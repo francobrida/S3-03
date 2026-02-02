@@ -19,7 +19,8 @@ class Category extends Model{
     }
 
     public function addCategory($name, $description){
-        $categories = $this->getAllCategories();
+        
+    $categories = $this->getAllCategories();
         if (empty($categories)) {
             $newId = 1;
         } else{
@@ -30,9 +31,11 @@ class Category extends Model{
         $categories[] = [
             'id' => $newId,
             'name' => $name,
-            'description' => $description];
+            'description' => $description
+            ];
 
-        file_put_contents(
+            
+        return file_put_contents(
             $this->jsonFile,
             json_encode(['categories' => $categories], JSON_PRETTY_PRINT)
         );

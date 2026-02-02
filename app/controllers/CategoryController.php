@@ -13,9 +13,15 @@ class CategoryController extends ApplicationController {
 
             header('Location: /proyecto-php/SPRINT3/S3-03/web/category');
             exit;
-        }
 
-        
-        $this->view->categories = $categoryModel->getAllCategories();
+            $categoryModel->addCategory($name, $description);
+
+            header('Location: /proyecto-php/SPRINT3/S3-03/web/category');
+            exit;
+        }
+        $this->view->categories=$categoryModel->getAllCategories();
+
+    
+
     }
 }
