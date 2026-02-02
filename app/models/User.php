@@ -19,6 +19,9 @@ class User extends Model{
         $data = json_decode($jsonContent, true); // existing PHP function  -> decodes THE string 
         // true: turns the string into and array  -> $task['name']
 
+        // Uncomment to debug:
+        // die(var_dump($data));
+
         return isset($data['users']) ? $data['users'] : [];
 
     }
@@ -30,7 +33,7 @@ class User extends Model{
 
         // Create a new users array
         $newUser = [
-            'id_user' => count($users) + 1, 
+            'id' => count($users) + 1, 
             'name' => $name,
             'surname' => $surname,
             'password' => $password,
@@ -53,7 +56,7 @@ class User extends Model{
 
         // Filter out the users with the given id_user
         $users = array_filter($users, function ($users) use ($id_user) {
-            return $users['id_user'] !== $id_user;
+            return $users['id'] !== $id_user;
         });
 
         // Save the updated tasks array back to the JSON file

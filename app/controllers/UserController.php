@@ -2,10 +2,10 @@
 
 class UserController extends ApplicationController
 {
-    public function userAction()
+    public function indexAction()
     {
-        $users = new User(); //create user instance
-
-        $this->view->users = $users->getAllUsers(); //shows all           
+        $users = new User(); 
+        $this->view->users = $users->getAllUsers();  
+                 
     }
 }

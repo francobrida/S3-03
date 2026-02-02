@@ -6,7 +6,7 @@
     "surname": "García",
     "password": "password1",
     "email": "alejandro.garcia@example.com",
-    "type": "ADMIN",
+    "type": "Admin",
     "creation_date": "2024-01-15T08:30:00Z"
   },
   {
@@ -15,7 +15,7 @@
     "surname": "Martínez",
     "password": "password2",
     "email": "sofia.mtz@pro-mail.org",
-    "type": "EDITOR",
+    "type": "Admin",
     "creation_date": "2024-05-22T14:45:12Z"
   },
   {
@@ -24,7 +24,7 @@
     "surname": "Pérez",
     "password": "password3",
     "email": "lucas.perez88@webmail.net",
-    "type": "USER",
+    "type": "Guest",
     "creation_date": "2025-11-03T10:15:30Z"
   },
   {
@@ -33,7 +33,7 @@
     "surname": "Rodríguez",
     "password": "password4",
     "email": "e.rodriguez@servicios.es",
-    "type": "USER",
+    "type": "Member",
     "creation_date": "2026-01-20T19:05:00Z"
   },
   {
@@ -42,7 +42,7 @@
     "surname": "Sánchez",
     "password": "password5",
     "email": "mateo.sanchez@tech-hub.io",
-    "type": "GUEST",
+    "type": "Member",
     "creation_date": "2026-02-01T12:00:00Z"
   }
 ]}
