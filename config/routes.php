@@ -13,4 +13,5 @@ $routes = array(
 	'/index' => 'test#index',
 	'/test' => 'test#index',
 	'/task' => 'task#index',
+	'/category' => 'category#index'
 );
