@@ -40,7 +40,15 @@
                 <td><?php echo isset($user['type']) ? $user['type'] : ''; ?></td>
                 <td>
                     <button>Edit</button>
-                    <button>Delete</button>
+
+                    <?php 
+                    $userId = isset($user['id']) ? $user['id'] : ''; 
+                    $urlDelete = WEB_ROOT . "/user/delete?id=" . $userId;
+                    ?>
+                    <a href="<?php echo $urlDelete; ?>" 
+                       onclick="return confirm('Confirm delete user');">
+                        <button type="button">Delete</button>
+                    </a>
                 </td>
             </tr>
         <?php endforeach; ?>
