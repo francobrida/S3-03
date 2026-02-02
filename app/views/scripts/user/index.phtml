@@ -1,41 +1,48 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>User</title>
-</head>
-<body>
+<h1>User Management System</h1>
 
-    <h1>User Management System</h1>
+<div style="background: #f4f4f4; padding: 15px; border: 1px solid #ccc; margin-bottom: 20px;">
+    <h3>Add New User</h3>
+    <form action="add" method="POST">
+        <input type="text" name="nickname" placeholder="Nickname">
+        <input type="text" name="name" placeholder="Name">
+        <input type="text" name="surname" placeholder="Surname">
+        <input type="email" name="email" placeholder="Email">
+        <input type="password" name="password" placeholder="Password">
+        <select name="type">
+            <option value="Guest">Guest</option>
+            <option value="Admin">Admin</option>
+        </select>
+        <button type="submit">Add User +</button>
+    </form>
+</div>
 
-    <table border="1">
-    
-        <tbody>
-            <?php 
-            
-            $users = $this->_data['users'] ?? []; 
-            ?>
-
-            <?php if (!empty($users)): ?>
-                <?php foreach ($users as $user): ?>
-                    <tr>
-                        <td><?php echo $user['nickname']; ?></td>
-                        <td><?php echo $user['name']; ?></td>
-                        <td><?php echo $user['surname']; ?></td>
-                        <td><?php echo $user['email']; ?></td>
-                        <td><?php echo $user['type']; ?></td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <tr>
-                    <td colspan="5">No users in database.</td>
-                </tr>
-            <?php endif; ?>
-        </tbody>
-    </table>
-
-</body>
-</html>
+<table border="1" width="100%">
+    <thead>
+        <tr>
+            <th>Nickname</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Email</th>
+            <th>Type</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php 
+        $users = isset($this->_data['users']) ? $this->_data['users'] : []; 
+        ?>
+        <?php foreach ($users as $user): ?>
+            <tr>
+                <td><?php echo isset($user['nickname']) ? $user['nickname'] : ''; ?></td>
+                <td><?php echo isset($user['name']) ? $user['name'] : ''; ?></td>
+                <td><?php echo isset($user['surname']) ? $user['surname'] : ''; ?></td>
+                <td><?php echo isset($user['email']) ? $user['email'] : ''; ?></td>
+                <td><?php echo isset($user['type']) ? $user['type'] : ''; ?></td>
+                <td>
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>

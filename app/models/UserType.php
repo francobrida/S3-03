@@ -1,9 +1,9 @@
 <?php
 
-    Enum UserType {
-        case Admin;
-        case Guest;
-        case Member;
+    Enum UserType : string {
+        case Admin = "Admin";
+        case Guest = "Guest";
+        case Member = "Member";
     }
 
 ?>

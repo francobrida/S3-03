@@ -25,31 +25,40 @@ class User extends Model{
         return isset($data['users']) ? $data['users'] : [];
 
     }
-/*
-    public function addUser(string $name, string $surname, string $password, 
+
+    public function addUser(string $nickname, string $name, string $surname, string $password, 
     string $email, UserType $type)
     {
         $users = $this->getAllUsers();
 
+        $lastId = 0;
+        foreach ($users as $user) {
+            if ($user['id'] > $lastId) {
+                $lastId = $user['id'];
+            }
+        }
         // Create a new users array
         $newUser = [
-            'id' => count($users) + 1, 
+            'id' => $lastId + 1, 
+            'nickname' => $nickname,
             'name' => $name,
             'surname' => $surname,
             'password' => $password,
             'email' => $email,
             'type' => $type->value,
             'creation_date' => (new DateTime())->format('Y-m-d H:i:s')
-            
         ];
 
-        // Append the new user to the users array
+        // Add the new user to the users array
         $users[] = $newUser;
         // Save the updated tasks array back to the JSON file
         $data = ['users' => $users];
         file_put_contents($this->jsonFile, json_encode($data, JSON_PRETTY_PRINT));
+        
     }
 
+
+/*
     public function deleteUser(int $id_user)
     {
         $users = $this->getAllUsers();
