@@ -24,4 +24,14 @@ class UserController extends ApplicationController
         header("Location: " . $this->_baseUrl() . "/user");
         exit;
     }
+
+    public function deleteAction() : void {
+        $id_user = $this->_getParam('id');
+
+        $userModel = new User(); 
+        $userModel->deleteUser($id_user);
+        
+        header("Location: " . $this->_baseUrl() . "/user");
+        exit;
+    }
 }
