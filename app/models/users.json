@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "name": "Alejandro",
+    "surname": "García",
+    "password": "password1",
+    "email": "alejandro.garcia@example.com",
+    "type": "ADMIN",
+    "creation_date": "2024-01-15T08:30:00Z"
+  },
+  {
+    "id": 2,
+    "name": "Sofía",
+    "surname": "Martínez",
+    "password": "password2",
+    "email": "sofia.mtz@pro-mail.org",
+    "type": "EDITOR",
+    "creation_date": "2024-05-22T14:45:12Z"
+  },
+  {
+    "id": 3,
+    "name": "Lucas",
+    "surname": "Pérez",
+    "password": "password3",
+    "email": "lucas.perez88@webmail.net",
+    "type": "USER",
+    "creation_date": "2025-11-03T10:15:30Z"
+  },
+  {
+    "id": 4,
+    "name": "Elena",
+    "surname": "Rodríguez",
+    "password": "password4",
+    "email": "e.rodriguez@servicios.es",
+    "type": "USER",
+    "creation_date": "2026-01-20T19:05:00Z"
+  },
+  {
+    "id": 5,
+    "name": "Mateo",
+    "surname": "Sánchez",
+    "password": "password5",
+    "email": "mateo.sanchez@tech-hub.io",
+    "type": "GUEST",
+    "creation_date": "2026-02-01T12:00:00Z"
+  }
+]
