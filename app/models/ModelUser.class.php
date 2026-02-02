@@ -1,10 +1,11 @@
 <?php
 require_once __DIR__ . '/../../lib/base/Model.php';
+require_once 'UserType.php';
 
 class User extends Model{
 
     // Path to the JSON file storing tasks
-    protected $jsonFile = ROOT_PATH . '/app/models/users.json';
+    protected $jsonFile = ROOT_PATH . '/data/users.json';
 
     public function __construct(){}
 
@@ -21,7 +22,7 @@ class User extends Model{
         return isset($data['users']) ? $data['users'] : [];
 
     }
-
+/*
     public function addUser(string $name, string $surname, string $password, 
     string $email, UserType $type)
     {
@@ -29,7 +30,7 @@ class User extends Model{
 
         // Create a new users array
         $newUser = [
-            'id_task' => count($users) + 1, 
+            'id_user' => count($users) + 1, 
             'name' => $name,
             'surname' => $surname,
             'password' => $password,
@@ -58,8 +59,7 @@ class User extends Model{
         // Save the updated tasks array back to the JSON file
         $data = ['users' => $users];
         file_put_contents($this->jsonFile, json_encode($data, JSON_PRETTY_PRINT));
-    }
+    }*/
 }
-
 
 ?>

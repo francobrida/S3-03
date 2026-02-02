@@ -1,4 +1,5 @@
-[
+{
+  "users":[
   {
     "id": 1,
     "name": "Alejandro",
@@ -44,4 +45,4 @@
     "type": "GUEST",
     "creation_date": "2026-02-01T12:00:00Z"
   }
-]
+]}

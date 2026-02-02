@@ -2,7 +2,7 @@
 
 class UserController extends ApplicationController
 {
-    public function indexAction()
+    public function userAction()
     {
         $users = new User(); //create user instance
 
