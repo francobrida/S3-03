@@ -1,22 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Lista de Usuarios</title>
+    <title>User</title>
 </head>
 <body>
 
-    <h1>Gestor de Usuarios</h1>
+    <h1>User Management System</h1>
 
     <table border="1">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>Email</th>
-                <th>Type</th>
-                <th>Action</th>
-            </tr>
-        </thead>
+    
         <tbody>
             <?php 
             
@@ -26,19 +18,20 @@
             <?php if (!empty($users)): ?>
                 <?php foreach ($users as $user): ?>
                     <tr>
+                        <td><?php echo $user['nickname']; ?></td>
                         <td><?php echo $user['name']; ?></td>
                         <td><?php echo $user['surname']; ?></td>
                         <td><?php echo $user['email']; ?></td>
                         <td><?php echo $user['type']; ?></td>
                         <td>
-                            <button>Editar</button>
-                            <button>Borrar</button>
+                            <button>Edit</button>
+                            <button>Delete</button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="5">No hay usuarios registrados todavía.</td>
+                    <td colspan="5">No users in database.</td>
                 </tr>
             <?php endif; ?>
         </tbody>

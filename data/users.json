@@ -2,6 +2,7 @@
   "users":[
   {
     "id": 1,
+    "nickname" : "El Ale78",
     "name": "Alejandro",
     "surname": "García",
     "password": "password1",
@@ -11,6 +12,7 @@
   },
   {
     "id": 2,
+    "nickname" : "ravenSong",
     "name": "Sofía",
     "surname": "Martínez",
     "password": "password2",
@@ -20,6 +22,7 @@
   },
   {
     "id": 3,
+    "nickname" : "bestlover57",
     "name": "Lucas",
     "surname": "Pérez",
     "password": "password3",
@@ -29,6 +32,7 @@
   },
   {
     "id": 4,
+    "nickname" : "ElenaRod",
     "name": "Elena",
     "surname": "Rodríguez",
     "password": "password4",
@@ -38,6 +42,7 @@
   },
   {
     "id": 5,
+    "nickname" : "MateoSanchez",
     "name": "Mateo",
     "surname": "Sánchez",
     "password": "password5",
