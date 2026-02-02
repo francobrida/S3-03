@@ -1,0 +1,24 @@
+{
+    "tasks": [
+        {
+            "id_task": 1,
+            "name": "tasca 1",
+            "description": "aprender a crear tareas",
+            "state": "done",
+            "start_time": "2026-02-01 11:44:06",
+            "end_time": "2026-02-01 12:00:05",
+            "creation_date": "2026-02-01 11:00:06",
+            "id_user": 1
+        },
+        {
+            "id_task": 2,
+            "name": "tasca 2",
+            "description": "aprender a crear controladores",
+            "state": "in_progress",
+            "start_time": "2026-02-01 14:00:00",
+            "end_time": "",
+            "creation_date": "2026-02-01 12:30:00",
+            "id_user": 1
+        }       
+    ]
+}
