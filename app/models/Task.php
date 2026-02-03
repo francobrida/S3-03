@@ -3,7 +3,7 @@
 class Task extends Model{
 
     // Path to the JSON file storing tasks
-    protected $jsonFile = ROOT_PATH . '/data/tasks.json';
+    protected $jsonFile = ROOT_PATH . '/data/tasks.json';   
     
     public function __construct()
     {
@@ -47,20 +47,7 @@ class Task extends Model{
         file_put_contents($this->jsonFile, json_encode($dataToSave, JSON_PRETTY_PRINT));      
     }
 
-    public function deleteTask(int $id_task) {
-        $tasks = $this->getAllTasks();
-
-        // Filter out the task with the given id_task
-        $tasks = array_filter($tasks, function($task) use ($id_task) {
-            return $task['id_task'] !== $id_task;
-        });
-
-        // Re-index the array to maintain sequential keys
-        $tasks = array_values($tasks);
-
-        $dataToSave = ['tasks' => $tasks];
-        file_put_contents($this->jsonFile, json_encode($dataToSave, JSON_PRETTY_PRINT));      
-    }
+    
 }
 
 ?>

@@ -21,14 +21,5 @@ class TaskController extends ApplicationController
         header("Location: " . $this->_baseUrl() . "/task");
         exit;
     }    
-    public function deleteTaskAction() : void
-    {
-        $id_task = $this->_getParam('id_task');
-        $this->tasks->deleteTask($id_task);
-        //$this->view->tasks = $this->tasks->getAllTasks(); //shows all
 
-        // Redirect to avoid form resubmission
-        header("Location: " . $this->_baseUrl() . "/task");
-        exit;
-    }
 }
