@@ -36,7 +36,15 @@
                 <div class=""><p class="text-sm text-gray-500"><?php echo htmlspecialchars($task['state']);  ?></p></div>
                 <div class=""><p class="text-sm text-gray-800"><?php echo htmlspecialchars($task['creation_date']); ?></p></div>
                 <div class=""><p class="text-sm text-gray-500"><?php echo htmlspecialchars($task['category']);  ?></p></div>
-
+                <div class="flex justify-end">
+                    <?php 
+                    $taskId = isset($task['id_task']) ? $task['id_task'] : ''; 
+                    $urlDelete = WEB_ROOT . "/task/deleteTask?id_task=" . $taskId;
+                    ?>
+                    <a href="<?php echo $urlDelete; ?>" onclick="return confirm('Confirm delete task');">
+                        <button type="button" class="py-2 px-4 rounded"><img src="<?= WEB_ROOT ?>/../docs/images/papelera.png" alt="Eliminar" class="w-4 h-4"></img></button>
+                    </a>                    
+                </div>
 
             </div>
             <?php endforeach; ?>

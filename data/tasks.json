@@ -34,36 +34,14 @@
             "id_user": 1
         },
         {
-            "id_task": 4,
-            "name": "444",
-            "description": "dfgdsfgsd",
-            "category": "general",
-            "state": "pending",
-            "start_time": null,
-            "end_time": null,
-            "creation_date": "2026-02-02 21:49:55",
-            "id_user": 1
-        },
-        {
             "id_task": 5,
-            "name": "e445",
-            "description": "sds",
+            "name": "555",
+            "description": "bbb",
             "category": "general",
             "state": "pending",
             "start_time": null,
             "end_time": null,
-            "creation_date": "2026-02-03 12:47:36",
-            "id_user": 1
-        },
-        {
-            "id_task": 6,
-            "name": "56445",
-            "description": "dsfsfa",
-            "category": "general",
-            "state": "pending",
-            "start_time": null,
-            "end_time": null,
-            "creation_date": "2026-02-03 12:48:27",
+            "creation_date": "2026-02-03 13:06:42",
             "id_user": 1
         }
     ]
