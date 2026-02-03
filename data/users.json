@@ -1,0 +1,53 @@
+{
+  "users":[
+  {
+    "id": 1,
+    "nickname" : "El Ale78",
+    "name": "Alejandro",
+    "surname": "García",
+    "password": "password1",
+    "email": "alejandro.garcia@example.com",
+    "type": "Admin",
+    "creation_date": "2024-01-15T08:30:00Z"
+  },
+  {
+    "id": 2,
+    "nickname" : "ravenSong",
+    "name": "Sofía",
+    "surname": "Martínez",
+    "password": "password2",
+    "email": "sofia.mtz@pro-mail.org",
+    "type": "Admin",
+    "creation_date": "2024-05-22T14:45:12Z"
+  },
+  {
+    "id": 3,
+    "nickname" : "bestlover57",
+    "name": "Lucas",
+    "surname": "Pérez",
+    "password": "password3",
+    "email": "lucas.perez88@webmail.net",
+    "type": "Guest",
+    "creation_date": "2025-11-03T10:15:30Z"
+  },
+  {
+    "id": 4,
+    "nickname" : "ElenaRod",
+    "name": "Elena",
+    "surname": "Rodríguez",
+    "password": "password4",
+    "email": "e.rodriguez@servicios.es",
+    "type": "Member",
+    "creation_date": "2026-01-20T19:05:00Z"
+  },
+  {
+    "id": 5,
+    "nickname" : "MateoSanchez",
+    "name": "Mateo",
+    "surname": "Sánchez",
+    "password": "password5",
+    "email": "mateo.sanchez@tech-hub.io",
+    "type": "Member",
+    "creation_date": "2026-02-01T12:00:00Z"
+  }
+]}
