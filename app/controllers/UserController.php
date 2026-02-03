@@ -2,6 +2,11 @@
 
 class UserController extends ApplicationController
 {
+    /*
+    public function __construct(User $user = new User())
+    {}
+    */
+    
     public function indexAction() : void
     {
         $users = new User(); 
@@ -33,5 +38,15 @@ class UserController extends ApplicationController
         
         header("Location: " . $this->_baseUrl() . "/user");
         exit;
+    }
+
+     public function editAction() : void {
+        $id_user = $this->_getParam('id');
+
+        $userModel = new User(); 
+        $foundUser = $userModel->searchUser($id_user);
+        
+        
+        
     }
 }
