@@ -1,16 +1,6 @@
 {
     "users": [
         {
-            "id": 1,
-            "nickname": "El Ale78",
-            "name": "Alejandro",
-            "surname": "Garcia",
-            "password": "password1",
-            "email": "alejandro.garcia@example.com",
-            "type": "Admin",
-            "creation_date": "2024-01-15T08:30:00Z"
-        },
-        {
             "id": 2,
             "nickname": "ravenSong",
             "name": "Sofia",

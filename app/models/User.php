@@ -57,8 +57,6 @@ class User extends Model{
         
     }
 
-
-/*
     public function deleteUser(int $id_user)
     {
         $users = $this->getAllUsers();
@@ -67,11 +65,12 @@ class User extends Model{
         $users = array_filter($users, function ($users) use ($id_user) {
             return $users['id'] !== $id_user;
         });
+        $users = array_values($users);
 
-        // Save the updated tasks array back to the JSON file
+        // Save the updated user array back to the JSON file
         $data = ['users' => $users];
         file_put_contents($this->jsonFile, json_encode($data, JSON_PRETTY_PRINT));
-    }*/
+    }
 }
 
 ?>
