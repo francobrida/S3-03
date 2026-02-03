@@ -2,7 +2,7 @@
     "tasks": [
         {
             "id_task": 1,
-            "name": "tasca 1",
+            "name": "crear tareas",
             "description": "aprender a crear tareas",
             "category": "general",
             "state": "completed",
@@ -13,10 +13,10 @@
         },
         {
             "id_task": 2,
-            "name": "tasca 2",
+            "name": "crear controladores",
             "description": "aprender a crear controladores",
             "category": "general",
-            "state": "inProgress",
+            "state": "completed",
             "start_time": "2026-02-01 14:00:00",
             "end_time": "",
             "creation_date": "2026-02-01 12:30:00",
@@ -24,24 +24,46 @@
         },
         {
             "id_task": 3,
-            "name": "\u00c1c\u00e9nt\u00f2s",
-            "description": "sdgaasdg",
+            "name": "Enum",
+            "description": "Aprender a utilizar enums",
             "category": "general",
-            "state": "pending",
+            "state": "inProgress",
             "start_time": null,
             "end_time": null,
             "creation_date": "2026-02-02 19:58:24",
             "id_user": 1
         },
         {
+            "id_task": 4,
+            "name": "nueva333",
+            "description": "4444",
+            "category": "trabajo",
+            "state": "completed",
+            "start_time": null,
+            "end_time": null,
+            "creation_date": "2026-02-03 13:55:49",
+            "id_user": 1
+        },
+        {
             "id_task": 5,
-            "name": "555",
-            "description": "bbb",
+            "name": "tarea de nombre excesivamente largo para que salte",
+            "description": "sadfsa",
+            "category": "compras",
+            "state": "pending",
+            "start_time": null,
+            "end_time": null,
+            "creation_date": "2026-02-03 20:58:17",
+            "id_user": 1
+        },
+        {
+            "id_task": 6,
+            "name": "limites 901234567890123456789012345678901234567890",
+            "description": "12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789090",
             "category": "general",
             "state": "pending",
             "start_time": null,
             "end_time": null,
-            "creation_date": "2026-02-03 13:06:42",
+            "creation_date": "2026-02-03 22:38:22",
             "id_user": 1
         }
     ]

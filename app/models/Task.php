@@ -59,6 +59,38 @@ class Task extends Model{
         $dataToSave = ['tasks' => $tasks];
         file_put_contents($this->jsonFile, json_encode($dataToSave, JSON_PRETTY_PRINT));      
     }
+
+    public function searchTask(int $id_task) : ?array 
+    {
+        $tasks = $this->getAllTasks();
+        foreach ($tasks as $task) {
+            if ($task['id_task'] == $id_task) {
+                return $task;
+            }
+        }
+        return null;
+    }
+
+    public function editTask(int $id_task, string $name, string $description, 
+    string $category, string $state) : void 
+    {
+        $tasks = $this->getAllTasks();
+        $newTasksList = [];
+
+        foreach ($tasks as $task) {
+            if ($task['id_task'] == $id_task) {
+                $task['name'] = $name;
+                $task['description'] = $description;
+                $task['category'] = $category;
+                $task['state'] = $state;                
+            }
+            $newTasksList[] = $task;
+        }
+
+        $data = ['tasks' => $newTasksList];
+        file_put_contents($this->jsonFile, json_encode($data, JSON_PRETTY_PRINT));
+    }
+
 }
 
 ?>

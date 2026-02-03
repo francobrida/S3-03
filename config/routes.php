@@ -15,9 +15,16 @@ $routes = array(
 	'/task' => 'task#index',
 	'/task/addTask' => 'task#addTask',
 	'/task/deleteTask' => 'task#deleteTask',
+	'/task/editTask' => 'task#editTask',
+	'/task/updateTask' => 'task#updateTask',
 	'/category' => 'category#index',
 	'/category/add' => 'category#add',
+	'/category/delete' => 'category#delete',
+	'/category/edit' => 'category#edit',
+	'/category/update' => 'category#update',
 	'/user' => 'user#index',
 	'/user/add' => 'user#add',
-	'/user/delete' => 'user#delete'
+	'/user/delete' => 'user#delete',
+	'/user/edit' => 'user#edit',
+	'/user/update' => 'user#update'
 );
