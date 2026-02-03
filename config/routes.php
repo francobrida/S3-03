@@ -13,11 +13,14 @@ $routes = array(
 	'/index' => 'test#index',
 	'/test' => 'test#index',
 	'/task' => 'task#index',
+	'/category' => 'category#index',
 	'/task/addTask' => 'task#addTask',
 	'/task/deleteTask' => 'task#deleteTask',
 	'/category' => 'category#index',
 	'/category/add' => 'category#add',
 	'/user' => 'user#index',
 	'/user/add' => 'user#add',
-	'/user/delete' => 'user#delete'
+	'/user/delete' => 'user#delete',
+	'/user/edit' => 'user#edit',
+	'/user/update' => 'user#update'
 );
