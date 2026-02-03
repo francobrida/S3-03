@@ -1,0 +1,19 @@
+{
+    "categories": [
+        {
+            "id": 1,
+            "name": "dadas",
+            "description": "asdas"
+        },
+        {
+            "id": 2,
+            "name": "dsada",
+            "description": "asdasd"
+        },
+        {
+            "id": 3,
+            "name": "Prueba ",
+            "description": "genial lo he conseguido "
+        }
+    ]
+}

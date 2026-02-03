@@ -1,0 +1,20 @@
+<h1>Añadir Categoría</h1>
+
+<form method="POST" action="/proyecto-php/SPRINT3/S3-03/web/category">
+    <label for="name">Nombre:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="description">Descripción:</label>
+    <input type="text" id="description" name="description" required>
+
+    <button type="submit">Añadir</button>
+</form>
+
+<h1>Categorías</h1>
+<ul>
+<?php foreach ($this->categories as $category): ?>
+    <li>
+        <?= $category['id']; ?> — <?= $category['name']; ?> — <?= $category['description']; ?>
+    </li>
+<?php endforeach; ?>
+</ul>
