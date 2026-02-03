@@ -1,0 +1,70 @@
+{
+    "tasks": [
+        {
+            "id_task": 1,
+            "name": "tasca 1",
+            "description": "aprender a crear tareas",
+            "category": "general",
+            "state": "completed",
+            "start_time": "2026-02-01 11:44:06",
+            "end_time": "2026-02-01 12:00:05",
+            "creation_date": "2026-02-01 11:00:06",
+            "id_user": 1
+        },
+        {
+            "id_task": 2,
+            "name": "tasca 2",
+            "description": "aprender a crear controladores",
+            "category": "general",
+            "state": "inProgress",
+            "start_time": "2026-02-01 14:00:00",
+            "end_time": "",
+            "creation_date": "2026-02-01 12:30:00",
+            "id_user": 1
+        },
+        {
+            "id_task": 3,
+            "name": "\u00c1c\u00e9nt\u00f2s",
+            "description": "sdgaasdg",
+            "category": "general",
+            "state": "pending",
+            "start_time": null,
+            "end_time": null,
+            "creation_date": "2026-02-02 19:58:24",
+            "id_user": 1
+        },
+        {
+            "id_task": 4,
+            "name": "444",
+            "description": "dfgdsfgsd",
+            "category": "general",
+            "state": "pending",
+            "start_time": null,
+            "end_time": null,
+            "creation_date": "2026-02-02 21:49:55",
+            "id_user": 1
+        },
+        {
+            "id_task": 5,
+            "name": "aaaa",
+            "description": "bbb",
+            "category": "general",
+            "state": "pending",
+            "start_time": null,
+            "end_time": null,
+            "creation_date": "2026-02-03 10:35:20",
+            "id_user": 1
+        },
+        {
+            "id_task": 6,
+            "name": "bbb",
+            "description": "sdfsd",
+            "category": "general",
+            "state": "pending",
+            "start_time": null,
+            "end_time": null,
+            "creation_date": "2026-02-03 11:16:28",
+            "id_user": 1
+        }
+    ]
+}

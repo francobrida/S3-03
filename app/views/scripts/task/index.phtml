@@ -1,35 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
+<div class="header mb-4 h-32 align-middle flex items-center justify-center bg-blue-500">
+    <h1 class="text-2xl font-bold text-white text-center">TO-DO</h1>
+</div>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo list</title>
-</head>
+<div class="addTaskContainer mb-4 p-4 bg-green-500 max-w-2xl self-center rounded-xl shadow-lg"> <!-- invisible"> -->
+    <h2 class="text-xl font-bold mb-2">Agregar nueva tarea</h2>
+    
+    <form action=<?= WEB_ROOT ?>/addTask method="POST" class="flex flex-col gap-4">
+        <input type="text" name="name" placeholder="Nombre de la tarea" required class="p-2 rounded border border-gray-300">
+        <textarea name="description" placeholder="Descripción de la tarea" required class="p-2 rounded border border-gray-300"></textarea>
+        <select name="category" required class="p-2 rounded border border-gray-300">
+            <option value="" disabled selected>Selecciona la categoría</option>
+            <option selected value="general">General</option>
+            <option value="trabajo">Trabajo</option>
+            <option value="compras">Compras</option>
+        </select>
+        <button type="submit" class="bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">Agregar tarea</button>
+    </form>
+</div>
 
-<body>
-    <div class="header mb-4 h-32 align-middle flex items-center justify-center bg-blue-500">
-        <h1 class="text-2xl font-bold text-white text-center">TO-DO</h1>
-    </div>
-
-     <div class="taskContainer p-4 bg-indigo-500 max-w-2xl self-center rounded-xl shadow-lg ">
-        <?php 
-        $displayTasks = $this->view->tasks ?? $this->tasks ?? [];
-        
-        if (empty($displayTasks)): 
-            echo "<p>No hay tareas disponibles.</p>";
-        else:
-            foreach ($displayTasks as $task): ?>
-                <div class="taskItem border p-4 mb-4 bg-gray-300 rounded-xl shadow display: grid grid-cols-5 gap-4">
-                    <div class=""><h2 class="text-xl font-bold"><?php echo htmlspecialchars($task['name']); ?></h2></div>
-                    <div class=""><p><?php echo htmlspecialchars($task['description']); ?></p></div>
-                    <div class=""><p class="text-sm text-gray-500">Estado: <?php echo htmlspecialchars($task['state']);  ?></p></div>
-                    <div class=""><p class="text-sm text-gray-800">Fecha creación: <?php echo htmlspecialchars($task['creation_date']); ?></p></div>
-
+    <div class="taskContainer p-4 bg-gray-300 max-w-2xl self-center rounded-xl shadow-lg ">
+    <?php 
+    $displayTasks = $this->view->tasks ?? $this->tasks ?? [];
+    
+    if (empty($displayTasks)): 
+        echo "<p>No hay tareas disponibles.</p>";
+    else:
+        foreach ($displayTasks as $task): ?>
+            <div class="taskItem border p-4 mb-4 bg-white rounded-xl shadow display: grid grid-cols-8 gap-4">
+                <div class="flex items-center me-4">
+                    <input <?= $task['state'] === 'completed' ? 'checked' : '' ?> id="green-checkbox" type="checkbox" value="" class="w-4 h-4 bg-green-500 border-default-medium rounded-xs focus:ring-green-500 dark:focus:ring-green-600 ring-offset-neutral-primary focus:ring-2">
                 </div>
-             <?php endforeach; ?>
-        <?php endif; ?>
-     </div>
-</body>
+                <div class=""><h2 class="text-xl font-bold"><?php echo htmlspecialchars($task['name']); ?></h2></div>
+                <!--<div class=""><p><?php /* echo htmlspecialchars($task['description']); */ ?></p></div>-->
+                
+                <div class=""><p class="text-sm text-gray-500"><?php echo htmlspecialchars($task['state']);  ?></p></div>
+                <div class=""><p class="text-sm text-gray-800"><?php echo htmlspecialchars($task['creation_date']); ?></p></div>
+                <div class=""><p class="text-sm text-gray-500"><?php echo htmlspecialchars($task['category']);  ?></p></div>
+                <div class="flex justify-end">
+                    <button type="submit" action=<?= WEB_ROOT ?>/task/editTask class="py-2 px-4 rounded"><img src="<?= WEB_ROOT ?>/../docs/images/lapiz.png" alt="Editar" class="w-4 h-4"></img></button>
+                </div>
+                <div class="flex justify-end">
+                    <?php 
+                    $taskId = isset($task['id_task']) ? $task['id_task'] : ''; 
+                    $urlDelete = WEB_ROOT . "/task/deleteTask?id_task=" . $taskId;
+                    ?>
+                    <a href="<?php echo $urlDelete; ?>" 
+                       onclick="return confirm('Confirm delete task');">
+                        <button type="button">Delete</button>
+                    </a>
+                    <!--<button type="submit" action=<?= WEB_ROOT ?>/task/deleteTask class="py-2 px-4 rounded"><img src="<?= WEB_ROOT ?>/../docs/images/papelera.png" alt="Eliminar" class="w-4 h-4"></img></button>-->
+                    <!--
+                    <form action=<?php /*WEB_ROOT*/ ?>/deleteTask method="POST">
+                        <input type="hidden" name="id_task" value="<?php /*echo htmlspecialchars($task['id_task']); */?>">
+                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Eliminar</button>
+                        
+                    </form>
+                    -->
+                </div>
 
-</html>
+            </div>
+            <?php endforeach; ?>
+    <?php endif; ?>
+    </div>
