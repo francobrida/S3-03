@@ -83,23 +83,26 @@ class User extends Model{
         return null;
     }
 
-    public function editUser(int $id_user, string $nickname, string $name, string $surname, string $password) : void {
+    public function editUser(int $id_user, string $nickname, string $name, string $surname, 
+    string $password, string $email, UserType $type) : void 
+    {
         $users = $this->getAllUsers();
+        $newUsersList = [];
 
-        foreach ($users as &$user) {
-            if ($user['id'] === $id_user) {
+        foreach ($users as $user) {
+            if ((int)$user['id'] === $id_user) {
                 $user['nickname'] = $nickname;
                 $user['name'] = $name;
                 $user['surname'] = $surname;
                 $user['password'] = $password;
-                break;
+                $user['email'] = $email;
+                $user['type'] = $type->value;
             }
+            $newUsersList[] = $user;
         }
 
-        // Save the updated users array back to the JSON file
-        $data = ['users' => $users];
+        $data = ['users' => $newUsersList];
         file_put_contents($this->jsonFile, json_encode($data, JSON_PRETTY_PRINT));
-
     }
 
 }

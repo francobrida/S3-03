@@ -44,9 +44,26 @@ class UserController extends ApplicationController
         $id_user = $this->_getParam('id');
 
         $userModel = new User(); 
-        $foundUser = $userModel->searchUser($id_user);
+        $foundUser = $userModel->searchUser((int)$id_user); // casting to int, if not it's a string 
         
+        $this->view->user = $foundUser;
+    }
+
+    public function updateAction() : void {
+
+        $id = $this->_getParam('id');
+        $nickname = $this->_getParam('nickname');
+        $name = $this->_getParam('name');
+        $surname = $this->_getParam('surname');
+        $password = $this->_getParam('password');
+        $email = $this->_getParam('email');
+        $type = $this->_getParam('type');
         
+        $userModel = new User(); 
+
+        $userModel->editUser((int)$id, $nickname, $name, $surname, $password, $email, UserType::from($type));
         
+        header("Location: " . $this->_baseUrl() . "/user");
+        exit;
     }
 }
