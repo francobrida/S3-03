@@ -71,6 +71,40 @@ class User extends Model{
         $data = ['users' => $users];
         file_put_contents($this->jsonFile, json_encode($data, JSON_PRETTY_PRINT));
     }
+
+    public function searchUser(int $id_user) : ?array 
+    {
+        $users = $this->getAllUsers();
+        foreach ($users as $user) {
+            if ($user['id'] === $id_user) {
+                return $user;
+            }
+        }
+        return null;
+    }
+
+    public function editUser(int $id_user, string $nickname, string $name, string $surname, 
+    string $password, string $email, UserType $type) : void 
+    {
+        $users = $this->getAllUsers();
+        $newUsersList = [];
+
+        foreach ($users as $user) {
+            if ((int)$user['id'] === $id_user) {
+                $user['nickname'] = $nickname;
+                $user['name'] = $name;
+                $user['surname'] = $surname;
+                $user['password'] = $password;
+                $user['email'] = $email;
+                $user['type'] = $type->value;
+            }
+            $newUsersList[] = $user;
+        }
+
+        $data = ['users' => $newUsersList];
+        file_put_contents($this->jsonFile, json_encode($data, JSON_PRETTY_PRINT));
+    }
+
 }
 
 ?>

@@ -39,7 +39,13 @@
                 <td><?php echo isset($user['email']) ? $user['email'] : ''; ?></td>
                 <td><?php echo isset($user['type']) ? $user['type'] : ''; ?></td>
                 <td>
-                    <button>Edit</button>
+                    <?php 
+                    $userId = isset($user['id']) ? $user['id'] : ''; 
+                    $urlEdit = WEB_ROOT . "/user/edit?id=" . $userId;
+                    ?>
+                    <a href="<?php echo $urlEdit; ?>" 
+                        <button type="button">Edit</button>
+                    </a>
 
                     <?php 
                     $userId = isset($user['id']) ? $user['id'] : ''; 
