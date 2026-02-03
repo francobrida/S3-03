@@ -18,6 +18,7 @@ $routes = array(
 	'/task/deleteTask' => 'task#deleteTask',
 	'/category' => 'category#index',
 	'/category/add' => 'category#add',
+	'/category/delete' => 'category#delete',
 	'/user' => 'user#index',
 	'/user/add' => 'user#add',
 	'/user/delete' => 'user#delete',
