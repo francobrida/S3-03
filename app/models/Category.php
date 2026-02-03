@@ -18,28 +18,28 @@ class Category extends Model{
         return isset($data['categories']) ? $data['categories'] : [];        
     }
 
-    public function addCategory($name, $description){
+    public function addCategory(string $name, string $description){
         
-    $categories = $this->getAllCategories();
-        if (empty($categories)) {
-            $newId = 1;
-        } else{
-            $lastCategory = end($categories);
-            $newId = $lastCategory['id'] + 1;
+        $categories = $this->getAllCategories();
+            if (empty($categories)) {
+                $newId = 1;
+            } else{
+                $lastCategory = end($categories);
+                $newId = $lastCategory['id'] + 1;
+            }
+
+            $categories[] = [
+                'id' => $newId,
+                'name' => $name,
+                'description' => $description
+                ];
+
+                
+            return file_put_contents(
+                $this->jsonFile,
+                json_encode(['categories' => $categories], JSON_PRETTY_PRINT)
+            );
         }
-
-        $categories[] = [
-            'id' => $newId,
-            'name' => $name,
-            'description' => $description
-            ];
-
-            
-        return file_put_contents(
-            $this->jsonFile,
-            json_encode(['categories' => $categories], JSON_PRETTY_PRINT)
-        );
-    }
 
 
 
