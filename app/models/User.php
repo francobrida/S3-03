@@ -1,32 +1,77 @@
 <?php
+require_once __DIR__ . '/../../lib/base/Model.php';
+require_once 'UserType.php';
 
-class User {
+class User extends Model{
 
-    public function __construct(
-        private int $id,
-        private string $name,
-        private string $surname,
-        private string $password,
-        private string $email,
-        private UserType $type,
-        private Datetime $creation_date
-    ){}
+    // Path to the JSON file storing tasks
+    protected $jsonFile = ROOT_PATH . '/data/users.json';
 
-    public function getId() : int {return $this->id;}
-    public function getName() : string {return $this->name;}
-    public function getSurname() : string {return $this->surname;}
-    public function getPassword() : string {return $this->password;}
-    public function getType() : UserType {return $this->type;}
-    public function getCreation_date() : Datetime {return $this->creation_date;}
-    public function getEmail() : string {return $this->email;}
+    public function __construct(){}
 
-    public function setName(string $name) : void {$this->name = $name;}
-    public function setSurname(string $surname) : void {$this->surname = $surname;}
-    public function setType(UserType $type) : void {$this->type = $type;}
-    public function setPassword(string $password) : void {$this->password = $password;}
-    public function setEmail(string $email) : void {$this->email = $email;}
-    // All setters except id and cration_date
+    public function getAllUsers()
+    {
+        if (!file_exists($this->jsonFile)) {
+            return [];
+        }
 
+        $jsonContent = file_get_contents($this->jsonFile); //exiting PHP functions -> retrieves a string
+        $data = json_decode($jsonContent, true); // existing PHP function  -> decodes THE string 
+        // true: turns the string into and array  -> $task['name']
+
+        // Uncomment to debug:
+        // die(var_dump($data));
+
+        return isset($data['users']) ? $data['users'] : [];
+
+    }
+
+    public function addUser(string $nickname, string $name, string $surname, string $password, 
+    string $email, UserType $type)
+    {
+        $users = $this->getAllUsers();
+
+        $lastId = 0;
+        foreach ($users as $user) {
+            if ($user['id'] > $lastId) {
+                $lastId = $user['id'];
+            }
+        }
+        // Create a new users array
+        $newUser = [
+            'id' => $lastId + 1, 
+            'nickname' => $nickname,
+            'name' => $name,
+            'surname' => $surname,
+            'password' => $password,
+            'email' => $email,
+            'type' => $type->value,
+            'creation_date' => (new DateTime())->format('Y-m-d H:i:s')
+        ];
+
+        // Add the new user to the users array
+        $users[] = $newUser;
+        // Save the updated tasks array back to the JSON file
+        $data = ['users' => $users];
+        file_put_contents($this->jsonFile, json_encode($data, JSON_PRETTY_PRINT));
+        
+    }
+
+
+/*
+    public function deleteUser(int $id_user)
+    {
+        $users = $this->getAllUsers();
+
+        // Filter out the users with the given id_user
+        $users = array_filter($users, function ($users) use ($id_user) {
+            return $users['id'] !== $id_user;
+        });
+
+        // Save the updated tasks array back to the JSON file
+        $data = ['users' => $users];
+        file_put_contents($this->jsonFile, json_encode($data, JSON_PRETTY_PRINT));
+    }*/
 }
 
 ?>
