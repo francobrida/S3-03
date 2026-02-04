@@ -37,7 +37,7 @@ $routes = array(
     // Esta parte nueva la explico en castellano hasta que la tengamos super claro para no liarnos (Fran)
     
     // Root route: Pagina principal de entrada! "Landing Page" (Login/Register)
-    '/' => 'user#index',
+    '/landing' => 'user#index',
     
     // Login: Ruta que envia el nickname y password para loguearse
     '/login' => 'user#login',
