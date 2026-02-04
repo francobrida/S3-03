@@ -3,7 +3,7 @@
 class Task extends Model{
 
     // Path to the JSON file storing tasks
-    protected $jsonFile = ROOT_PATH . '/data/tasks.json'; 
+    protected $jsonFile = ROOT_PATH . '/data/data.json'; 
     
     public function __construct()
     {

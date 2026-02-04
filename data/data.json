@@ -1,0 +1,140 @@
+{
+    "tasks": [
+        {
+            "id_task": 1,
+            "name": "tasca 1",
+            "description": "aprender a crear tareas",
+            "category": "general",
+            "state": "completed",
+            "start_time": "2026-02-01 11:44:06",
+            "end_time": "2026-02-01 12:00:05",
+            "creation_date": "2026-02-01 11:00:06",
+            "id_user": 1
+        },
+        {
+            "id_task": 2,
+            "name": "tasca 2",
+            "description": "aprender a crear controladores",
+            "category": "general",
+            "state": "inProgress",
+            "start_time": "2026-02-01 14:00:00",
+            "end_time": "",
+            "creation_date": "2026-02-01 12:30:00",
+            "id_user": 1
+        },
+        {
+            "id_task": 3,
+            "name": "\u00c1c\u00e9nt\u00f2s",
+            "description": "sdgaasdg",
+            "category": "general",
+            "state": "pending",
+            "start_time": null,
+            "end_time": null,
+            "creation_date": "2026-02-02 19:58:24",
+            "id_user": 1
+        },
+        {
+            "id_task": 5,
+            "name": "555",
+            "description": "bbb",
+            "category": "general",
+            "state": "pending",
+            "start_time": null,
+            "end_time": null,
+            "creation_date": "2026-02-03 13:06:42",
+            "id_user": 1
+        }
+    ],
+
+    "users": [
+        {
+            "id": 2,
+            "nickname": "ravenSong",
+            "name": "Sofia",
+            "surname": "Martinez",
+            "password": "password2",
+            "email": "sofia.mtz@pro-mail.org",
+            "type": "Admin",
+            "creation_date": "2024-05-22T14:45:12Z"
+        },
+        {
+            "id": 3,
+            "nickname": "bestlover57",
+            "name": "Lucas",
+            "surname": "Perez",
+            "password": "password3",
+            "email": "lucas.perez88@webmail.net",
+            "type": "Guest",
+            "creation_date": "2025-11-03T10:15:30Z"
+        },
+        {
+            "id": 4,
+            "nickname": "ElenaRod",
+            "name": "Elena",
+            "surname": "Rodriguez",
+            "password": "password4",
+            "email": "e.rodriguez@servicios.es",
+            "type": "Member",
+            "creation_date": "2026-01-20T19:05:00Z"
+        },
+        {
+            "id": 5,
+            "nickname": "MateoSanchez",
+            "name": "Mateo",
+            "surname": "Sanchez",
+            "password": "password5",
+            "email": "mateo.sanchez@tech-hub.io",
+            "type": "Member",
+            "creation_date": "2026-02-01T12:00:00Z"
+        },
+        {
+            "id": 6,
+            "nickname": "ravenSong",
+            "name": "Sofia",
+            "surname": "Martinez",
+            "password": "1111",
+            "email": "sofia.mtz@pro-mail.org",
+            "type": "Guest",
+            "creation_date": "2026-02-03 12:49:01"
+        },
+        {
+            "id": 7,
+            "nickname": "ravenSong",
+            "name": "Sofia",
+            "surname": "Lopez",
+            "password": "1111",
+            "email": "sofia.mtz@pro-mail.org",
+            "type": "Guest",
+            "creation_date": "2026-02-03 12:57:18"
+        }
+    ],
+
+    "categories": [
+        {
+            "id": 1,
+            "name": "dadas",
+            "description": "asdas"
+        },
+        {
+            "id": 2,
+            "name": "dsada",
+            "description": "asdasd"
+        },
+        {
+            "id": 3,
+            "name": "Prueba ",
+            "description": "genial lo he conseguido "
+        },
+        {
+            "id": 4,
+            "name": "ddd",
+            "description": "dddd"
+        },
+        {
+            "id": 5,
+            "name": "aaaaa",
+            "description": "aaaa"
+        }
+    ]
+
+}

@@ -5,7 +5,7 @@ require_once 'UserType.php';
 class User extends Model{
 
     // Path to the JSON file storing tasks
-    protected $jsonFile = ROOT_PATH . '/data/users.json';
+    protected $jsonFile = ROOT_PATH . '/data/data.json';
 
     public function __construct(){}
 

@@ -3,7 +3,7 @@
 class Category extends Model{
 
  
-    protected $jsonFile = ROOT_PATH . '/data/categories.json';
+    protected $jsonFile = ROOT_PATH . '/data/data.json';
     
     public function __construct(){
       
