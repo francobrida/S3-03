@@ -28,7 +28,7 @@ class User extends Model{
     }
 
     public function addUser(string $nickname, string $name, string $surname, string $password, 
-    string $email, UserType $type)
+    string $email, UserType $type) : array
     {
         $users = $this->getAllUsers();
 
@@ -56,6 +56,7 @@ class User extends Model{
         $data = ['users' => $users];
         file_put_contents($this->jsonUsers, json_encode($data, JSON_PRETTY_PRINT));
         
+        return $newUser;
     }
 
     public function deleteUser(int $id_user)
@@ -103,7 +104,7 @@ class User extends Model{
         $newUsersList = [];
 
         foreach ($users as $user) {
-            if ((int)$user['id'] === $id_user) {
+            if ((int)$user['id'] === (int)$id_user) {
                 $user['nickname'] = $nickname;
                 $user['name'] = $name;
                 $user['surname'] = $surname;
@@ -116,6 +117,19 @@ class User extends Model{
 
         $data = ['users' => $newUsersList];
         file_put_contents($this->jsonUsers, json_encode($data, JSON_PRETTY_PRINT));
+    }
+
+    public function authenticateUser(string $nickname, string $password) : ?array 
+    {
+        $users = $this->getAllUsers();
+        foreach ($users as $user) {
+            if (strtolower($user['nickname']) === strtolower(trim($nickname))){ // trim() to erase possible space errors, tolowercase for case insensitive
+                if ($user['password'] === $password ) {
+                return $user;
+                }
+            }
+        }
+        return null;
     }
 
 }
