@@ -2,9 +2,9 @@
 
 class UserController extends ApplicationController
 {
-    private User $user;
+    protected User $user;
+
     public function __construct(){
-        parent::__construct();
         $this->user = new User();
     }
     
@@ -85,7 +85,7 @@ class UserController extends ApplicationController
         } else {
             $_SESSION['error'] = "Nickname/password incorrect";
 
-            header("Location: " . $this->_baseUrl() . "/user/index"); // redirect to loguin if wrong loguin.
+            header("Location: " . $this->_baseUrl() . "/user/index"); // redirect to login if wrong loguin.
             exit;
         }
    }

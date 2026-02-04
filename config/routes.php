@@ -12,20 +12,39 @@
 $routes = array(
 	'/index' => 'test#index',
 	'/test' => 'test#index',
-	'/task' => 'task#index',
-	'/category' => 'category#index',
-	'/task/addTask' => 'task#addTask',
-	'/task/deleteTask' => 'task#deleteTask',
-	'/task/editTask' => 'task#editTask',
-	'/task/updateTask' => 'task#updateTask',
-	'/category' => 'category#index',
-	'/category/add' => 'category#add',
-	'/category/delete' => 'category#delete',
-	'/category/edit' => 'category#edit',
-	'/category/update' => 'category#update',
-	'/user' => 'user#index',
-	'/user/add' => 'user#add',
-	'/user/delete' => 'user#delete',
-	'/user/edit' => 'user#edit',
-	'/user/update' => 'user#update'
+	
+	// TASK 
+    '/task' => 'task#index',
+    '/task/addTask' => 'task#addTask',
+    '/task/deleteTask' => 'task#deleteTask',
+    '/task/editTask' => 'task#editTask',
+    '/task/updateTask' => 'task#updateTask',
+
+    // CATEGORY 
+    '/category' => 'category#index',
+    '/category/add' => 'category#add',
+    '/category/delete' => 'category#delete',
+    '/category/edit' => 'category#edit',
+    '/category/update' => 'category#update',
+
+    // USER (Admin)
+    '/user' => 'user#index',
+    '/user/add' => 'user#add',
+    '/user/delete' => 'user#delete',
+    '/user/edit' => 'user#edit',
+    '/user/update' => 'user#update',
+
+    // Esta parte nueva la explico en castellano hasta que la tengamos super claro para no liarnos (Fran)
+    
+    // Root route: Pagina principal de entrada! "Landing Page" (Login/Register)
+    '/' => 'user#index',
+    
+    // Login: Ruta que envia el nickname y password para loguearse
+    '/login' => 'user#login',
+    
+    // Register: Registra nuevo usuario (Público - se crea automaticamente como Type::Member)
+    '/register' => 'user#register',
+    
+    // Logout: Clear session and redirect to home (TO DO, si tenemos login, necesitamos un logout)
+    '/logout' => 'user#logout'
 );
