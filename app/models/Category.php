@@ -41,6 +41,21 @@ class Category extends Model{
             );
         }
 
+    public function deleteCategory(int $id){
+
+        $categories = $this->getAllCategories();
+
+        $categories = array_filter($categories, function($category) use ($id){
+            return $category['id'] !== $id;
+        });
+
+        $categories = array_values($categories);
+
+        $data = ['categories' => $categories];
+        file_put_contents($this->jsonFile, json_encode($data, JSON_PRETTY_PRINT));
+
+    }    
+
 
 
     
