@@ -41,7 +41,7 @@ class User extends Model{
         // Create a new users array
         $newUser = [
             'id' => $lastId + 1, 
-            'nickname' => $nickname,
+            'nickname' => strtolower($nickname),
             'name' => $name,
             'surname' => $surname,
             'password' => $password,
@@ -105,7 +105,7 @@ class User extends Model{
 
         foreach ($users as $user) {
             if ((int)$user['id'] === (int)$id_user) {
-                $user['nickname'] = $nickname;
+                $user['nickname'] = strtolower($nickname);
                 $user['name'] = $name;
                 $user['surname'] = $surname;
                 $user['password'] = $password;
@@ -130,6 +130,17 @@ class User extends Model{
             }
         }
         return null;
+    }
+
+    public function isAlreadyUsed(string $nickname): bool { 
+        $users = $this->getAllUsers();
+        
+        foreach ($users as $user) {
+            if (strtolower(trim($user['nickname'])) === strtolower(trim($nickname))) { // Compare nicknames using lowercase
+                return true; // Match found
+            }
+        }
+        return false; // No match found
     }
 
 }
