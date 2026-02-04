@@ -1,0 +1,48 @@
+<div class="header mb-4 h-32 align-middle flex items-center justify-center bg-blue-500">
+    <h1 class="text-2xl font-bold text-white text-center">TO-DO</h1>
+</div>
+<div class="taskContainer p-4 bg-gray-300 max-w-4xl self-center rounded-xl shadow-lg ">    
+    <h3 class="flex justify-center font-bold">Editar tarea</h3>
+   
+    <?php if ($this->task): ?>
+        <form action="<?php echo WEB_ROOT; ?>/task/updateTask" method="POST">
+            <div class="taskItem p-4 pb-0 mb-4  display: grid grid-cols-5 gap-4">
+                <div class="flex justify-center">Nombre</div>
+                <div class="flex justify-center">Descripción</div>
+                <div class="flex justify-center">Categoria</div>
+                <div class="flex justify-center">Estado</div>
+                <div class="flex justify-end pr-6">Botones</div>
+            </div>
+            <div class="taskItem border p-4 mb-4 bg-white rounded-xl shadow display: grid grid-cols-5 gap-4">
+                <input type="hidden" name="id_task" value="<?= $this->task['id_task']; ?>">
+                <input class="bg-gray-200 pl-2 rounded" type="text" name="name" value="<?= htmlspecialchars($this->task['name']); ?>" maxlength="50">
+                <textarea class="bg-gray-200 pl-2 rounded" type="text" name="description" maxlength="500"><?= htmlspecialchars($this->task['description']); ?></textarea>
+                <input class="bg-gray-200 pl-2 rounded" type="text" name="category" value="<?= htmlspecialchars($this->task['category']); ?>">                
+                
+                <?php
+                    $state = htmlspecialchars($this->task['state']);
+                ?>
+                <select name="state" required class="bg-gray-200 pl-2 rounded">
+                    <option <?= $state == 'completed' ? 'selected' : '' ?> value="completed">Completada</option>
+                    <option <?= $state == 'inProgress' ? 'selected' : '' ?> value="inProgress">En progreso</option>
+                    <option <?= $state == 'pending' ? 'selected' : '' ?> value="pending">Pendiente</option>
+                </select>
+                <div class="flex justify-end">
+                    <button type="submit" class="py-2 px-4 rounded">
+                        <img src="<?= WEB_ROOT ?>/images/salvar.png" alt="Guardar" class="w-4 h-4"></img>
+                    </button>
+                    <button type="cancel" class="py-2 px-4 rounded" onclick="javascript:window.location='<?php echo WEB_ROOT; ?>/task';">
+                        <img src="<?= WEB_ROOT ?>/images/cerrar.png" alt="Cancelar" class="w-4 h-4"></img>
+                    </button>
+                    <!--
+                    a href="<?php // echo WEB_ROOT; ?>/task">
+                            <button type="button" class="py-2 px-4 rounded"><img src="<?php // WEB_ROOT ?>/images/cerrar.png" alt="Cancelar" class="w-4 h-4"></img></button>
+                    </a>-->
+                </div>
+            </div>
+        </form>
+    <?php else: ?>
+        <p class="text-red-600">Error: tarea no encontrada</p>
+    <?php endif; ?>
+</div>    
+
