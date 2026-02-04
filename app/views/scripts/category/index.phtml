@@ -1,20 +1,36 @@
+
+<h1>TO DO APP</h1>
+
 <h1>Añadir Categoría</h1>
 
+<!-- Primer formulario enviando datos mediante POST. -->
+
 <form method="POST" action="<?= WEB_ROOT ?>/category/add">
+
     <label for="name">Nombre:</label>
     <input type="text" id="name" name="name" required>
-
+    
     <label for="description">Descripción:</label>
     <input type="text" id="description" name="description" required>
-
+    
     <button type="submit">Añadir</button>
 </form>
 
-<h1>Categorías</h1>
+<!-- Listar categorias -->
+
+<h1>Lista de categorías</h1>
 <ul>
-<?php foreach ($this->categories as $category): ?>
-    <li>
-        <?= $category['name']; ?> — <?= $category['description']; ?>
-    </li>
-<?php endforeach; ?>
+    <!-- Bucle php para mostrar las tareas con su boton de eliminar -->
+    <?php foreach ($this->categories as $category): ?>
+        <li>
+            <?= htmlspecialchars($category['name']); ?>
+            <?= htmlspecialchars($category['description']); ?>
+            
+            <a href="<?= WEB_ROOT ?>/category/delete?id=<?= $category['id'] ?> "
+            onclick="return confirm('¿Seguro que quieres eliminar esta categoría?')">
+            🗑️
+            </a>
+            
+        </li>
+    <?php endforeach; ?>
 </ul>
