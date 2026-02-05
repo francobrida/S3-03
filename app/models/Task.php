@@ -25,14 +25,14 @@ class Task extends Model{
         
         return isset($data['tasks']) ? $data['tasks'] : [];        
     }
-    public function addTask(string $name, string $description) {
+    public function addTask(string $name, string $description, int $category_id) {
         $tasks = $this->getAllTasks();
 
         $newTask = [
             'id_task' => count($tasks) + 1,
             'name' => $name,
             'description' => $description,
-            'category' => 'general', // default category
+            'category_id' => $category_id, 
             'state' => 'pending',
             'start_time' => null,
             'end_time' => null,
@@ -72,8 +72,9 @@ class Task extends Model{
     }
 
     public function editTask(int $id_task, string $name, string $description, 
-    string $category, string $state) : void 
+    int $category, string $state) : void 
     {
+        //echo "<br>editTask" . var_dump($state);
         $tasks = $this->getAllTasks();
         $newTasksList = [];
 
@@ -81,7 +82,7 @@ class Task extends Model{
             if ($task['id_task'] == $id_task) {
                 $task['name'] = $name;
                 $task['description'] = $description;
-                $task['category'] = $category;
+                $task['category_id'] = $category;
                 $task['state'] = $state;                
             }
             $newTasksList[] = $task;
