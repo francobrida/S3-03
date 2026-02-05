@@ -10,7 +10,6 @@
  * '/calendar' => 'calendar#index'
  */
 $routes = array(
-	'/index' => 'test#index',
 	'/test' => 'test#index',
 	
 	// TASK 
@@ -28,7 +27,7 @@ $routes = array(
     '/category/update' => 'category#update',
 
     // USER (Admin)
-    '/user' => 'user#index',
+    '/userAdmin' => 'user#admin',
     '/user/add' => 'user#add',
     '/user/delete' => 'user#delete',
     '/user/edit' => 'user#edit',
@@ -37,7 +36,7 @@ $routes = array(
     // Esta parte nueva la explico en castellano hasta que la tengamos super claro para no liarnos (Fran)
     
     // Root route: Pagina principal de entrada! "Landing Page" (Login/Register)
-    '/landing' => 'user#index',
+    '/index' => 'user#index',
     
     // Login: Ruta que envia el nickname y password para loguearse
     '/login' => 'user#login',

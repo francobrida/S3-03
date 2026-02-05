@@ -14,6 +14,13 @@ class UserController extends ApplicationController
         $this->view->users = $this->user->getAllUsers();  
     }
 
+    public function adminAction() : void 
+    {
+        // Esta es para el panel de gestión
+        $this->view->users = $this->user->getAllUsers(); 
+
+    }
+
     public function addAction() : void {
     
         $nickname = $this->_getParam('nickname');
@@ -86,9 +93,18 @@ class UserController extends ApplicationController
         } else {
             $_SESSION['error'] = "Nickname/password incorrect";
 
-            header("Location: " . $this->_baseUrl() . "/user/index"); // redirect to login if wrong loguin.
+            header("Location: " . $this->_baseUrl() . "/index"); // redirect to login if wrong loguin.
             exit;
         }
+   }
+
+   public function logoutAction() : void {
+        session_start();
+        session_unset();
+        session_destroy();
+
+        header("Location: " . $this->_baseUrl() . "/index");
+        exit;
    }
 
     public function registerAction(): void {
@@ -99,7 +115,7 @@ class UserController extends ApplicationController
         // Validation to Check if nickname is already used
         if ($this->user->isAlreadyUsed($nickname)) {
             $_SESSION['error'] = "The nickname '$nickname' is already used. Please choose another.";
-            header("Location: " . $this->_baseUrl() . "/user/index");
+            header("Location: " . $this->_baseUrl() . "/index");
             exit;
         }
 
