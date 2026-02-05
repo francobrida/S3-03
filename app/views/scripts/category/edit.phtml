@@ -1,0 +1,34 @@
+<h1>TO DO APP</h1>
+
+<h2>Editar Categoría</h2>
+
+<form method="POST" action="<?= WEB_ROOT ?>/category/update">
+    
+    <!-- Campo OCULTO con el ID -->
+    <input type="hidden" 
+           name="id" 
+           value="<?= $this->category['id'] ?>">
+    
+    <!-- Campo para el NOMBRE -->
+    <label for="name">Nombre:</label>
+    <input type="text" 
+           id="name" 
+           name="name" 
+           value="<?= htmlspecialchars($this->category['name']) ?>" 
+           required>
+    <br>
+    
+    <!-- Campo para la DESCRIPCIÓN -->
+    <label for="description">Descripción:</label>
+    <input type="text" 
+           id="description" 
+           name="description" 
+           value="<?= htmlspecialchars($this->category['description']) ?>" 
+           required>
+    <br>
+    
+    <button type="submit">Guardar Cambios</button>
+    
+    <a href="<?= WEB_ROOT ?>/category">Cancelar</a>
+    
+</form>

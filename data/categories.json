@@ -2,23 +2,13 @@
     "categories": [
         {
             "id": 1,
-            "name": "general",
-            "description": "general"
+            "name": "ddd",
+            "description": "dddd"
         },
         {
             "id": 2,
-            "name": "compras",
-            "description": "compras"
-        },
-        {
-            "id": 3,
-            "name": "trabajo",
-            "description": "trabajo"
-        },
-        {
-            "id": 4,
-            "name": "pruebas",
-            "description": "asdfsaf"
+            "name": "ddd",
+            "description": "ssss"
         }
     ]
 }
