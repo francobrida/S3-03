@@ -28,7 +28,7 @@ class User extends Model{
     }
 
     public function addUser(string $nickname, string $name, string $surname, string $password, 
-    string $email, UserType $type)
+    string $email, UserType $type) : array
     {
         $users = $this->getAllUsers();
 
@@ -41,7 +41,7 @@ class User extends Model{
         // Create a new users array
         $newUser = [
             'id' => $lastId + 1, 
-            'nickname' => $nickname,
+            'nickname' => strtolower($nickname),
             'name' => $name,
             'surname' => $surname,
             'password' => $password,
@@ -56,6 +56,7 @@ class User extends Model{
         $data = ['users' => $users];
         file_put_contents($this->jsonUsers, json_encode($data, JSON_PRETTY_PRINT));
         
+        return $newUser;
     }
 
     public function deleteUser(int $id_user)
@@ -103,8 +104,8 @@ class User extends Model{
         $newUsersList = [];
 
         foreach ($users as $user) {
-            if ((int)$user['id'] === $id_user) {
-                $user['nickname'] = $nickname;
+            if ((int)$user['id'] === (int)$id_user) {
+                $user['nickname'] = strtolower($nickname);
                 $user['name'] = $name;
                 $user['surname'] = $surname;
                 $user['password'] = $password;
@@ -116,6 +117,30 @@ class User extends Model{
 
         $data = ['users' => $newUsersList];
         file_put_contents($this->jsonUsers, json_encode($data, JSON_PRETTY_PRINT));
+    }
+
+    public function authenticateUser(string $nickname, string $password) : ?array 
+    {
+        $users = $this->getAllUsers();
+        foreach ($users as $user) {
+            if (strtolower($user['nickname']) === strtolower(trim($nickname))){ // trim() to erase possible space errors, tolowercase for case insensitive
+                if ($user['password'] === $password ) {
+                return $user;
+                }
+            }
+        }
+        return null;
+    }
+
+    public function isAlreadyUsed(string $nickname): bool { 
+        $users = $this->getAllUsers();
+        
+        foreach ($users as $user) {
+            if (strtolower(trim($user['nickname'])) === strtolower(trim($nickname))) { // Compare nicknames using lowercase
+                return true; // Match found
+            }
+        }
+        return false; // No match found
     }
 
 }
