@@ -54,7 +54,38 @@ class Category extends Model{
         $data = ['categories' => $categories];
         file_put_contents($this->jsonFile, json_encode($data, JSON_PRETTY_PRINT));
 
-    }    
+    }
+    
+    public function searchCategory(int $id){
+
+        $categories = $this->getAllCategories();
+
+        foreach($categories as $category){
+            if($category['id'] === $id){
+                return $category;
+            }
+        }
+
+        return null;
+
+    }
+
+    public function updateCategory(int $id, string $name, string $description) {
+        $categories = $this->getAllCategories();
+        
+        foreach ($categories as $key => $category) {
+            if ($category['id'] === $id) {
+                $categories[$key]['name'] = $name;
+                $categories[$key]['description'] = $description;
+                break;
+            }
+        }
+        
+        return file_put_contents(
+            $this->jsonFile,
+            json_encode(['categories' => $categories], JSON_PRETTY_PRINT)
+        );
+}
 
 
 

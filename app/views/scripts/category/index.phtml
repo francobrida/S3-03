@@ -26,6 +26,9 @@
             <?= htmlspecialchars($category['name']); ?>
             <?= htmlspecialchars($category['description']); ?>
             
+            <a href="<?= WEB_ROOT ?>/category/edit?id=<?= $category['id'] ?>">
+            ✏️
+            </a>
             <a href="<?= WEB_ROOT ?>/category/delete?id=<?= $category['id'] ?> "
             onclick="return confirm('¿Seguro que quieres eliminar esta categoría?')">
             🗑️
