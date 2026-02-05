@@ -49,16 +49,6 @@
             "email": "sofia.mtz@pro-mail.org",
             "type": "Guest",
             "creation_date": "2026-02-03 12:49:01"
-        },
-        {
-            "id": 7,
-            "nickname": "ravenSong",
-            "name": "Sofia",
-            "surname": "Lopez",
-            "password": "1111",
-            "email": "sofia.mtz@pro-mail.org",
-            "type": "Guest",
-            "creation_date": "2026-02-03 12:57:18"
         }
     ]
 }

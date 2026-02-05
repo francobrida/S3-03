@@ -1,0 +1,63 @@
+
+<h1>User Management System</h1>
+
+<div style="background: #f4f4f4; padding: 15px; border: 1px solid #ccc; margin-bottom: 20px;">
+    <h3>Add New User</h3>
+    <form action="add" method="POST">
+        <input type="text" name="nickname" placeholder="Nickname">
+        <input type="text" name="name" placeholder="Name">
+        <input type="text" name="surname" placeholder="Surname">
+        <input type="email" name="email" placeholder="Email">
+        <input type="password" name="password" placeholder="Password">
+        <select name="type">
+            <option value="Guest">Guest</option>
+            <option value="Admin">Admin</option>
+        </select>
+        <button type="submit">Add User +</button>
+    </form>
+</div>
+
+<table border="1" width="100%">
+    <thead>
+        <tr>
+            <th>Nickname</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Email</th>
+            <th>Type</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php 
+        $users = isset($this->_data['users']) ? $this->_data['users'] : []; 
+        ?>
+        <?php foreach ($users as $user): ?>
+            <tr>
+                <td><?php echo isset($user['nickname']) ? $user['nickname'] : ''; ?></td>
+                <td><?php echo isset($user['name']) ? $user['name'] : ''; ?></td>
+                <td><?php echo isset($user['surname']) ? $user['surname'] : ''; ?></td>
+                <td><?php echo isset($user['email']) ? $user['email'] : ''; ?></td>
+                <td><?php echo isset($user['type']) ? $user['type'] : ''; ?></td>
+                <td>
+                    <?php 
+                    $userId = isset($user['id']) ? $user['id'] : ''; 
+                    $urlEdit = WEB_ROOT . "/user/edit?id=" . $userId;
+                    ?>
+                    <a href="<?php echo $urlEdit; ?>" 
+                        <button type="button">Edit</button>
+                    </a>
+
+                    <?php 
+                    $userId = isset($user['id']) ? $user['id'] : ''; 
+                    $urlDelete = WEB_ROOT . "/user/delete?id=" . $userId;
+                    ?>
+                    <a href="<?php echo $urlDelete; ?>" 
+                       onclick="return confirm('Confirm delete user');">
+                        <button type="button">Delete</button>
+                    </a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
