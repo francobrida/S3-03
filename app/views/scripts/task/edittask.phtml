@@ -13,10 +13,10 @@
                 <div class="flex justify-center">Estado</div>
                 <div class="flex justify-end pr-6">Botones</div>
             </div>
-            <div class="taskItem border p-4 mb-4 bg-white rounded-xl shadow display: grid grid-cols-5 gap-4">
+            <div class="taskItem border p-4 mb-4 bg-white rounded-xl shadow display: grid grid-cols-5 gap-4 h-60">
                 <input type="hidden" name="id_task" value="<?= $this->task['id_task']; ?>">
-                <input class="bg-gray-200 pl-2 rounded" type="text" name="name" value="<?= htmlspecialchars($this->task['name']); ?>" maxlength="50">
-                <textarea class="bg-gray-200 pl-2 rounded" type="text" name="description" maxlength="500"><?= htmlspecialchars($this->task['description']); ?></textarea>
+                <input class="bg-gray-200 pl-2 rounded" type="text" name="name" value="<?= htmlspecialchars($this->task['name']); ?>" maxlength="20">
+                <textarea class="bg-gray-200 pl-2 rounded resize-none text-justify align-middle" type="text" name="description" maxlength="100"><?= htmlspecialchars($this->task['description']); ?></textarea>
                 
                 <select name="category_id">
                     <?php foreach ($this->categories as $cat): ?>

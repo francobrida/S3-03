@@ -1,5 +1,5 @@
 <div class="addTaskContainer mb-4 p-4 ml-6 mt-8 bg-green-700 max-w-4xl self-center rounded-xl shadow-lg"> 
-    <h2 class="text-xl font-bold mb-2">Today</h2>
+    <h2 class="text-xl font-bold mb-2">Hoy</h2>
     <p><?php 
         $fecha = new DateTime();
         $date = date('l, j F'); echo $date; 
@@ -7,8 +7,8 @@
     <h3 class="text-xl font-bold mb-2">Agregar nueva tarea</h2>
     
     <form action=<?= WEB_ROOT ?>/task/addTask method="POST" class="flex flex-col gap-4">
-        <input type="text" name="name" placeholder="Nombre de la tarea" required class="p-2 rounded border border-gray-300" maxlength="50">
-        <textarea name="description" placeholder="Descripción de la tarea" required class="p-2 rounded border border-gray-300" maxlength="500"></textarea>
+        <input type="text" name="name" placeholder="Nombre de la tarea" required class="p-2 rounded border border-gray-300" maxlength="20">
+        <textarea name="description" placeholder="Descripción de la tarea" required class="p-2 rounded border border-gray-300" maxlength="100"></textarea>
         <select name="category_id" required>
             <option value="" disabled selected>Selecciona la categoría</option>
             <?php foreach ($this->categories as $category): ?>
@@ -17,6 +17,7 @@
                 </option>
             <?php endforeach; ?>
         </select>
+        <input type="date" required name="start_date" value="<?php echo date('Y-m-d'); ?>" />
         <button type="submit" class="bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">Agregar tarea</button>
     </form>
 </div>
