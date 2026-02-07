@@ -6,8 +6,9 @@
             "description": "aprender a usar el framework y mostrar tareas creadas manualmente",
             "category_id": 1,
             "state": "completed",
-            "start_time": "2026-02-01 11:44:06",
-            "end_time": "2026-02-01 12:00:05",
+            "start_date": "2026-02-06",
+            "start_time": "11:44:06",
+            "end_time": "12:00:05",
             "creation_date": "2026-02-01 11:00:06",
             "id_user": 1
         },
@@ -17,7 +18,8 @@
             "description": "aprender a crear tareas desde el aplicativo",
             "category_id": 3,
             "state": "completed",
-            "start_time": "2026-02-01 14:00:00",
+            "start_date": "2026-02-06",
+            "start_time": "14:00:00",
             "end_time": null,
             "creation_date": "2026-02-01 12:30:00",
             "id_user": 1
@@ -28,6 +30,7 @@
             "description": "Aprender a utilizar enums",
             "category_id": 3,
             "state": "completed",
+            "start_date": "2026-02-06",
             "start_time": null,
             "end_time": null,
             "creation_date": "2026-02-02 19:58:24",
@@ -39,6 +42,7 @@
             "description": "Aprender a borrar y editar tareas desde el aplicativo",
             "category_id": 3,
             "state": "completed",
+            "start_date": "2026-02-06",
             "start_time": null,
             "end_time": null,
             "creation_date": "2026-02-03 13:55:49",
@@ -50,6 +54,7 @@
             "description": "Acceder dinamicamente a categorias desde tareas",
             "category_id": 3,
             "state": "inProgress",
+            "start_date": "2026-02-06",
             "start_time": null,
             "end_time": null,
             "creation_date": "2026-02-03 20:58:17",
@@ -61,9 +66,22 @@
             "description": "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890",
             "category_id": 1,
             "state": "inProgress",
+            "start_date": "2026-02-06",
             "start_time": null,
             "end_time": null,
             "creation_date": "2026-02-03 22:38:22",
+            "id_user": 1
+        },
+        {
+            "id_task": 7,
+            "name": "con fecha",
+            "description": "sfasfa",
+            "category_id": 1,
+            "state": "pending",
+            "start_date": "2026-02-06",
+            "start_time": null,
+            "end_time": null,
+            "creation_date": "2026-02-05 13:20:50",
             "id_user": 1
         }
     ]

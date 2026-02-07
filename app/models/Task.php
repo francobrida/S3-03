@@ -25,16 +25,16 @@ class Task extends Model{
         
         return isset($data['tasks']) ? $data['tasks'] : [];        
     }
-    public function addTask(string $name, string $description, int $category_id, timestamp $start_date) {
+    public function addTask(string $name, string $description, int $category_id, string $start_date) {
         $tasks = $this->getAllTasks();
-        $format = "Ymd";
+        
         $newTask = [
             'id_task' => count($tasks) + 1,
             'name' => $name,
             'description' => $description,
             'category_id' => $category_id, 
             'state' => 'pending',
-            'start_date' => date($format,$start_date),
+            'start_date' => $start_date,
             'start_time' => null,
             'end_time' => null,
             'creation_date' => date("Y-m-d H:i:s"),
