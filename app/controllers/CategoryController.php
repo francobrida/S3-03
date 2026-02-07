@@ -22,7 +22,7 @@ class CategoryController extends ApplicationController {
 
     public function deleteAction(){
       if (isset($_GET['id'])) { 
-          $id = (int) $_GET['id'];
+          $id = (int) $_GET['id']; //casteo el id a numero entero
 
           $categoryModel = new Category();
           $categoryModel->deleteCategory($id);
@@ -30,8 +30,30 @@ class CategoryController extends ApplicationController {
 
       header('Location: ' . WEB_ROOT . '/category');
       exit;
-  
 
+    }
 
+    public function editAction(){
+      if (isset($_GET['id'])){
+        $id = (int) $_GET['id'];
+
+        $categoryModel = new Category();
+        $category = $categoryModel->searchCategory($id);
+
+        $this->view->category = $category;
+
+      }
+    }
+
+    public function updateAction(){
+      $id = (int) $_POST['id'];
+      $name = $_POST['name'];
+      $description = $_POST['description'];
+        
+      $categoryModel = new Category();
+      $categoryModel->updateCategory($id, $name, $description);
+        
+      header('Location: ' . WEB_ROOT . '/category');
+      exit;
     }
 }
