@@ -1,17 +1,17 @@
 {
     "users": [
         {
-            "id": 2,
-            "nickname": "ravenSong",
+            "id": 1,
+            "nickname": "raven",
             "name": "Sofia",
             "surname": "Martinez",
-            "password": "password2",
+            "password": "pass1",
             "email": "sofia.mtz@pro-mail.org",
             "type": "Admin",
             "creation_date": "2024-05-22T14:45:12Z"
         },
         {
-            "id": 3,
+            "id": 2,
             "nickname": "bestlover57",
             "name": "Lucas",
             "surname": "Perez",
@@ -21,7 +21,7 @@
             "creation_date": "2025-11-03T10:15:30Z"
         },
         {
-            "id": 4,
+            "id": 3,
             "nickname": "ElenaRod",
             "name": "Elena",
             "surname": "Rodriguez",
@@ -31,7 +31,7 @@
             "creation_date": "2026-01-20T19:05:00Z"
         },
         {
-            "id": 5,
+            "id": 4,
             "nickname": "MateoSanchez",
             "name": "Mateo",
             "surname": "Sanchez",
