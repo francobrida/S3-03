@@ -26,6 +26,7 @@ $routes = array(
     '/category/delete' => 'category#delete',
     '/category/edit' => 'category#edit',
     '/category/update' => 'category#update',
+    '/category/filter' => 'category#filter',
 
     // USER (Admin)
     '/userAdmin' => 'user#admin',
