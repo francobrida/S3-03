@@ -1,14 +1,3 @@
 {
-    "categories": [
-        {
-            "id": 1,
-            "name": "ddd",
-            "description": "dddd"
-        },
-        {
-            "id": 2,
-            "name": "ddd",
-            "description": "ssss"
-        }
-    ]
+    "categories": []
 }
