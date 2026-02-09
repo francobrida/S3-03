@@ -1,19 +1,18 @@
-
-<h1>User Management System</h1>
+<?php include 'header.phtml'; ?>
 
 <div style="background: #f4f4f4; padding: 15px; border: 1px solid #ccc; margin-bottom: 20px;">
-    <h3>Add New User</h3>
+    <h3>Agregar nuevo usuario</h3>
     <form action="add" method="POST">
         <input type="text" name="nickname" placeholder="Nickname">
-        <input type="text" name="name" placeholder="Name">
-        <input type="text" name="surname" placeholder="Surname">
+        <input type="text" name="name" placeholder="Nombre">
+        <input type="text" name="surname" placeholder="Apellido">
         <input type="email" name="email" placeholder="Email">
         <input type="password" name="password" placeholder="Password">
         <select name="type">
-            <option value="Guest">Guest</option>
+            <option value="Member">Member</option>
             <option value="Admin">Admin</option>
         </select>
-        <button type="submit">Add User +</button>
+        <button type="submit">Agregar Usuario +</button>
     </form>
 </div>
 
@@ -21,11 +20,11 @@
     <thead>
         <tr>
             <th>Nickname</th>
-            <th>Name</th>
-            <th>Surname</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
             <th>Email</th>
-            <th>Type</th>
-            <th>Actions</th>
+            <th>Tipo</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -45,7 +44,7 @@
                     $urlEdit = WEB_ROOT . "/user/edit?id=" . $userId;
                     ?>
                     <a href="<?php echo $urlEdit; ?>" 
-                        <button type="button">Edit</button>
+                        <button type="button">Editar</button>
                     </a>
 
                     <?php 
@@ -54,7 +53,7 @@
                     ?>
                     <a href="<?php echo $urlDelete; ?>" 
                        onclick="return confirm('Confirm delete user');">
-                        <button type="button">Delete</button>
+                        <button type="button">Eliminar</button>
                     </a>
                 </td>
             </tr>

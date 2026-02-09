@@ -1,7 +1,9 @@
-<h1>User Management System</h1>
+<?php include 'header.phtml'; ?>
+
+<h1>Admin de Usuarios</h1>
 
 <div style="background: #f4f4f4; padding: 15px; border: 1px solid #ccc; margin-bottom: 20px;">
-    <h3>Edit User</h3>
+    <h3>Editar Usuario</h3>
     <form action="<?php echo WEB_ROOT; ?>/user/update" method="POST">
         <input type="hidden" name="id" value="<?php echo $this->user['id']; ?>">
         <input type="text" name="nickname" value= <?php echo $this->user['nickname']; ?>>
@@ -10,10 +12,10 @@
         <input type="email" name="email" value= <?php echo $this->user['email']; ?>>
         <input type="password" name="password" value= <?php echo $this->user['password']; ?>>
         <select name="type">
-            <option value="Guest">Guest</option>
+            <option value="Member">Member</option>
             <option value="Admin">Admin</option>
         </select>
-        <button type="submit">Save Changes</button>
+        <button type="submit">Guardar cambios</button>
         <a href="<?php echo WEB_ROOT; ?>/user">Cancel</a>
     </form>
 </div>
