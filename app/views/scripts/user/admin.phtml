@@ -1,8 +1,40 @@
 <?php include 'header.phtml'; ?>
 
-<div>
-    <a href="<?php echo WEB_ROOT; ?>/userAddView">Agregar nuevo usuario</a>
+<h1 class="text-2xl font-bold mb-2 text-black">Hoy</h2>
+<p class="text-black"><?php 
+    $fecha = new DateTime();
+    $date = date('l, j F'); echo $date; 
+?></p>
+
+<div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
+    <a href="<?php echo WEB_ROOT; ?>/userAddView" class="btn-add">
+        Agregar nuevo usuario
+    </a>
 </div>
+
+<div style="margin-bottom: 20px;">
+    <input type="text" id="userSearch" placeholder="Buscar por nickname, nombre, email..." 
+           style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+</div>
+
+<script>
+document.getElementById('userSearch').addEventListener('keyup', function() {
+    let filter = this.value.toLowerCase();
+    let rows = document.querySelectorAll('table tbody tr');
+
+    rows.forEach(row => {
+        // Obtenemos el texto de toda la fila (nickname, nombre, apellido, email)
+        let text = row.textContent.toLowerCase();
+        
+        // El equivalente a strpos() en JS es .includes()
+        if (text.includes(filter)) {
+            row.style.display = ""; // Muestra la fila
+        } else {
+            row.style.display = "none"; // Oculta la fila
+        }
+    });
+});
+</script>
 
 <table border="1" width="100%">
     <thead>
