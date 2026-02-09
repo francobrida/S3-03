@@ -1,0 +1,43 @@
+<div style="display: flex; align-items: center; width: 100%; margin-bottom: 30px;">
+
+    <div style="flex: 1;">
+
+</div>
+
+<?php $currentUri = $_SERVER['REQUEST_URI']; // Para detectar la ruta actual y marcar el enlace activo ?>
+
+<nav style="display: flex; align-items: center; gap: 20px;">
+    
+    <?php if (isset($_SESSION['type']) && $_SESSION['type'] === 'Admin'): ?>
+        <a href="<?= WEB_ROOT ?>/userAdmin" 
+           class="nav-block <?= (strpos($currentUri, 'userAdmin') !== false) ? 'active' : '' ?>">
+           Usuarios
+        </a>
+    <?php endif; ?>
+
+    <a href="<?= WEB_ROOT ?>/task" 
+       class="nav-block <?= (strpos($currentUri, 'task') !== false) ? 'active' : '' ?>">
+       Tareas
+    </a>
+
+    <a href="<?= WEB_ROOT ?>/category" 
+       class="nav-block <?= (strpos($currentUri, 'category') !== false) ? 'active' : '' ?>">
+       Categorías
+    </a>
+</nav>
+
+    <div style="flex: 1; display: flex; justify-content: flex-end; align-items: center; gap: 15px;">
+        <div class="user-nickname">
+            <?= $_SESSION['nickname'] ?? '' ?>
+        </div>
+
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <a href="<?= WEB_ROOT ?>/logout" 
+               class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+               Logout
+            </a>
+        <?php endif; ?>
+    </div>
+
+</div>
+
