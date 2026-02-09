@@ -15,6 +15,7 @@ $routes = array(
 	// TASK 
     '/task' => 'task#index',
     '/task/addTask' => 'task#addTask',
+    '/task/addNewTask' => 'task#addNewTask',
     '/task/deleteTask' => 'task#deleteTask',
     '/task/editTask' => 'task#editTask',
     '/task/updateTask' => 'task#updateTask',

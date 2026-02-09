@@ -2,13 +2,18 @@
     "categories": [
         {
             "id": 1,
-            "name": "ddd",
-            "description": "dddd"
+            "name": "trabajo",
+            "description": "trabajo"
         },
         {
             "id": 2,
-            "name": "ddd",
-            "description": "ssss"
+            "name": "general",
+            "description": "general"
+        },
+        {
+            "id": 3,
+            "name": "compras",
+            "description": "compras"
         }
     ]
 }

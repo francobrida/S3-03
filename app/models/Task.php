@@ -25,7 +25,27 @@ class Task extends Model{
         
         return isset($data['tasks']) ? $data['tasks'] : [];        
     }
-    public function addTask(string $name, string $description, int $category_id, string $start_date) {
+    public function getUserTasks(int $idUser)
+    {
+        if (!file_exists($this->jsonFile)) {
+            return [];
+        }
+
+        $jsonContent = file_get_contents($this->jsonFile); //exiting PHP functions -> retrieves a string
+        $data = json_decode($jsonContent, true);
+//var_dump($idUser);
+        $UserTasks=[];
+        foreach ($data['tasks'] as $task) {
+//var_dump($task['id_user']);
+            if ($task['id_user'] == $idUser) {
+                $UserTasks[]=$task;
+            }
+        }
+//echo "<br> UserTasks: ";
+//var_dump($UserTasks);
+        return isset($UserTasks['tasks']) ? $UserTasks['tasks'] : [];
+    }
+    public function addNewTask(string $name, string $description, int $category_id, string $start_date, string $start_time, string $end_time) {
         $tasks = $this->getAllTasks();
         
         $newTask = [
@@ -35,8 +55,8 @@ class Task extends Model{
             'category_id' => $category_id, 
             'state' => 'pending',
             'start_date' => $start_date,
-            'start_time' => null,
-            'end_time' => null,
+            'start_time' => $start_time,
+            'end_time' => $end_time,
             'creation_date' => date("Y-m-d H:i:s"),
             'id_user' => 1 // Assuming a default user for simplicity
         ];
@@ -73,7 +93,7 @@ class Task extends Model{
     }
 
     public function editTask(int $id_task, string $name, string $description, 
-    int $category, string $state) : void 
+    int $category, string $state, string $start_date, string $start_time, string $end_time) : void 
     {
         //echo "<br>editTask" . var_dump($state);
         $tasks = $this->getAllTasks();
@@ -84,7 +104,10 @@ class Task extends Model{
                 $task['name'] = $name;
                 $task['description'] = $description;
                 $task['category_id'] = $category;
-                $task['state'] = $state;                
+                $task['state'] = $state;
+                $task['start_date'] = $start_date;
+                $task['start_time'] = $start_time;
+                $task['end_time'] = $end_time;
             }
             $newTasksList[] = $task;
         }
