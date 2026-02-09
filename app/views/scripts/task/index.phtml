@@ -5,7 +5,34 @@
         $date = date('l, j F'); echo $date; 
     ?></p>
     <!--<h3 class="text-xl font-bold mb-2">Agregar nueva tarea</h2>-->
-    
+
+    <!-- FILTRO -->
+    <form action="<?= WEB_ROOT ?>/task/filter" method="GET" style="display: flex; gap: 10px; align-items: center;">
+        
+        <select name="user_id">
+            <option value="">Usuario</option>
+            <?php foreach ($this->users as $user): ?> <option value="<?= $user['id'] ?>"><?= $user['nickname'] ?></option>
+            <?php endforeach; ?>
+        </select>
+
+        <select name="category_id">
+            <option value="">Categoría</option>
+            <?php foreach ($this->categories as $category): ?> <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+            <?php endforeach; ?>
+        </select>
+
+        <select name="state">
+            <option value="">Estado</option>
+            <option value="pending">Pendiente</option>
+            <option value="inProgress">En progreso</option>
+            <option value="completed">Completeda</option>
+        </select>
+ 
+        <button type="submit">Filtrar </button>
+        <a href="<?= WEB_ROOT ?>/task">Limpiar</a>
+    </form>
+    <!-- HASTA AQUI CODIGO NUEVO DE FILTRO -->
+     
     <div class="taskItem border border-teal-600 p-4 mb-4 mt-4 bg-white rounded-xl shadow bg-teal-600">
         <form action=<?= WEB_ROOT ?>/task/addTask method="POST" class="flex flex-col gap-4 bg-teal-700">
             <input type="text" name="name" placeholder="Nombre de la tarea" required class="p-2 rounded border border-gray-300" maxlength="20">
