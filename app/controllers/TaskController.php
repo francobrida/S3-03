@@ -27,7 +27,7 @@ class TaskController extends ApplicationController
     }
     public function addTaskAction()
     {
-        $this->tasks->addTask($_POST['name'], $_POST['description'], $_POST['category_id']);
+        $this->tasks->addTask($_POST['name'], $_POST['description'], $_POST['category_id'], $_POST['start_date']);
         $this->view->tasks = $this->tasks->getAllTasks(); //shows all
 
         // Redirect to avoid form resubmission
