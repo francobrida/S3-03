@@ -1,19 +1,7 @@
 <?php include 'header.phtml'; ?>
 
-<div style="background: #f4f4f4; padding: 15px; border: 1px solid #ccc; margin-bottom: 20px;">
-    <h3>Agregar nuevo usuario</h3>
-    <form action="add" method="POST">
-        <input type="text" name="nickname" placeholder="Nickname">
-        <input type="text" name="name" placeholder="Nombre">
-        <input type="text" name="surname" placeholder="Apellido">
-        <input type="email" name="email" placeholder="Email">
-        <input type="password" name="password" placeholder="Password">
-        <select name="type">
-            <option value="Member">Member</option>
-            <option value="Admin">Admin</option>
-        </select>
-        <button type="submit">Agregar Usuario +</button>
-    </form>
+<div>
+    <a href="<?php echo WEB_ROOT; ?>/userAddView">Agregar nuevo usuario</a>
 </div>
 
 <table border="1" width="100%">
@@ -52,7 +40,7 @@
                     $urlDelete = WEB_ROOT . "/user/delete?id=" . $userId;
                     ?>
                     <a href="<?php echo $urlDelete; ?>" 
-                       onclick="return confirm('Confirm delete user');">
+                       onclick="return confirm('Confirmar eliminar usuario con sus respectivas tareas');">
                         <button type="button">Eliminar</button>
                     </a>
                 </td>

@@ -1,16 +1,6 @@
 {
     "users": [
         {
-            "id": 1,
-            "nickname": "raven",
-            "name": "Sofia",
-            "surname": "Martinez",
-            "password": "pass1",
-            "email": "sofia.mtz@pro-mail.org",
-            "type": "Admin",
-            "creation_date": "2024-05-22T14:45:12Z"
-        },
-        {
             "id": 2,
             "nickname": "bestlover57",
             "name": "Lucas",
