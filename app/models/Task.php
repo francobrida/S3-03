@@ -114,6 +114,10 @@ class Task extends Model{
             if ($filters['state'] != '' && $task['state'] != $filters['state']) {
                 $keepTask = false;
             }
+            // Filtro por Nombre (texto ingresado en form)
+            if ($filters['search'] != '' && stripos($task['name'], $filters['search']) === false) {
+                $keepTask = false;
+            }
 
             if ($keepTask) {
                 $results[] = $task;

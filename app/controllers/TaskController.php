@@ -96,16 +96,17 @@ class TaskController extends ApplicationController
         $this->view->categoriesById = $categoriesById;
 
         // 3. Filtros!
-        $filters = [
-            'user_id'     => $_GET['user_id'] ?? '',
-            'category_id' => $_GET['category_id'] ?? '',
-            'state'       => $_GET['state'] ?? '' 
-        ];
+       $filters = [
+        'user_id'     => $_GET['user_id'] ?? '',
+        'category_id' => $_GET['category_id'] ?? '',
+        'state'       => $_GET['state'] ?? '',
+        'search'      => $_GET['search'] ?? '' // Captura texto del form
+         ];
+
         $this->view->tasks = $this->tasks->filterTasks($filters);
 
-        // 4. Render manual
         $this->view->render('task/index.phtml');
-        exit; 
+        exit;
     }
 
 }
