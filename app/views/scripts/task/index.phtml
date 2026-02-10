@@ -1,5 +1,4 @@
-<div class="pl-6 pb-4 pt-10 mb-4 bg-teal-600 self-center"> 
-    <!--
+ <!--
     Cabecera
     -->
     <h1 class="text-2xl font-bold mb-2 text-white">Hoy</h1>
@@ -31,10 +30,45 @@
 <div class="m-6">
     <hr>
 </div>
-<!--    
-Filtros
+ 
+<!-- FILTRO -->
+    <div class="filtersContainer">
+        <form action="<?= WEB_ROOT ?>/task/filter" method="GET" style="display: flex; gap: 10px; align-items: center;">
+            
+            <input type="text" name="search" placeholder="Buscar por nombre..." 
+                value="<?= $_GET['search'] ?? '' ?>">
 
--->
+            <select name="user_id">
+                <option value="">Usuario</option>
+                <?php foreach ($this->users as $user): ?>
+                    <option value="<?= $user['id'] ?>" <?= (isset($_GET['user_id']) && $_GET['user_id'] == $user['id']) ? 'selected' : '' ?>>
+                        <?= $user['nickname'] ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+
+            <select name="category_id">
+                <option value="">Categoría</option>
+                <?php foreach ($this->categories as $category): ?>
+                    <option value="<?= $category['id'] ?>" <?= (isset($_GET['category_id']) && $_GET['category_id'] == $category['id']) ? 'selected' : '' ?>>
+                        <?= $category['name'] ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+
+            <select name="state">
+                <option value="">Estado</option>
+                <option value="pending" <?= (isset($_GET['state']) && $_GET['state'] == 'pending') ? 'selected' : '' ?>>Pendiente</option>
+                <option value="inProgress" <?= (isset($_GET['state']) && $_GET['state'] == 'inProgress') ? 'selected' : '' ?>>En progreso</option>
+                <option value="completed" <?= (isset($_GET['state']) && $_GET['state'] == 'completed') ? 'selected' : '' ?>>Completada</option>
+            </select>
+
+            <button type="submit">Filtrar</button>
+            <a href="<?= WEB_ROOT ?>/task">Limpiar</a>
+        </form>
+    </div>
+    <!-- HASTA AQUI CODIGO NUEVO DE FILTRO -->
+
 <div class="m-6">
     <hr>
 </div>

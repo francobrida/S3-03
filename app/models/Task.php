@@ -116,6 +116,38 @@ class Task extends Model{
         file_put_contents($this->jsonFile, json_encode($data, JSON_PRETTY_PRINT));
     }
 
+   public function filterTasks(array $filters) : array {
+        $tasks = $this->getAllTasks();
+        $results = []; 
+
+        foreach ($tasks as $task) {
+            $keepTask = true;
+
+            // Filtro por Usuario
+            if ($filters['user_id'] != '' && $task['id_user'] != $filters['user_id']) {
+                $keepTask = false;
+            }
+
+            // Filtro por Categoría
+            if ($filters['category_id'] != '' && $task['category_id'] != $filters['category_id']) {
+                $keepTask = false;
+            }
+
+            // Filtro por Estado
+            if ($filters['state'] != '' && $task['state'] != $filters['state']) {
+                $keepTask = false;
+            }
+            // Filtro por Nombre (texto ingresado en form)
+            if ($filters['search'] != '' && stripos($task['name'], $filters['search']) === false) {
+                $keepTask = false;
+            }
+
+            if ($keepTask) {
+                $results[] = $task;
+            }
+        }
+        return $results;
+    }
 }
 
 ?>

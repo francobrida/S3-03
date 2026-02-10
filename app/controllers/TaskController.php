@@ -20,6 +20,9 @@ class TaskController extends ApplicationController
         }
         $this->view->categoriesById = $categoriesById; //send categories diccionary
 
+        $userModel = new User(); //create user model
+        $this->view->users = $userModel->getAllUsers(); //send all users for filters
+
         $this->view->states = State::cases(); //send the enum of states
         if (isset($_SESSION['user_id'])){
             $this->view->tasks = $this->tasks->getUserTasks($_SESSION['user_id']);
@@ -96,6 +99,36 @@ class TaskController extends ApplicationController
         $this->tasks->editTask($id_task, $name, $description, $category, $state, $start_date, $start_time, $end_time);
         
         header("Location: " . $this->_baseUrl() . "/task");
+        exit;
+    }
+
+    public function filterAction() : void {
+        // 1. Cargar datos para los selects
+        $categoryModel = new Category();
+        $userModel = new User();
+        
+        // Los guardamos en el objeto view para que $this-> los encuentre
+        $this->view->categories = $categoryModel->getAllCategories();
+        $this->view->users = $userModel->getAllUsers();
+
+        // 2. Diccionario para la lista de tareas 
+        $categoriesById = [];
+        foreach ($this->view->categories as $cat) {
+            $categoriesById[$cat['id']] = $cat['name'];
+        }
+        $this->view->categoriesById = $categoriesById;
+
+        // 3. Filtros!
+       $filters = [
+        'user_id'     => $_GET['user_id'] ?? '',
+        'category_id' => $_GET['category_id'] ?? '',
+        'state'       => $_GET['state'] ?? '',
+        'search'      => $_GET['search'] ?? '' // Captura texto del form
+         ];
+
+        $this->view->tasks = $this->tasks->filterTasks($filters);
+
+        $this->view->render('task/index.phtml');
         exit;
     }
 
