@@ -1,7 +1,7 @@
 
 <div style="background: #f4f4f4; padding: 15px; border: 1px solid #ccc; margin-bottom: 20px;">
     <h3>Agregar nuevo usuario</h3>
-    <form action="add" method="POST">
+    <form action="<?php echo WEB_ROOT; ?>/user/add" method="POST">
         <input type="text" name="nickname" placeholder="Nickname">
         <input type="text" name="name" placeholder="Nombre">
         <input type="text" name="surname" placeholder="Apellido">
@@ -11,6 +11,7 @@
             <option value="Member">Member</option>
             <option value="Admin">Admin</option>
         </select>
-        <button type="submit">Agregar Usuario +</button>
+        <button type="submit">Agregar Usuario</button>
+        <a href="<?php echo WEB_ROOT; ?>/userAdmin">Cancelar</a>
     </form>
 </div>
