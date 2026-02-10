@@ -1,17 +1,69 @@
+<div class="pl-6 pb-4 pt-10 mb-4 bg-teal-600 self-center h-40"> 
+    <?php include __DIR__ . '/../header/header.phtml'; ?>
+</div>
 
-<div style="background: #f4f4f4; padding: 15px; border: 1px solid #ccc; margin-bottom: 20px;">
-    <h3>Agregar nuevo usuario</h3>
+<div class="p-4 max-w-2xl absolute top-16 left-1/2 -translate-x-1/2 w-full">
+    
     <form action="<?php echo WEB_ROOT; ?>/user/add" method="POST">
-        <input type="text" name="nickname" placeholder="Nickname">
-        <input type="text" name="name" placeholder="Nombre">
-        <input type="text" name="surname" placeholder="Apellido">
-        <input type="email" name="email" placeholder="Email">
-        <input type="password" name="password" placeholder="Password">
-        <select name="type">
-            <option value="Member">Member</option>
-            <option value="Admin">Admin</option>
-        </select>
-        <button type="submit">Agregar Usuario</button>
-        <a href="<?php echo WEB_ROOT; ?>/userAdmin">Cancelar</a>
+        
+        <div class="min-w-2xl border p-6 pb-8 mb-4 bg-white rounded-3xl shadow-lg grid gap-4">
+            
+            <div>
+                <div class="text-black-500 font-bold text-3xl">Agregar usuario</div>
+                <div class="text-black-500 text-xl">Configura un nuevo perfil en el sistema</div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex flex-col gap-1">
+                    <label class="text-black-500 font-bold text-base">Nickname</label>
+                    <input class="bg-gray-100 text-gray-700 pl-3 rounded-xl shadow-md py-2 border-none" required placeholder="Ej: fran_dev" type="text" name="nickname">
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="text-black-500 font-bold text-base">Email</label>
+                    <input class="bg-gray-100 text-gray-700 pl-3 rounded-xl shadow-md py-2 border-none" required placeholder="correo@ejemplo.com" type="email" name="email">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex flex-col gap-1">
+                    <label class="text-black-500 font-bold text-base">Nombre</label>
+                    <input class="bg-gray-100 text-gray-700 pl-3 rounded-xl shadow-md py-2 border-none" required placeholder="Nombre" type="text" name="name">
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="text-black-500 font-bold text-base">Apellido</label>
+                    <input class="bg-gray-100 text-gray-700 pl-3 rounded-xl shadow-md py-2 border-none" required placeholder="Apellido" type="text" name="surname">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex flex-col gap-1">
+                    <label class="text-black-500 font-bold text-base">Contraseña</label>
+                    <input class="bg-gray-100 text-gray-700 pl-3 rounded-xl shadow-md py-2 border-none" required placeholder="********" type="password" name="password">
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="text-black-500 font-bold text-base">Tipo de usuario</label>
+                    <select name="type" class="bg-gray-100 text-gray-700 pl-3 rounded-xl shadow-md py-2 border-none appearance-none">
+                        <option value="Member">Member</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                </div>
+            </div>
+
+            <hr class="my-2">
+
+            <div class="grid grid-cols-2 gap-4">
+                <div class="flex justify-center">
+                    <button type="submit" class="w-full py-3 px-4 rounded-xl border bg-teal-800 text-white font-bold hover:bg-teal-900 transition shadow-lg">
+                        Agregar Usuario
+                    </button>
+                </div>
+                <div class="flex justify-center">
+                    <a href="<?php echo WEB_ROOT; ?>/userAdmin" class="w-full py-3 px-4 rounded-xl border border-teal-800 text-teal-800 font-bold text-center hover:bg-teal-50 transition shadow-lg">
+                        Cancelar
+                    </a>
+                </div>
+            </div>
+
+        </div>
     </form>
 </div>

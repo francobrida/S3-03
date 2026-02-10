@@ -1,60 +1,86 @@
 <?php include __DIR__ . '/../header/header.phtml'; ?>
 
-<div>
-    <div class="filtersContainer">
-                <form action="<?= WEB_ROOT ?>/user/filter" method="GET" style="display: flex; gap: 10px; align-items: center;">
-                        
-                    <input type="text" name="search" placeholder="Buscar por nickname..." 
-                        value="<?= $_GET['search'] ?? '' ?>"
-                        style="color: black; padding: 5px 10px; border-radius: 8px; border: 1px solid #ccc;">
-
-                    <button type="submit">Buscar</button>
-                </form>
+<div class="pl-6 pb-4 pt-10 mb-4 bg-teal-600 self-center"> 
+    <h1 class="text-2xl font-bold mb-2 text-white">Administración de Usuarios</h1>
+    <div class="mt-auto grid grid-cols-2">
+        <p class="text-white">Gestiona los perfiles y permisos del sistema</p>
+    
+        <div class="flex justify-end mr-4">
+            <a href="<?php echo WEB_ROOT; ?>/userAddView">                       
+                <button type="button" class="py-2 px-4 rounded-xl bg-teal-800 text-white font-bold shadow-lg hover:bg-teal-900 transition">
+                    + Nuevo Usuario
+                </button>
+            </a>     
+        </div>
     </div>
-    <a href="<?php echo WEB_ROOT; ?>/userAddView">Agregar nuevo usuario</a>
 </div>
 
-<table border="1" width="100%">
-    <thead>
-        <tr>
-            <th>Nickname</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Email</th>
-            <th>Tipo</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php 
-        $users = isset($this->_data['users']) ? $this->_data['users'] : []; 
-        ?>
-        <?php foreach ($users as $user): ?>
-            <tr>
-                <td><?php echo isset($user['nickname']) ? $user['nickname'] : ''; ?></td>
-                <td><?php echo isset($user['name']) ? $user['name'] : ''; ?></td>
-                <td><?php echo isset($user['surname']) ? $user['surname'] : ''; ?></td>
-                <td><?php echo isset($user['email']) ? $user['email'] : ''; ?></td>
-                <td><?php echo isset($user['type']) ? $user['type'] : ''; ?></td>
-                <td>
-                    <?php 
-                    $userId = isset($user['id']) ? $user['id'] : ''; 
-                    $urlEdit = WEB_ROOT . "/user/edit?id=" . $userId;
-                    ?>
-                    <a href="<?php echo $urlEdit; ?>" 
-                        <button type="button">Editar</button>
-                    </a>
+<?php if (isset($_SESSION['info_message'])): ?>
+    <div class="mx-6 bg-blue-500 text-white p-3 rounded-xl mb-4 shadow-md">
+        <?= $_SESSION['info_message']; unset($_SESSION['info_message']); ?>
+    </div>
+<?php endif; ?>
 
-                    <?php 
-                    $userId = isset($user['id']) ? $user['id'] : ''; 
+<div class="filtersContainer m-6 bg-white p-4 rounded-3xl shadow-md border border-gray-100">
+    <form action="<?= WEB_ROOT ?>/user/filter" method="GET" class="flex flex-wrap gap-4 items-center">
+        <input type="text" name="search" placeholder="Buscar por nickname..." 
+               value="<?= $_GET['search'] ?? '' ?>"
+               class="bg-gray-100 text-gray-700 px-4 py-2 rounded-xl shadow-inner border-none focus:ring-2 focus:ring-teal-500 flex-grow">
+
+        <button type="submit" class="py-2 px-6 rounded-xl bg-teal-600 text-white font-bold hover:bg-teal-700 transition">
+            Buscar
+        </button>
+        <a href="<?= WEB_ROOT ?>/userAdmin" class="text-teal-600 font-bold hover:underline">Limpiar</a>
+    </form>
+</div>
+
+<div class="m-6">
+    <hr class="border-gray-200">
+</div>
+
+<div class="userContainer p-4 ml-6 mr-6 grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(300px,1fr))]">
+    <?php 
+    $displayUsers = $this->view->users ?? $this->users ?? []; 
+    
+    if (empty($displayUsers)): ?>
+        <p class="text-gray-500 text-center col-span-full">No se encontraron usuarios.</p>
+    <?php else:
+        foreach ($displayUsers as $user): ?>
+        <div class="p-6 bg-white rounded-3xl shadow-lg border border-gray-50 flex flex-col justify-between hover:shadow-xl transition">
+            
+            <div class="flex justify-between items-start mb-4">
+                <div class="rounded-2xl px-3 py-1 text-xs font-bold text-white shadow-md
+                    <?= $user['type'] === 'Admin' ? 'bg-purple-600' : 'bg-teal-500' ?>">
+                    <?= strtoupper($user['type']) ?>
+                </div>
+                <p class="text-gray-400 text-sm font-mono">@<?= htmlspecialchars($user['nickname']) ?></p>
+            </div>
+
+            <div class="mb-4">
+                <h2 class="text-black-500 font-bold text-xl uppercase">
+                    <?= htmlspecialchars($user['name'] . " " . $user['surname']) ?>
+                </h2>
+                <p class="text-sm text-gray-500 italic mt-1"><?= htmlspecialchars($user['email']) ?></p>
+            </div>
+
+            <div class="mt-auto pt-4 border-t border-gray-100 flex justify-end gap-2">
+                <?php 
+                    $userId = $user['id'] ?? ''; 
+                    $urlEdit = WEB_ROOT . "/user/edit?id=" . $userId;
                     $urlDelete = WEB_ROOT . "/user/delete?id=" . $userId;
-                    ?>
-                    <a href="<?php echo $urlDelete; ?>" 
-                       onclick="return confirm('Confirmar eliminar usuario con sus respectivas tareas');">
-                        <button type="button">Eliminar</button>
-                    </a>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+                ?>
+                
+                <a href="<?= $urlEdit ?>" class="p-2 hover:bg-teal-50 rounded-xl transition">
+                    <img src="<?= WEB_ROOT ?>/images/lapiz.png" alt="Editar" class="w-5 h-5">
+                </a>
+
+                <a href="<?= $urlDelete ?>" 
+                   onclick="return confirm('¿Eliminar a <?= $user['nickname'] ?> y todas sus tareas?');"
+                   class="p-2 hover:bg-red-50 rounded-xl transition">
+                    <img src="<?= WEB_ROOT ?>/images/papelera.png" alt="Eliminar" class="w-5 h-5">
+                </a>
+            </div>
+        </div>
+        <?php endforeach; 
+    endif; ?>
+</div>
