@@ -1,6 +1,16 @@
 {
     "users": [
         {
+            "id": 1,
+            "nickname": "raven",
+            "name": "prueba1",
+            "surname": "Perez",
+            "password": "pass1",
+            "email": "prueba@gmail.com",
+            "type": "Admin",
+            "creation_date": "2025-11-03T10:15:30Z"
+        },
+        {
             "id": 2,
             "nickname": "bestlover57",
             "name": "Lucas",
