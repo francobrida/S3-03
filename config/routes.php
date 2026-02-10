@@ -19,6 +19,7 @@ $routes = array(
     '/task/deleteTask' => 'task#deleteTask',
     '/task/editTask' => 'task#editTask',
     '/task/updateTask' => 'task#updateTask',
+    '/task/filter' => 'task#filter',
 
     // CATEGORY 
     '/category' => 'category#index',
@@ -26,6 +27,7 @@ $routes = array(
     '/category/delete' => 'category#delete',
     '/category/edit' => 'category#edit',
     '/category/update' => 'category#update',
+    '/category/filter' => 'category#filter',
 
     // USER (Admin)
     '/userAdmin' => 'user#admin',
@@ -34,6 +36,7 @@ $routes = array(
     '/user/delete' => 'user#delete',
     '/user/edit' => 'user#edit',
     '/user/update' => 'user#update',
+    '/user/filter' => 'user#filter',
 
     // Esta parte nueva la explico en castellano hasta que la tengamos super claro para no liarnos (Fran)
     
