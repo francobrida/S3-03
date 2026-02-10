@@ -1,3 +1,19 @@
 {
-    "categories": []
+    "categories": [
+        {
+            "id": 1,
+            "name": "trabajo",
+            "description": "trabajo"
+        },
+        {
+            "id": 2,
+            "name": "general",
+            "description": "general"
+        },
+        {
+            "id": 3,
+            "name": "compras",
+            "description": "compras"
+        }
+    ]
 }
