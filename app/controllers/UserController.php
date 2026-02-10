@@ -21,6 +21,8 @@ class UserController extends ApplicationController
 
     }
 
+    public function addViewAction() : void {}
+
     public function addAction() : void {
     
         $nickname = $this->_getParam('nickname');
@@ -41,7 +43,7 @@ class UserController extends ApplicationController
         
         $this->user->addUser($nickname, $name, $surname, $password, $email, UserType::from($type));
         
-        header("Location: " . $this->_baseUrl() . "/user");
+        header("Location: " . $this->_baseUrl() . "/userAdmin");
         exit;
     }
 
@@ -50,7 +52,7 @@ class UserController extends ApplicationController
 
         $this->user->deleteUser($id_user);
         
-        header("Location: " . $this->_baseUrl() . "/user");
+        header("Location: " . $this->_baseUrl() . "/userAdmin");
         exit;
     }
 
@@ -74,7 +76,7 @@ class UserController extends ApplicationController
 
         $this->user->editUser((int)$id, $nickname, $name, $surname, $password, $email, UserType::from($type));
         
-        header("Location: " . $this->_baseUrl() . "/user");
+        header("Location: " . $this->_baseUrl() . "/userAdmin");
         exit;
     }
 
@@ -99,7 +101,7 @@ class UserController extends ApplicationController
    }
 
    public function logoutAction() : void {
-        session_start();
+        session_start(); // is this necessary?
         session_unset();
         session_destroy();
 
@@ -114,7 +116,7 @@ class UserController extends ApplicationController
 
         // Validation to Check if nickname is already used
         if ($this->user->isAlreadyUsed($nickname)) {
-            $_SESSION['error'] = "The nickname '$nickname' is already used. Please choose another.";
+            $_SESSION['error'] = "El nickname '$nickname' ya está ocupado. Por favor elija otro.";
             header("Location: " . $this->_baseUrl() . "/index");
             exit;
         }
