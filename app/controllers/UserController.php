@@ -135,4 +135,14 @@ class UserController extends ApplicationController
         exit;
     }
 
+    public function filterAction() : void {
+      
+      $searchByNickname = $_GET['search'] ?? '';
+    
+      $this->view->users = $this->user->filterUser($searchByNickname);
+
+      $this->view->render('user/admin.phtml');
+      exit;
+    }
+
 }

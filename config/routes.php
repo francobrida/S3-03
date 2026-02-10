@@ -36,6 +36,7 @@ $routes = array(
     '/user/delete' => 'user#delete',
     '/user/edit' => 'user#edit',
     '/user/update' => 'user#update',
+    '/user/filter' => 'user#filter',
 
     // Esta parte nueva la explico en castellano hasta que la tengamos super claro para no liarnos (Fran)
     
