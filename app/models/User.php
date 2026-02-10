@@ -143,6 +143,18 @@ class User extends Model{
         return false; // No match found
     }
 
+    public function filterUser($searchByNickname) : array {
+        $users = $this->getAllUsers();
+        $filteredUsers = [];
+
+        foreach ($users as $user) {
+            if (stripos($user['nickname'], $searchByNickname) !== false) {
+                $filteredUsers[] = $user;
+            }
+        }
+
+        return $filteredUsers;
+    }
 }
 
 ?>
