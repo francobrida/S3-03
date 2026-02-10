@@ -40,10 +40,11 @@
 </div>
  
 <!-- FILTRO -->
-    <div class="filtersContainer">
-        <form action="<?= WEB_ROOT ?>/task/filter" method="GET" style="display: flex; gap: 10px; align-items: center;">
+    <div class="filtersContainer ml-6 py-2 pl-2 border rounded-2xl shadow-lg bg-white">
+        <!-- <form action="<?= WEB_ROOT ?>/task/filter" method="GET" style="display: flex; gap: 10px; align-items: center;" >-->
+        <form action="<?= WEB_ROOT ?>/task/filter" method="GET" class="flex gap-2 align-center">
             
-            <input type="text" name="search" placeholder="Buscar por nombre..." 
+            <input type="text" name="search" class="rounded-xl pl-2 bg-gray-200" placeholder="Buscar por nombre..." 
                 value="<?= $_GET['search'] ?? '' ?>">
 
             <select name="user_id">
@@ -82,7 +83,7 @@
 </div>
 <div class="taskContainer p-4 pl-0 ml-6 mr-6 w-full self-center grid gap-x-4 gap-y-8 justify-center items-stretch [grid-template-columns:repeat(auto-fit,minmax(300px,1fr))]">
     <?php 
-    $displayTasks = $this->view->tasks ?? $this->tasks ?? [];
+    $displayTasks = $this->tasks ?? [];
     
     if (empty($displayTasks)): 
         echo "<p>No hay tareas disponibles.</p>";
@@ -127,7 +128,7 @@
                         $taskId = isset($task['id_task']) ? $task['id_task'] : ''; 
                         $urlDelete = WEB_ROOT . "/task/deleteTask?id_task=" . $taskId;
                     ?>
-                    <a href="<?php echo $urlDelete; ?>" onclick="return confirm('Confirm delete task');">
+                    <a href="<?php echo $urlDelete; ?>" onclick="return confirm('¿Estas seguro que quieres eliminar esta tarea?');">
                         <button type="button" class="py-2 px-4 rounded"><img src="<?= WEB_ROOT ?>/images/papelera.png" alt="Eliminar" class="w-4 h-4"></img></button>
                     </a>
                 </div>
