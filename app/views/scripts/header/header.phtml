@@ -13,7 +13,6 @@
            class="nav-block <?= (strpos($currentUri, 'userAdmin') !== false) ? 'active' : '' ?>">
            Usuarios
         </a>
-    <?php endif; ?>
 
     <a href="<?= WEB_ROOT ?>/task" 
        class="nav-block <?= (strpos($currentUri, 'task') !== false) ? 'active' : '' ?>">
@@ -24,6 +23,7 @@
        class="nav-block <?= (strpos($currentUri, 'category') !== false) ? 'active' : '' ?>">
        Categorías
     </a>
+    <?php endif; ?>
 </nav>
 
     <div style="flex: 1; display: flex; justify-content: flex-end; align-items: center; gap: 15px;">
