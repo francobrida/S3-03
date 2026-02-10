@@ -1,49 +1,61 @@
-<!--<div class="header mb-4 h-32 align-middle flex items-center justify-center bg-blue-500">
-    <h1 class="text-2xl font-bold text-white text-center">TO-DO</h1>
-</div>-->
-<div class="taskContainer p-4 bg-gray-300 max-w-4xl self-center rounded-xl shadow-lg ">    
-    <h3 class="flex justify-center font-bold">Editar tarea</h3>
-   
+<div class="pl-6 pb-4 pt-10 mb-4 bg-teal-600 self-center h-40"> 
+    <!--
+    Cabezera
+    -->
+    
+</div>
+<div class="p-4 max-w-2xl absolute top-16 left-1/2 -translate-x-1/2 w-full">
     <?php if ($this->task): ?>
         <form action="<?php echo WEB_ROOT; ?>/task/updateTask" method="POST">
-            <div class="taskItem p-4 pb-0 mb-4  display: grid grid-cols-5 gap-4">
-                <div class="flex justify-center">Nombre</div>
-                <div class="flex justify-center">Descripción</div>
-                <div class="flex justify-center">Categoria</div>
-                <div class="flex justify-center">Estado</div>
-                <div class="flex justify-end pr-6">Botones</div>
-            </div>
-            <div class="taskItem border p-4 mb-4 bg-white rounded-xl shadow display: grid grid-cols-5 gap-4 h-60">
-                <input type="hidden" name="id_task" value="<?= $this->task['id_task']; ?>">
-                <input class="bg-gray-200 pl-2 rounded" type="text" name="name" value="<?= htmlspecialchars($this->task['name']); ?>" maxlength="20">
-                <textarea class="bg-gray-200 pl-2 rounded resize-none text-justify align-middle" type="text" name="description" maxlength="100"><?= htmlspecialchars($this->task['description']); ?></textarea>
-                
-                <select name="category_id">
-                    <?php foreach ($this->categories as $cat): ?>
-                        <option value="<?= $cat['id'] ?>"
-                            <?= $cat['id'] == $this->task['category_id'] ? 'selected' : '' ?>>
-                            <?= ucfirst(str_replace('_', ' ', $cat['name'])) ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
+            
+            <div class="min-w-2xl taskItem border p-6 pb-8 mb-4 bg-white rounded-3xl shadow-lg grid gap-2">
+                <div class="text-black-500 font-bold text-3xl">Editar tarea</div>
 
+                <input type="hidden" name="id_task" value="<?= $this->task['id_task']; ?>">
+                <div class="text-black-500 font-bold text-base">Nombre de la tarea</div>
+                <input class="bg-gray-100 text-gray-500 pl-2 rounded-xl shadow-lg py-1" type="text" name="name" value="<?= htmlspecialchars($this->task['name']); ?>" maxlength="20">
+                <div class="text-black-500 font-bold text-base">Descripción</div>
+                <textarea class="bg-gray-100 text-gray-500 px-2 rounded-xl shadow-lg resize-none text-justify align-middle h-20 py-1" type="text" name="description" maxlength="100"><?= htmlspecialchars($this->task['description']); ?></textarea>
+                <div class="grid grid-cols-2 gap-8">
+                    <div class="izquierda w-full">
+                        <div class="text-black-500 font-bold text-base py-2">Categoria</div>
+                        <select name="category_id" class="bg-gray-100 text-gray-500 rounded-xl shadow-lg w-full py-1 px-2">
+                        <?php foreach ($this->categories as $cat): ?>
+                            <option value="<?= $cat['id'] ?>"
+                                <?= $cat['id'] == $this->task['category_id'] ? 'selected' : '' ?>>
+                                <?= ucfirst(str_replace('_', ' ', $cat['name'])) ?>
+                            </option>
+                        <?php endforeach; ?>
+                        </select>
+                        <div class="text-black-500 font-bold text-base py-2">Hora de inicio</div>
+                        <input class="bg-gray-100 text-gray-500 py-1 px-2 rounded-xl shadow-lg w-full" type="time" name="start_time" value="<?= htmlspecialchars($this->task['start_time']); ?>" maxlength="20">
+                        <div class="text-black-500 font-bold text-base py-2">Estado</div>
+                        <select name="state" class="bg-gray-100 text-gray-500 rounded-xl shadow-lg w-full py-1 px-2">
+                            <?php foreach ($this->states as $state): ?>
+                                <option value="<?= $state->name ?>"
+                                    <?= $state->name == $this->task['state'] ? 'selected' : '' ?>>
+                                    <?= ucfirst(str_replace('_', ' ', $state->name)) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="derecha w-full">
+                        <div class="text-black-500 font-bold text-base py-2">Fecha</div>
+                        <input class="bg-gray-100 text-gray-500 py-1 px-2 rounded-xl shadow-lg w-full" type="date" name="start_date" value="<?= htmlspecialchars($this->task['start_date']); ?>" maxlength="20">
+                        <div class="text-black-500 font-bold text-base py-2">Hora de fin</div>
+                        <input class="bg-gray-100 text-gray-500 py-1 px-2 rounded-xl shadow-lg w-full" type="time" name="end_time" value="<?= htmlspecialchars($this->task['end_time']); ?>" maxlength="20">
+                    </div>
+                </div>                   
                 
-                <select name="state">
-                    <?php foreach ($this->states as $state): ?>
-                        <option value="<?= $state->name ?>"
-                            <?= $state->name == $this->task['state'] ? 'selected' : '' ?>>
-                            <?= ucfirst(str_replace('_', ' ', $state->name)) ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-                <div class="flex justify-end">
-                    <button type="submit" class="py-2 px-4 rounded">
-                        <img src="<?= WEB_ROOT ?>/images/salvar.png" alt="Guardar" class="w-4 h-4"></img>
-                    </button>
-                    <button type="cancel" class="py-2 px-4 rounded" onclick="javascript:window.location='<?php echo WEB_ROOT; ?>/task';">
-                        <img src="<?= WEB_ROOT ?>/images/cerrar.png" alt="Cancelar" class="w-4 h-4"></img>
-                    </button>
-                   
+                <hr>
+
+                <div class="grid grid-cols-2 justify-end mg-6">
+                    <div class="grid justify-center">
+                        <button type="submit" class="py-2 px-4 rounded-xl border bg-teal-800 text-white">Aceptar</button>
+                    </div>
+                    <div class="grid justify-center">
+                        <a href="javascript:window.location='<?php echo WEB_ROOT; ?>/task';" class="grid py-2 px-4 rounded-xl border border-teal-800 text-teal-800 w-24">Cancelar</a>
+                    </div>
                 </div>
             </div>
         </form>

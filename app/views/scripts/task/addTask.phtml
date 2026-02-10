@@ -1,0 +1,53 @@
+<div class="pl-6 pb-4 pt-10 mb-4 bg-teal-600 self-center h-40"> 
+    <!--
+    Cabezera
+    -->    
+</div>
+<div class="p-4 max-w-2xl absolute top-16 left-1/2 -translate-x-1/2 w-full">
+    
+    <form action="<?php echo WEB_ROOT; ?>/task/addNewTask" method="POST">
+        
+        <div class="min-w-2xl taskItem border p-6 pb-8 mb-4 bg-white rounded-3xl shadow-lg grid gap-2">
+            <div class="text-black-500 font-bold text-3xl">Crear tarea</div>
+
+            <input type="hidden" name="id_task" value="<?= $this->task['id_task']; ?>">
+            <div class="text-black-500 text-xl">Define tu próximo objetivo</div>
+            <div class="text-black-500 font-bold text-base">Nombre de la tarea</div>
+            <input class="bg-gray-100 text-gray-500 pl-2 rounded-xl shadow-lg py-1" required placeholder="Nombre de la tarea" type="text" name="name" value="" maxlength="20">
+            <div class="text-black-500 font-bold text-base">Descripción</div>
+            <textarea class="bg-gray-100 text-gray-500 px-2 rounded-xl shadow-lg resize-none text-justify align-middle h-20 py-1" required placeholder="Descripción de la tarea" type="text" name="description" maxlength="100"></textarea>
+            <div class="grid grid-cols-2 gap-8">
+                <div class="izquierda w-full">
+                    <div class="text-black-500 font-bold text-base py-2">Categoria</div>
+                    <select name="category_id" class="bg-gray-100 text-gray-500 rounded-xl shadow-lg w-full py-1 px-2" required>
+                        <option value="" disabled selected>Selecciona la categoría</option>
+                    <?php foreach ($this->categories as $cat): ?>
+                        <option value="<?= $cat['id'] ?>">
+                            <?= ucfirst(str_replace('_', ' ', $cat['name'])) ?>
+                        </option>
+                    <?php endforeach; ?>
+                    </select>
+                    <div class="text-black-500 font-bold text-base py-2">Hora de inicio</div>
+                    <input class="bg-gray-100 text-gray-500 py-1 px-2 rounded-xl shadow-lg w-full" required type="time" name="start_time" value="09:00" maxlength="20">
+                </div>
+                <div class="derecha w-full">
+                    <div class="text-black-500 font-bold text-base py-2">Fecha</div>
+                    <input class="bg-gray-100 text-gray-500 py-1 px-2 rounded-xl shadow-lg w-full" required type="date" name="start_date" value="<?php echo date('Y-m-d'); ?>" maxlength="20">
+                    <div class="text-black-500 font-bold text-base py-2">Hora de fin</div>
+                    <input class="bg-gray-100 text-gray-500 py-1 px-2 rounded-xl shadow-lg w-full" required type="time" name="end_time" value="12:00" maxlength="20">
+                </div>
+            </div>
+            <hr>
+            <div class="grid grid-cols-2 justify-end mg-6">
+                <div class="grid justify-center">
+                    <button type="submit" class="py-2 px-4 rounded-xl border bg-teal-800 text-white">Aceptar</button>
+                </div>
+                <div class="grid justify-center">
+                    <a href="javascript:window.location='<?php echo WEB_ROOT; ?>/task';" class="grid py-2 px-4 rounded-xl border border-teal-800 text-teal-800 w-24">Cancelar</a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>    
+
