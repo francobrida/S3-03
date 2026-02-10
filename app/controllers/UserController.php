@@ -24,8 +24,12 @@ class UserController extends ApplicationController
     public function adminAction() : void 
     {
         // Esta es para el panel de gestión
+        if (isset($_SESSION['user_id']) && $_SESSION['type'] != 'Admin'){
+            $_SESSION['info_message'] = "No puedes acceder a este panel si no eres Admin";
+            header("Location: " . $this->_baseUrl() . "/task");
+            exit;
+        }
         $this->view->users = $this->user->getAllUsers(); 
-
     }
 
     public function addViewAction() : void {}
