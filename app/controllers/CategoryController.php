@@ -56,4 +56,15 @@ class CategoryController extends ApplicationController {
       header('Location: ' . WEB_ROOT . '/category');
       exit;
     }
+
+    public function filterAction() : void {
+      
+      $searchByName = $_GET['search'] ?? '';
+      $categoryModel = new Category();
+    
+      $this->view->categories = $categoryModel->filterCategory($searchByName);
+
+      $this->view->render('category/index.phtml');
+      exit;
+    }
 }

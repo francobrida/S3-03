@@ -85,10 +85,20 @@ class Category extends Model{
             $this->jsonFile,
             json_encode(['categories' => $categories], JSON_PRETTY_PRINT)
         );
-}
+    }
 
+    public function filterCategory($searchByName) : array {
+        $categories = $this->getAllCategories();
+        $filteredCategories = [];
 
+        foreach ($categories as $category) {
+            if (stripos($category['name'], $searchByName) !== false) {
+                $filteredCategories[] = $category;
+            }
+        }
 
+        return $filteredCategories;
+    }
     
 
 }

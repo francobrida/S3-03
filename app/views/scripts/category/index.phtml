@@ -14,7 +14,19 @@
             <p class="opacity-80 mb-6">
                 <?= date('l, d F'); ?>
             </p>
-            
+
+            <!-- FILTRO - FRAN -->
+            <div class="filtersContainer">
+                <form action="<?= WEB_ROOT ?>/category/filter" method="GET" style="display: flex; gap: 10px; align-items: center;">
+                        
+                    <input type="text" name="search" placeholder="Buscar por nombre..." 
+                        value="<?= $_GET['search'] ?? '' ?>"
+                        style="color: black; padding: 5px 10px; border-radius: 8px; border: 1px solid #ccc;">
+
+                    <button type="submit">Buscar</button>
+                </form>
+            </div>
+
             <!-- FORMULARIO HORIZONTAL -->
             <form method="POST" action="<?= WEB_ROOT ?>/category/add" class="flex gap-4 items-end">
                 
