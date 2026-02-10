@@ -10,6 +10,10 @@ class TaskController extends ApplicationController
     }
     public function indexAction()
     {
+        if (!isset($_SESSION['user_id'])){
+            header("Location: " . $this->_baseUrl() . "/index");
+            exit;
+        }
         $categoryModel = new Category(); //Si, en el controler de task creo la categoria
         $categories = $categoryModel->getAllCategories(); //send all the categories
         $this->view->categories = $categories; //send all categories
@@ -33,6 +37,10 @@ class TaskController extends ApplicationController
     }
     public function addTaskAction()
     {
+        if (!isset($_SESSION['user_id'])){
+            header("Location: " . $this->_baseUrl() . "/index");
+            exit;
+        }
         $this->view->addTasks = $this->tasks->getAllTasks(); //shows all
         $this->view->states = State::cases(); //send the enum of states
   
@@ -68,6 +76,10 @@ class TaskController extends ApplicationController
 
     public function editTaskAction() : void
     {
+        if (!isset($_SESSION['user_id'])){
+            header("Location: " . $this->_baseUrl() . "/index");
+            exit;
+        }
         $id_task = $this->_getParam('id_task');
         $foundTask = $this->tasks->searchTask($id_task);
         $this->view->states = State::cases(); //send the enum of states
