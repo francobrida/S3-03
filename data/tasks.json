@@ -95,6 +95,30 @@
             "end_time": "12:00",
             "creation_date": "2026-02-10 11:10:15",
             "id_user": 1
+        },
+        {
+            "id_task": 9,
+            "name": "primera tarea Elena",
+            "description": "pruebas",
+            "category_id": 1,
+            "state": "pending",
+            "start_date": "2026-02-10",
+            "start_time": "09:00",
+            "end_time": "12:00",
+            "creation_date": "2026-02-10 13:07:34",
+            "id_user": 3
+        },
+        {
+            "id_task": 10,
+            "name": "mas trabajo",
+            "description": "bbbb",
+            "category_id": 1,
+            "state": "pending",
+            "start_date": "2026-02-10",
+            "start_time": "15:00",
+            "end_time": "12:00",
+            "creation_date": "2026-02-10 13:07:58",
+            "id_user": 3
         }
     ]
 }

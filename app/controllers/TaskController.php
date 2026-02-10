@@ -49,7 +49,11 @@ class TaskController extends ApplicationController
 
     public function addNewTaskAction()
     {
-        $this->tasks->addNewTask($_POST['name'], $_POST['description'], $_POST['category_id'], $_POST['start_date'], $_POST['start_time'], $_POST['end_time']);
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: " . $this->_baseUrl() . "/index");
+            exit;
+        }
+        $this->tasks->addNewTask($_POST['name'], $_POST['description'], $_POST['category_id'], $_POST['start_date'], $_POST['start_time'], $_POST['end_time'], (int) $_SESSION['user_id']);
         $this->view->tasks = $this->tasks->getAllTasks(); //shows all
 
         // Redirect to avoid form resubmission
