@@ -26,12 +26,10 @@ class TaskController extends ApplicationController
         }
         else {
             $this->view->tasks = $this->tasks->getAllTasks(); //send all tasks   
-        }
-            
+        }            
     }
     public function addTaskAction()
     {
-        //$this->tasks->addTask($_POST['name'], $_POST['description'], $_POST['category_id'], $_POST['start_date'], $_POST['start_time'], $_POST['end_time']);
         $this->view->addTasks = $this->tasks->getAllTasks(); //shows all
         $this->view->states = State::cases(); //send the enum of states
   
@@ -43,9 +41,7 @@ class TaskController extends ApplicationController
         foreach ($categories as $category) {
             $categoriesById[$category['id']] = $category['name'];
         }
-        $this->view->categoriesById = $categoriesById; //send categories diccionary
-
-        
+        $this->view->categoriesById = $categoriesById; //send categories diccionary        
     }
 
     public function addNewTaskAction()

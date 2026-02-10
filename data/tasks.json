@@ -83,6 +83,18 @@
             "end_time": "12:00",
             "creation_date": "2026-02-05 13:20:50",
             "id_user": 1
+        },
+        {
+            "id_task": 8,
+            "name": "aaaa",
+            "description": "bbb",
+            "category_id": 3,
+            "state": "pending",
+            "start_date": "2026-02-10",
+            "start_time": "09:00",
+            "end_time": "12:00",
+            "creation_date": "2026-02-10 09:57:37",
+            "id_user": 1
         }
     ]
 }

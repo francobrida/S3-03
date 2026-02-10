@@ -12,7 +12,6 @@
                 <div class="text-black-500 font-bold text-3xl">Editar tarea</div>
 
                 <input type="hidden" name="id_task" value="<?= $this->task['id_task']; ?>">
-                <!--<div class="text-black-500 text-xl">Define tu próximo objetivo</div>-->
                 <div class="text-black-500 font-bold text-base">Nombre de la tarea</div>
                 <input class="bg-gray-100 text-gray-500 pl-2 rounded-xl shadow-lg py-1" type="text" name="name" value="<?= htmlspecialchars($this->task['name']); ?>" maxlength="20">
                 <div class="text-black-500 font-bold text-base">Descripción</div>
@@ -46,11 +45,9 @@
                         <div class="text-black-500 font-bold text-base py-2">Hora de fin</div>
                         <input class="bg-gray-100 text-gray-500 py-1 px-2 rounded-xl shadow-lg w-full" type="time" name="end_time" value="<?= htmlspecialchars($this->task['end_time']); ?>" maxlength="20">
                     </div>
-                </div>
-                    
+                </div>                   
                 
                 <hr>
-
 
                 <div class="grid grid-cols-2 justify-end mg-6">
                     <div class="grid justify-center">
