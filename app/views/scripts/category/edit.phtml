@@ -1,34 +1,82 @@
-<h1>TO DO APP</h1>
-
-<h2>Editar Categoría</h2>
-
-<form method="POST" action="<?= WEB_ROOT ?>/category/update">
+<!-- Contenedor principal centrado -->
+<div class="max-w-4xl mx-auto p-6">
     
-    <!-- Campo OCULTO con el ID -->
-    <input type="hidden" 
-           name="id" 
-           value="<?= $this->category['id'] ?>">
+    <!-- LA PASTILLA GRANDE -->
+    <div class="bg-white rounded-3xl overflow-hidden shadow-lg mt-10">
+        
+        <!-- PARTE VERDE (arriba) -->
+        <div class="bg-teal-700 text-white p-8">
+            
+            <!-- Contenedor flex con título a la izquierda, icono a la derecha -->
+            <div class="flex justify-between items-start">
+                
+                <!-- Izquierda: Título y fecha -->
+                <div>
+                    <h1 class="text-4xl font-bold">
+                        Editar Categoría
+                    </h1>
+                    <p class="opacity-80 mt-2">
+                        <?= date('l, d F'); ?>
+                    </p>
+                </div>
+                
+                <!-- Derecha: Icono volver -->
+                <a href="<?= WEB_ROOT ?>/category" 
+                   class="text-white hover:opacity-80 transition-opacity">
+                    <i class="fa-solid fa-arrow-left text-2xl"></i>
+                </a>
+                
+            </div>
+            
+        </div>
+        
+        <!-- PARTE BLANCA (abajo) -->
+        <div class="bg-white p-8">
+            
+            <form method="POST" action="<?= WEB_ROOT ?>/category/update">
+                
+                <input type="hidden" name="id" value="<?= $this->category['id'] ?>">
+                
+                <div class="flex gap-4 items-end">
+                    
+                    <div class="flex-1">
+                        <label class="block text-gray-600 font-semibold mb-2">
+                            Nombre
+                        </label>
+                        <input type="text" 
+                               name="name" 
+                               value="<?= htmlspecialchars($this->category['name']) ?>"
+                               class="w-full border-2 border-gray-400 rounded-xl px-4 py-3 shadow-md text-gray-600"
+                               required>
+                    </div>
+                    
+                    <div class="flex-1">
+                        <label class="block text-gray-600 font-semibold mb-2">
+                            Descripción
+                        </label>
+                        <input type="text" 
+                               name="description" 
+                               value="<?= htmlspecialchars($this->category['description']) ?>"
+                               class="w-full border-2 border-gray-400 rounded-xl px-4 py-3 shadow-md text-gray-600"
+                               required>
+                    </div>
+                    
+                    <button type="submit" 
+                            class="bg-teal-700 text-white px-6 py-3 rounded-xl font-semibold shadow-md hover:opacity-90">
+                        Guardar
+                    </button>
+                    
+                    <a href="<?= WEB_ROOT ?>/category" 
+                       class="bg-white text-gray-600 border-2 border-gray-400 px-6 py-3 rounded-xl font-semibold shadow-md hover:bg-gray-100 inline-block">
+                        Cancelar
+                    </a>
+                    
+                </div>
+                
+            </form>
+            
+        </div>
+        
+    </div>
     
-    <!-- Campo para el NOMBRE -->
-    <label for="name">Nombre:</label>
-    <input type="text" 
-           id="name" 
-           name="name" 
-           value="<?= htmlspecialchars($this->category['name']) ?>" 
-           required>
-    <br>
-    
-    <!-- Campo para la DESCRIPCIÓN -->
-    <label for="description">Descripción:</label>
-    <input type="text" 
-           id="description" 
-           name="description" 
-           value="<?= htmlspecialchars($this->category['description']) ?>" 
-           required>
-    <br>
-    
-    <button type="submit">Guardar Cambios</button>
-    
-    <a href="<?= WEB_ROOT ?>/category">Cancelar</a>
-    
-</form>
+</div>
