@@ -3,17 +3,20 @@
         {
             "id": 1,
             "name": "trabajo",
-            "description": "trabajo"
+            "description": "trabajo",
+            "color": "red"
         },
         {
             "id": 2,
             "name": "general",
-            "description": "general"
+            "description": "general",
+            "color": "green"
         },
         {
             "id": 3,
             "name": "compras",
-            "description": "compras"
+            "description": "compras",
+            "color": "yellow"
         }
     ]
 }

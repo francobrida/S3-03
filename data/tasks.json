@@ -16,7 +16,7 @@
             "id_task": 2,
             "name": "crear tareas",
             "description": "aprender a crear tareas desde el aplicativo",
-            "category_id": 3,
+            "category_id": 2,
             "state": "completed",
             "start_date": "2026-02-06",
             "start_time": "14:00",

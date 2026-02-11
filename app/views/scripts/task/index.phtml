@@ -6,12 +6,11 @@
     </div>
 <?php endif; ?>
 
-<div class="pl-6 pb-4 pt-10 mb-4 bg-teal-600 self-center"> 
+<div class="pl-6 pb-4 pt-10 mb-4 bg-teal-700 self-center"> 
     <!--
     Cabec
     -->
     <h1 class="text-2xl font-bold mb-2 text-white">Hoy</h1>
-    <div class="mt-auto grid grid-cols-2">
         <p class="text-white"><?php 
             $fecha = new DateTime();
             $formatter = new IntlDateFormatter(
@@ -90,17 +89,17 @@
     else:
         foreach ($displayTasks as $task): ?>
         <div class="p-4 mb-4 bg-white rounded-3xl shadow-lg grid gap-2 h-full max-w-[300px] w-full">
-            <div class="grid grid-cols-2 gap-6"> <!--1 estado y categoria-->
+            <div class="grid grid-cols-2 gap-8"> <!--1 estado y categoria-->
                 
-                <div class="rounded-2xl shadow-lg text-white flex justify-center h-8
+                <div class="rounded-2xl shadow-lg text-white flex justify-center h-8 text-sm items-center
                     <?= $task['state'] === 'completed' ? 'bg-teal-700' : '' ?>
                     <?= $task['state'] === 'inProgress' ? 'bg-teal-400' : '' ?>
                     <?= $task['state'] === 'pending' ? 'bg-gray-400' : '' ?>
                 ">
-                    <?php echo $task['state'] ?></div>
-                
-                <div class="rounded-2xl shadow-lg text-white flex justify-center h-8 bg-red-600">
-                    <p class="flex justify-end"><?php echo htmlspecialchars($this->categoriesById[$task['category_id']]); ?></p>
+                    <?php echo $task['state'] ?>
+                </div>
+                <div class="shadow-lg text-white text-sm flex justify-center h-8 bg-<?= $this->categoriesColorById[$task['category_id']] ?>-600">
+                    <p class="flex justify-end items-center"><?php echo htmlspecialchars($this->categoriesById[$task['category_id']]); ?></p>
                 </div>
             </div>
             <div><!--2 nombre tarea -->
