@@ -32,6 +32,12 @@ class TaskController extends ApplicationController
 
         $userModel = new User(); //create user model
         $this->view->users = $userModel->getAllUsers(); //send all users for filters
+        
+        $userNameById = [];
+        foreach ($this->view->users as $user) {
+            $userNameById[$user['id']] = $user['nickname'];
+        }
+        $this->view->userNameById = $userNameById;
 
         $this->view->states = State::cases(); //send the enum of states
         if (isset($_SESSION['user_id']) && isset($_SESSION['type']) && $_SESSION['type']!= "Admin" ){
@@ -133,18 +139,26 @@ class TaskController extends ApplicationController
         $this->view->categories = $categoryModel->getAllCategories();
         $this->view->users = $userModel->getAllUsers();
 
-        // 2. Diccionario para la lista de tareas 
+        // 2.1 Diccionario de nombres para la lista de tareas 
         $categoriesById = [];
         foreach ($this->view->categories as $cat) {
             $categoriesById[$cat['id']] = $cat['name'];
         }
         $this->view->categoriesById = $categoriesById;
 
+        // 2.2 Diccionario de colores para la lista de tareas
         $categoriesColorById = [];
         foreach ($this->view->categories as $category) {
             $categoriesColorById[$category['id']] = $category['color'];
         }
         $this->view->categoriesColorById = $categoriesColorById; //send categories color diccionary
+
+        // 2.3 Diccionario de nombres de usuarios para la lista de tareas
+        $userNameById = [];
+        foreach ($this->view->users as $user) {
+            $userNameById[$user['id']] = $user['nickname'];
+        }
+        $this->view->userNameById = $userNameById;
 
         // 3. Filtros!
        $filters = [
