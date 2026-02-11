@@ -22,7 +22,13 @@ class TaskController extends ApplicationController
         foreach ($categories as $category) {
             $categoriesById[$category['id']] = $category['name'];
         }
-        $this->view->categoriesById = $categoriesById; //send categories diccionary
+        $this->view->categoriesById = $categoriesById; //send categories name diccionary
+
+        $categoriesColorById = [];
+        foreach ($categories as $category) {
+            $categoriesColorById[$category['id']] = $category['color'];
+        }
+        $this->view->categoriesColorById = $categoriesColorById; //send categories color diccionary
 
         $userModel = new User(); //create user model
         $this->view->users = $userModel->getAllUsers(); //send all users for filters
@@ -102,7 +108,7 @@ class TaskController extends ApplicationController
 
     public function updateTaskAction() : void 
     {
-        echo "<br>updateTask" . var_dump($this->_getParam('category_id'));
+        //echo "<br>updateTask" . var_dump($this->_getParam('category_id'));
         $id_task = (int) $this->_getParam('id_task');
         $name = trim($this->_getParam('name'));
         $description = trim($this->_getParam('description'));
