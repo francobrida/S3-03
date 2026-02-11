@@ -1,9 +1,11 @@
-<!-- Semiheader verde -->
+<?php include __DIR__ . '/../header/header.phtml'; ?>
+
+<!-- header -->
 <div class="pl-6 pb-4 pt-10 mb-4 bg-teal-600 self-center h-40">
-    <?php include __DIR__ . '/../header/header.phtml'; ?>
+    
 </div>
 
-<!-- Formulario -->
+<!-- formulaarioo -->
 <div class="p-4 max-w-xl absolute top-16 left-1/2 -translate-x-1/2 w-full">
     <form method="POST" action="<?= WEB_ROOT ?>/category/add">
         
@@ -29,10 +31,10 @@
                           required></textarea>
             </div>
 
-            <!-- Línea separadora fina -->
+            <!-- linea gris -->
             <hr class="border-t border-gray-300 my-4">
 
-            <!-- Botones añadir / cancelar -->
+            <!-- boton cancelar / aceptar -->
             <div class="flex justify-end gap-4">
                 <!-- Cancelar -->
                 <a href="<?= WEB_ROOT ?>/category" 
