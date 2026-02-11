@@ -15,7 +15,7 @@
         {
             "id_task": 2,
             "name": "crear tareas",
-            "description": "aprender a crear tareas desde el aplicativo",
+            "description": "aprender a crear tareas en el aplicativo",
             "category_id": 2,
             "state": "completed",
             "start_date": "2026-02-06",
@@ -50,19 +50,19 @@
         },
         {
             "id_task": 5,
-            "name": "Categorias dinamicas",
-            "description": "Acceder dinamicamente a categorias desde tareas",
+            "name": "Categorias din\u00e1micas",
+            "description": "Acceder din\u00e1micamente a categor\u00edas desde tareas",
             "category_id": 3,
             "state": "inProgress",
             "start_date": "2026-02-06",
             "start_time": "11:44",
             "end_time": "12:00",
             "creation_date": "2026-02-03 20:58:17",
-            "id_user": 1
+            "id_user": 2
         },
         {
             "id_task": 6,
-            "name": "limites 901234567890",
+            "name": "l\u00edmites 901234567890",
             "description": "1234567890123456789012345678901234567890 23456789012345678901234567890 23456789012345678901234567890",
             "category_id": 1,
             "state": "inProgress",
@@ -70,7 +70,7 @@
             "start_time": "11:44",
             "end_time": "12:00",
             "creation_date": "2026-02-03 22:38:22",
-            "id_user": 1
+            "id_user": 2
         },
         {
             "id_task": 7,
@@ -110,7 +110,7 @@
         },
         {
             "id_task": 10,
-            "name": "mas trabajo",
+            "name": "m\u00e1s trabajo",
             "description": "bbbb",
             "category_id": 1,
             "state": "pending",
