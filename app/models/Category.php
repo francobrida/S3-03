@@ -18,7 +18,7 @@ class Category extends Model{
         return isset($data['categories']) ? $data['categories'] : [];        
     }
 
-    public function addCategory(string $name, string $description){
+    public function addCategory(string $name, string $description, string $color){
         
         $categories = $this->getAllCategories();
             if (empty($categories)) {
@@ -31,7 +31,8 @@ class Category extends Model{
             $categories[] = [
                 'id' => $newId,
                 'name' => $name,
-                'description' => $description
+                'description' => $description,
+                'color' => $color
                 ];
 
                 
@@ -70,13 +71,14 @@ class Category extends Model{
 
     }
 
-    public function updateCategory(int $id, string $name, string $description) {
+    public function updateCategory(int $id, string $name, string $description, string $color) {
         $categories = $this->getAllCategories();
         
         foreach ($categories as $key => $category) {
             if ($category['id'] === $id) {
                 $categories[$key]['name'] = $name;
                 $categories[$key]['description'] = $description;
+                $categories[$key]['color'] = $color;
                 break;
             }
         }

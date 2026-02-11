@@ -2,7 +2,7 @@
 <?php include __DIR__ . '/../header/header.phtml'; ?>
 
 <!-- Semiheader Verde (estilo de tu compi) -->
-<div class="pl-6 pb-4 pt-10 mb-4 bg-teal-600 self-center">
+<div class="pl-6 pb-4 pt-10 mb-4 bg-teal-700 self-center">
     
     <!-- Título principal -->
     <h1 class="text-2xl font-bold mb-2 text-white">Hoy</h1>
@@ -74,6 +74,8 @@
         <div class="p-4 mb-4 bg-white rounded-3xl shadow-lg grid gap-2 h-full max-w-[300px] w-full">
 
             <!-- nombre/descripcion -->
+            
+        <div class="flex justify-between items-start">   
             <div>
                 <p class="text-black-500 font-bold text-2xl break-keep">
                     <?= htmlspecialchars($category['name']); ?>
@@ -83,6 +85,9 @@
                 </p>
             </div>
 
+            <span class="inline-block w-3 h-3 rounded-full bg-<?= $category['color'] ?>"></span>
+        </div>
+        
             <!-- botones a la derecha -->
             <div class="mt-auto flex justify-end gap-3">
 
