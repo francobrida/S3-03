@@ -4,11 +4,23 @@ class CategoryController extends ApplicationController {
 
     public function indexAction() {
         $categoryModel = new Category();
+
+        if (!isset($_SESSION['user_id'])){
+            header("Location: " . $this->_baseUrl() . "/index");
+            exit;
+        }
+
         $this->view->categories = $categoryModel->getAllCategories();
   }
 
-  public function addAction(){
-      if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    public function addAction(){
+
+        if (!isset($_SESSION['user_id'])){
+              header("Location: " . $this->_baseUrl() . "/index");
+              exit;
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           $name = $_POST['name'] ?? '';
           $description = $_POST['description'] ?? '';
 
@@ -38,6 +50,12 @@ class CategoryController extends ApplicationController {
     }
 
     public function editAction(){
+      
+      if (!isset($_SESSION['user_id'])){
+              header("Location: " . $this->_baseUrl() . "/index");
+              exit;
+      }
+      
       if (isset($_GET['id'])){
         $id = (int) $_GET['id'];
 
