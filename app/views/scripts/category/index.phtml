@@ -2,39 +2,34 @@
 <?php include __DIR__ . '/../header/header.phtml'; ?>
 
 <!-- Semiheader Verde (estilo de tu compi) -->
-<div class="pl-6 pb-4 pt-10 mb-4 bg-teal-700 self-center">
-    
-    <!-- Título principal -->
-    <h1 class="text-2xl font-bold mb-2 text-white">Hoy</h1>
-    
-    <!-- Fecha y botón añadir categoría -->
-    <div class="mt-auto grid grid-cols-2">
-        
-        <!-- Fecha formateada -->
-        <p class="text-white"><?php 
-            $fecha = new DateTime();
-            $formatter = new IntlDateFormatter(
-                'es_ES',
-                IntlDateFormatter::FULL,
-                IntlDateFormatter::NONE,
-                null,
-                null,
-                "EEEE, d 'de' MMMM"
-            );
-            echo ucfirst($formatter->format($fecha));
-        ?></p>
-    
-        <!-- Botón añadir -->
-        <div class="flex justify-end mr-4">
-            <?php $urlAdd = WEB_ROOT . "/category/add"; ?>
-            <a href="<?php echo $urlAdd; ?>">                       
-                <button type="button" class="py-2 px-4 rounded-xl bg-teal-800 text-white">
-                    Añadir categoría
-                </button>
-            </a>     
-        </div>
-        
-    </div>  
+<div class="pl-12 pb-1 pt-2 mb-4 bg-teal-800 self-center"> 
+    <!--
+    Cabecera
+    -->
+    <h1 class="text-4xl font-bold mb-2 text-white">Hoy</h1>
+    <p class="text-white text-xl"><?php 
+        $fecha = new DateTime();
+        $formatter = new IntlDateFormatter(
+            'es_ES',
+            IntlDateFormatter::FULL,
+            IntlDateFormatter::NONE,
+            null,
+            null,
+            "EEEE, d 'de' MMMM"
+        );
+        echo ucfirst($formatter->format($fecha));
+    ?></p>
+
+    <!-- Botón añadir -->
+    <div class="flex justify-end mr-6 -mt-9 pb-4"> 
+        <?php $urlAdd = WEB_ROOT . "/category/add"; ?>
+        <a href="<?php echo $urlAdd; ?>">                       
+            <button type="button" class="inline-flex items-center gap-2 bg-teal-700 hover:bg-teal-400 
+            text-white font-medium py-2 px-3 rounded-2xl shadow-lg">
+                + Añadir categoría
+            </button>
+        </a>     
+    </div> 
 </div>
     
 <!-- Separador -->

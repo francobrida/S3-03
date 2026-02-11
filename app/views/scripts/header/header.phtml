@@ -1,69 +1,55 @@
-<?php 
-// Detectamos la URI para saber qué pestaña subrayar
-$currentUri = $_SERVER['REQUEST_URI']; 
-?>
+<?php $currentUri = $_SERVER['REQUEST_URI']; ?>
 
 <style>
-    /* Esto es el estilo para el subrayado de la pestaña activa */
+    /* Subrayado minimalista */
     .nav-link {
         position: relative;
-    }
-    .nav-link.active {
-        color: #ffffff;
-        opacity: 1;
+        padding: 4px 0;
     }
     .nav-link.active::after {
         content: '';
         position: absolute;
-        bottom: -8px; /*Subrayado  */
+        bottom: -2px; /* Más pegado al texto como en la imagen */
         left: 0;
         width: 100%;
-        height: 3px;
-        background-color: #2dd4bf; /* Un color turquesa brillante para que resalte sobre el fondo oscuro */
-        box-shadow: 0 0 8px rgba(45, 212, 191, 0.6); /* Un sutil brillo */
+        height: 1px;
+        background-color: white; /* Blanco puro */
+        border-radius: 2px;
     }
 </style>
 
-<div class="flex items-center justify-between w-full px-8 py-4 bg-teal-700 text-white shadow-2xl">
+<div class="flex items-center w-full px-12 py-6 bg-teal-800 text-white">
 
-    <div class="flex-1">
-        <a class="group">
-            <span class="font-black text-2xl tracking-tighter">
-                TODO<span class="font-light text-teal-500">APP</span>
-            </span>
-        </a>
-    </div>
+    <div class="flex-1"></div>
 
-    <nav class="flex items-center gap-10">
+    <nav class="flex items-center gap-12">
         <a href="<?= WEB_ROOT ?>/task" 
-           class="nav-link font-bold text-base tracking-wide <?= (strpos($currentUri, 'task') !== false) ? 'active' : 'opacity-60 hover:opacity-100' ?>">
-           TAREAS
+           class="nav-link font-medium text-base transition-opacity <?= (strpos($currentUri, 'task') !== false) ? 'active' : 'opacity-70 hover:opacity-100' ?>">
+           Gestor de tareas
         </a>
 
         <?php if (isset($_SESSION['type']) && $_SESSION['type'] === 'Admin'): ?>
-            <a href="<?= WEB_ROOT ?>/userAdmin" 
-               class="nav-link font-bold text-base tracking-wide <?= (strpos($currentUri, 'userAdmin') !== false || strpos($currentUri, 'user/') !== false) ? 'active' : 'opacity-60 hover:opacity-100' ?>">
-               USUARIOS
+            <a href="<?= WEB_ROOT ?>/category" 
+               class="nav-link font-medium text-base transition-opacity <?= (strpos($currentUri, 'category') !== false) ? 'active' : 'opacity-70 hover:opacity-100' ?>">
+               Gestor de categorías
             </a>
 
-            <a href="<?= WEB_ROOT ?>/category" 
-               class="nav-link font-bold text-base tracking-wide <?= (strpos($currentUri, 'category') !== false) ? 'active' : 'opacity-60 hover:opacity-100' ?>">
-               CATEGORÍAS
+            <a href="<?= WEB_ROOT ?>/userAdmin" 
+               class="nav-link font-medium text-base transition-opacity <?= (strpos($currentUri, 'userAdmin') !== false || strpos($currentUri, 'user/') !== false) ? 'active' : 'opacity-70 hover:opacity-100' ?>">
+               Gestor de usuarios
             </a>
         <?php endif; ?>
     </nav>
 
     <div class="flex-1 flex justify-end items-center gap-6">
-        <div class="flex items-center gap-3 px-3 py-1 bg-teal-800/50 rounded-full border border-teal-700">
-            <span class="text-sm font-semibold text-teal-100">
-                <?= $_SESSION['nickname'] ?? '' ?>
-            </span>
-        </div>
+        <span class="text-teal-300 italic font-medium">
+            @<?= $_SESSION['nickname'] ?? 'usuario' ?>
+        </span>
 
         <?php if (isset($_SESSION['user_id'])): ?>
             <a href="<?= WEB_ROOT ?>/logout" 
-               class="text-xs font-black bg-red-500/10 hover:bg-red-500 border border-red-500/50 text-red-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-300">
-               LOGOUT
+               class="text-sm bg-white/10 hover:bg-white/20 px-4 py-1.5 rounded-lg border border-white/20 transition">
+               LOG OUT
             </a>
         <?php endif; ?>
     </div>
