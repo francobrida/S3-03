@@ -1,4 +1,4 @@
-<div class="pb-4 mb-4 bg-teal-600 self-center h-40"> 
+<div class="pb-4 mb-4 bg-teal-800 self-center h-40"> 
     <?php include __DIR__ . '/../header/header.phtml'; ?>
 </div>
 
@@ -56,18 +56,20 @@
                 </div>
             </div>
 
-            <hr class="my-2 border-gray-100">
+            <hr class="my-2">
 
-            <div class="grid grid-cols-2 gap-4">
+            <div class="flex justify-end gap-4">
                 <div class="flex justify-center">
-                    <button type="submit" class="w-full py-3 px-4 rounded-xl border bg-teal-800 text-white font-bold hover:bg-teal-900 transition shadow-lg">
-                        Guardar cambios
-                    </button>
-                </div>
-                <div class="flex justify-center">
-                    <a href="<?php echo WEB_ROOT; ?>/userAdmin" class="w-full py-3 px-4 rounded-xl border border-teal-800 text-teal-800 font-bold text-center hover:bg-teal-50 transition shadow-lg">
+                    <a href="<?php echo WEB_ROOT; ?>/userAdmin" class="py-2 px-6 rounded-xl border 
+                    border-teal-800 text-teal-800 hover:bg-gray-100 transition-colors shadow-lg">
                         Cancelar
                     </a>
+                </div>
+
+                <div class="flex justify-center">
+                    <button type="submit" class="py-2 px-6 rounded-xl border bg-teal-800 text-white shadow-lg">
+                        Aceptar
+                    </button>
                 </div>
             </div>
 
