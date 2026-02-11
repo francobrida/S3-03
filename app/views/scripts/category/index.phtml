@@ -1,10 +1,16 @@
+<!-- Header -->
 <?php include __DIR__ . '/../header/header.phtml'; ?>
-<!-- Contenedor principal centrado -->
-<div class="max-w-4xl mx-auto p-6">
+
+<!-- Semiheader Verde (estilo de tu compi) -->
+<div class="pl-6 pb-4 pt-10 mb-4 bg-teal-600 self-center">
     
-    <!-- fecha izq añadir der -->
+    <!-- Título principal -->
+    <h1 class="text-2xl font-bold mb-2 text-white">Hoy</h1>
+    
+    <!-- Fecha y botón añadir categoría -->
     <div class="mt-auto grid grid-cols-2">
         
+        <!-- Fecha formateada -->
         <p class="text-white"><?php 
             $fecha = new DateTime();
             $formatter = new IntlDateFormatter(
@@ -18,16 +24,20 @@
             echo ucfirst($formatter->format($fecha));
         ?></p>
     
+        <!-- Botón añadir -->
         <div class="flex justify-end mr-4">
-            <a href="<?= WEB_ROOT ?>/category/add" 
-            class="py-2 px-4 rounded-xl bg-teal-800 text-white hover:opacity-90 transition-opacity">
-                ➕ Añadir categoría
-            </a>
+            <?php $urlAdd = WEB_ROOT . "/category/add"; ?>
+            <a href="<?php echo $urlAdd; ?>">                       
+                <button type="button" class="py-2 px-4 rounded-xl bg-teal-800 text-white">
+                    Añadir categoría
+                </button>
+            </a>     
         </div>
+        
     </div>  
 </div>
     
-<!-- linea gris -->
+<!-- Separador -->
 <div class="m-6"><hr></div>
 
 <!-- FILTRO busqueda -->
