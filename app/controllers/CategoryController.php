@@ -23,9 +23,10 @@ class CategoryController extends ApplicationController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           $name = $_POST['name'] ?? '';
           $description = $_POST['description'] ?? '';
+          $color = $_POST['color'] ?? 'teal-600';
 
           $categoryModel = new Category();
-          $categoryModel->addCategory($name, $description);
+          $categoryModel->addCategory($name, $description, $color);
 
           // Redirigir solo después de POST
           header("Location: " . WEB_ROOT . "/category");
@@ -71,9 +72,10 @@ class CategoryController extends ApplicationController {
       $id = (int) $_POST['id'];
       $name = $_POST['name'];
       $description = $_POST['description'];
+      $color = $_POST['color'] ?? 'teal-600';
         
       $categoryModel = new Category();
-      $categoryModel->updateCategory($id, $name, $description);
+      $categoryModel->updateCategory($id, $name, $description, $color);
         
       header('Location: ' . WEB_ROOT . '/category');
       exit;

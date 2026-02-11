@@ -4,19 +4,19 @@
             "id": 1,
             "name": "trabajo",
             "description": "trabajo",
-            "color": "red"
+            "color": "teal-600"
         },
         {
             "id": 2,
             "name": "general",
             "description": "general",
-            "color": "green"
+            "color": "teal-600"
         },
         {
             "id": 3,
             "name": "compras",
             "description": "compras",
-            "color": "yellow"
+            "color": "teal-600"
         }
     ]
 }
