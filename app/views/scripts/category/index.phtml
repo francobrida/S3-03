@@ -36,21 +36,18 @@
 <div class="m-6"><hr></div>
 
 <!-- FILTRO busqueda -->
-<div class="filtersContainer">
-    <form action="<?= WEB_ROOT ?>/category/filter" method="GET" class="flex gap-4 items-center">
-
+<div class="pr-6">
+    <form action="<?= WEB_ROOT ?>/category/filter" method="GET" class="flex gap-4 items-center justify-end">
        
         <input type="text" name="search" placeholder="Buscar por nombre..." 
             value="<?= $_GET['search'] ?? '' ?>"
-            class="border-2 border-gray-400 rounded-xl px-4 py-2 text-black">
-
+            class="border-2 border-gray-400 rounded-xl px-4 py-2 text-gray-500">
         
-        <button type="submit" class="bg-teal-800 text-white px-4 py-2 rounded-xl">
+        <button type="submit" class="bg-teal-800 text-white px-4 py-2 rounded-xl hover:bg-teal-900 transition">
             Buscar
         </button>
-
         
-        <a href="<?= WEB_ROOT ?>/category" class="bg-gray-400 text-white px-4 py-2 rounded-xl">
+        <a href="<?= WEB_ROOT ?>/category" class="bg-gray-400 text-white px-4 py-2 rounded-xl hover:bg-gray-500 transition">
             Limpiar
         </a>
 
@@ -84,17 +81,34 @@
         </div>
         
             <!-- botones a la derecha -->
-            <div class="mt-auto flex justify-end gap-3">
+            <div class="mt-auto flex justify-end">
 
                 <!-- Editar -->
-                <a href="<?= WEB_ROOT ?>/category/edit?id=<?= $category['id'] ?>" class="text-2xl hover:scale-110 transition-transform">
+                <!--
+                <a href="<?php //echo WEB_ROOT ?>/category/edit?id=<?php //echo $category['id'] ?>" class="text-2xl hover:scale-110 transition-transform">
                     ✏️
+                </a>
+                -->
+                <?php 
+                    $CategoryId = isset($category['id']) ? $category['id'] : ''; 
+                    $urlEdit = WEB_ROOT . "/category/edit?id=" . $CategoryId;
+                ?>
+                <a href="<?php echo $urlEdit; ?>">                       
+                    <button type="button" class="py-2 px-4 rounded"><img src="<?= WEB_ROOT ?>/images/lapiz.png" alt="Editar" class="w-4 h-4"></img></button>
                 </a>
 
                 <!-- Eliminar -->
-                <a href="<?= WEB_ROOT ?>/category/delete?id=<?= $category['id'] ?>" class="text-2xl hover:scale-110 transition-transform"
+                <!--
+                <a href="<?php //echo WEB_ROOT ?>/category/delete?id=<?php //echo $category['id'] ?>" class="text-2xl hover:scale-110 transition-transform"
                    onclick="return confirm('¿Seguro que quieres eliminar esta categoría?')">
                     🗑️
+                </a>
+                -->
+                <?php 
+                    $urlDelete = WEB_ROOT . "/category/delete?id=" . $CategoryId;
+                ?>
+                <a href="<?php echo $urlDelete; ?>" onclick="return confirm('¿Seguro que quieres eliminar esta categoría?');">
+                    <button type="button" class="py-2 px-4 rounded"><img src="<?= WEB_ROOT ?>/images/papelera.png" alt="Eliminar" class="w-4 h-4"></img></button>
                 </a>
 
             </div>
