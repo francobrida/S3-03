@@ -6,19 +6,30 @@ class UserController extends ApplicationController
 
     public function __construct()
     {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();// To save user info during navigation
+        }
         $this->user = new User();
     }
     
     public function indexAction() : void
     {
-        $this->view->users = $this->user->getAllUsers();  
+       if (isset($_SESSION['user_id']) && $_SESSION['user_id'] != ''){
+            $_SESSION['info_message'] = "Ya tienes una sesión iniciada. ¡Bienvenido de nuevo! Haz logout si eres otro usuario, sorry ;)";
+            header("Location: " . $this->_baseUrl() . "/task");
+            exit;
+        }
     }
 
     public function adminAction() : void 
     {
         // Esta es para el panel de gestión
+        if (isset($_SESSION['user_id']) && $_SESSION['type'] != 'Admin'){
+            $_SESSION['info_message'] = "No puedes acceder a este panel si no eres Admin";
+            header("Location: " . $this->_baseUrl() . "/task");
+            exit;
+        }
         $this->view->users = $this->user->getAllUsers(); 
-
     }
 
     public function addViewAction() : void {}
@@ -81,7 +92,6 @@ class UserController extends ApplicationController
     }
 
    public function loginAction() : void {
-        session_start(); // To save user info during navigation
 
         $foundUser = $this->user->authenticateUser($this->_getParam('nickname'), $this->_getParam('password'));
 
@@ -101,7 +111,6 @@ class UserController extends ApplicationController
    }
 
    public function logoutAction() : void {
-        session_start(); // is this necessary?
         session_unset();
         session_destroy();
 
@@ -110,7 +119,6 @@ class UserController extends ApplicationController
    }
 
     public function registerAction(): void {
-        session_start(); // To save user info during navigation
 
         $nickname = $this->_getParam('nickname');
 

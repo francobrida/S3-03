@@ -1,43 +1,71 @@
-<div style="display: flex; align-items: center; width: 100%; margin-bottom: 30px;">
+<?php 
+// Detectamos la URI para saber qué pestaña subrayar
+$currentUri = $_SERVER['REQUEST_URI']; 
+?>
 
-    <div style="flex: 1;">
+<style>
+    /* Esto es el estilo para el subrayado de la pestaña activa */
+    .nav-link {
+        position: relative;
+    }
+    .nav-link.active {
+        color: #ffffff;
+        opacity: 1;
+    }
+    .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: -8px; /*Subrayado  */
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background-color: #2dd4bf; /* Un color turquesa brillante para que resalte sobre el fondo oscuro */
+        box-shadow: 0 0 8px rgba(45, 212, 191, 0.6); /* Un sutil brillo */
+    }
+</style>
 
-</div>
+<div class="flex items-center justify-between w-full px-8 py-4 bg-teal-900 text-white shadow-2xl">
 
-<?php $currentUri = $_SERVER['REQUEST_URI']; // Para detectar la ruta actual y marcar el enlace activo ?>
+    <div class="flex-1">
+        <a class="group">
+            <span class="font-black text-2xl tracking-tighter">
+                TODO<span class="font-light text-teal-500">APP</span>
+            </span>
+        </a>
+    </div>
 
-<nav style="display: flex; align-items: center; gap: 20px;">
-    
-    <?php if (isset($_SESSION['type']) && $_SESSION['type'] === 'Admin'): ?>
-        <a href="<?= WEB_ROOT ?>/userAdmin" 
-           class="nav-block <?= (strpos($currentUri, 'userAdmin') !== false) ? 'active' : '' ?>">
-           Usuarios
+    <nav class="flex items-center gap-10">
+        <a href="<?= WEB_ROOT ?>/task" 
+           class="nav-link font-bold text-base tracking-wide <?= (strpos($currentUri, 'task') !== false) ? 'active' : 'opacity-60 hover:opacity-100' ?>">
+           TAREAS
         </a>
 
-    <a href="<?= WEB_ROOT ?>/task" 
-       class="nav-block <?= (strpos($currentUri, 'task') !== false) ? 'active' : '' ?>">
-       Tareas
-    </a>
+        <?php if (isset($_SESSION['type']) && $_SESSION['type'] === 'Admin'): ?>
+            <a href="<?= WEB_ROOT ?>/userAdmin" 
+               class="nav-link font-bold text-base tracking-wide <?= (strpos($currentUri, 'userAdmin') !== false || strpos($currentUri, 'user/') !== false) ? 'active' : 'opacity-60 hover:opacity-100' ?>">
+               USUARIOS
+            </a>
 
-    <a href="<?= WEB_ROOT ?>/category" 
-       class="nav-block <?= (strpos($currentUri, 'category') !== false) ? 'active' : '' ?>">
-       Categorías
-    </a>
-    <?php endif; ?>
-</nav>
+            <a href="<?= WEB_ROOT ?>/category" 
+               class="nav-link font-bold text-base tracking-wide <?= (strpos($currentUri, 'category') !== false) ? 'active' : 'opacity-60 hover:opacity-100' ?>">
+               CATEGORÍAS
+            </a>
+        <?php endif; ?>
+    </nav>
 
-    <div style="flex: 1; display: flex; justify-content: flex-end; align-items: center; gap: 15px;">
-        <div class="user-nickname">
-            <?= $_SESSION['nickname'] ?? '' ?>
+    <div class="flex-1 flex justify-end items-center gap-6">
+        <div class="flex items-center gap-3 px-3 py-1 bg-teal-800/50 rounded-full border border-teal-700">
+            <span class="text-sm font-semibold text-teal-100">
+                <?= $_SESSION['nickname'] ?? '' ?>
+            </span>
         </div>
 
         <?php if (isset($_SESSION['user_id'])): ?>
             <a href="<?= WEB_ROOT ?>/logout" 
-               class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
-               Logout
+               class="text-xs font-black bg-red-500/10 hover:bg-red-500 border border-red-500/50 text-red-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-300">
+               LOGOUT
             </a>
         <?php endif; ?>
     </div>
 
 </div>
-

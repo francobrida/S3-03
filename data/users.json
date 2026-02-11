@@ -4,7 +4,7 @@
             "id": 1,
             "nickname": "raven",
             "name": "prueba1",
-            "surname": "Perez",
+            "surname": "Perezzzz",
             "password": "pass1",
             "email": "prueba@gmail.com",
             "type": "Admin",
@@ -49,6 +49,16 @@
             "email": "sofia.mtz@pro-mail.org",
             "type": "Guest",
             "creation_date": "2026-02-03 12:49:01"
+        },
+        {
+            "id": 7,
+            "nickname": "asdasd",
+            "name": "asdasd",
+            "surname": "asdasd",
+            "password": "1234",
+            "email": "afafa@adada",
+            "type": "Admin",
+            "creation_date": "2026-02-10 12:42:07"
         }
     ]
 }
