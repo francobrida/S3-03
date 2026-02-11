@@ -10,6 +10,10 @@ class TaskController extends ApplicationController
     }
     public function indexAction()
     {
+        if (!isset($_SESSION['user_id'])){
+            header("Location: " . $this->_baseUrl() . "/index");
+            exit;
+        }
         $categoryModel = new Category(); //Si, en el controler de task creo la categoria
         $categories = $categoryModel->getAllCategories(); //send all the categories
         $this->view->categories = $categories; //send all categories
@@ -18,7 +22,13 @@ class TaskController extends ApplicationController
         foreach ($categories as $category) {
             $categoriesById[$category['id']] = $category['name'];
         }
-        $this->view->categoriesById = $categoriesById; //send categories diccionary
+        $this->view->categoriesById = $categoriesById; //send categories name diccionary
+
+        $categoriesColorById = [];
+        foreach ($categories as $category) {
+            $categoriesColorById[$category['id']] = $category['color'];
+        }
+        $this->view->categoriesColorById = $categoriesColorById; //send categories color diccionary
 
         $userModel = new User(); //create user model
         $this->view->users = $userModel->getAllUsers(); //send all users for filters
@@ -33,6 +43,10 @@ class TaskController extends ApplicationController
     }
     public function addTaskAction()
     {
+        if (!isset($_SESSION['user_id'])){
+            header("Location: " . $this->_baseUrl() . "/index");
+            exit;
+        }
         $this->view->addTasks = $this->tasks->getAllTasks(); //shows all
         $this->view->states = State::cases(); //send the enum of states
   
@@ -72,6 +86,10 @@ class TaskController extends ApplicationController
 
     public function editTaskAction() : void
     {
+        if (!isset($_SESSION['user_id'])){
+            header("Location: " . $this->_baseUrl() . "/index");
+            exit;
+        }
         $id_task = $this->_getParam('id_task');
         $foundTask = $this->tasks->searchTask($id_task);
         $this->view->states = State::cases(); //send the enum of states
@@ -90,7 +108,7 @@ class TaskController extends ApplicationController
 
     public function updateTaskAction() : void 
     {
-        // echo "<br>updateTask" . var_dump($this->_getParam('category_id'));
+        //echo "<br>updateTask" . var_dump($this->_getParam('category_id'));
         $id_task = (int) $this->_getParam('id_task');
         $name = trim($this->_getParam('name'));
         $description = trim($this->_getParam('description'));

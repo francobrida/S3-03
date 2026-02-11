@@ -1,4 +1,4 @@
-<div class="pl-6 pb-4 pt-10 mb-4 bg-teal-600 self-center h-40"> 
+<div class="pb-4 mb-4 bg-teal-600 self-center h-40"> 
     <?php include __DIR__ . '/../header/header.phtml'; ?>
     
 </div>
@@ -19,7 +19,7 @@
                         <div class="text-black-500 font-bold text-base py-2">Categoria</div>
                         <select name="category_id" class="bg-gray-100 text-gray-500 rounded-xl shadow-lg w-full py-1 px-2">
                         <?php foreach ($this->categories as $cat): ?>
-                            <option value="<?= $cat['id'] ?>"
+                            <option value="<?= $cat['id'] ?>" class="bg-<?= $cat['color'] ?>-200"
                                 <?= $cat['id'] == $this->task['category_id'] ? 'selected' : '' ?>>
                                 <?= ucfirst(str_replace('_', ' ', $cat['name'])) ?>
                             </option>

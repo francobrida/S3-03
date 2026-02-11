@@ -1,0 +1,53 @@
+<?php include __DIR__ . '/../header/header.phtml'; ?>
+
+<!-- header -->
+<div class="pl-6 pb-4 pt-10 mb-4 bg-teal-600 self-center h-40">
+    
+</div>
+
+<!-- formulaarioo -->
+<div class="p-4 max-w-xl absolute top-16 left-1/2 -translate-x-1/2 w-full">
+    <form method="POST" action="<?= WEB_ROOT ?>/category/add">
+        
+        <!-- Card blanca-->
+        <div class="min-w-3xl taskItem border p-6 pb-8 mb-4 bg-white rounded-3xl shadow-lg grid gap-4">
+            
+            <!-- Título -->
+            <div class="text-black-500 font-bold text-3xl">Añadir Categoría</div>
+            <div class="text-black-500 text-m">Define una categoría donde englobar tus tareas</div>
+
+            <!-- Campos-->
+            <div class="w-full">
+                <!-- Nombre -->
+                <div class="text-black-500 font-bold text-base py-2 ">Nombre</div>
+                <input type="text" name="name" 
+                       class="bg-gray-100 text-gray-500 pl-2 rounded-xl shadow-lg py-2 w-full border p-6"
+                       required>
+
+                <!-- Descripción -->
+                <div class="text-black-500 font-bold text-base py-2">Descripción</div>
+                <textarea name="description" 
+                          class="bg-gray-100 text-gray-500 pl-2 rounded-xl shadow-lg py-2 w-full h-32 resize-none border p-6"
+                          required></textarea>
+            </div>
+
+            <!-- linea gris -->
+            <hr class="border-t border-gray-300 my-4">
+
+            <!-- boton cancelar / aceptar -->
+            <div class="flex justify-end gap-4">
+                <!-- Cancelar -->
+                <a href="<?= WEB_ROOT ?>/category" 
+                   class="py-2 px-6 rounded-xl border border-teal-800 text-teal-800 hover:bg-gray-100 transition-colors shadow-lg">
+                    Cancelar
+                </a>
+                <!-- Añadir -->
+                <button type="submit" class="py-2 px-6 rounded-xl border bg-teal-800 text-white shadow-lg">
+                    + Añadir
+                </button>
+            </div>
+
+        </div>
+
+    </form>
+</div>
