@@ -2,111 +2,95 @@
 <!-- Contenedor principal centrado -->
 <div class="max-w-4xl mx-auto p-6">
     
-    <!-- LA PASTILLA GRANDE -->
-    <div class="bg-white rounded-3xl overflow-hidden shadow-lg mt-10">
+    <!-- fecha izq añadir der -->
+    <div class="mt-auto grid grid-cols-2">
         
-        <!-- PARTE VERDE (arriba) -->
-        <div class="bg-teal-700 text-white p-8">
-            
-            <h1 class="text-4xl font-bold mb-2">
-                Gestor de categorías
-            </h1>
-            
-            <p class="opacity-80 mb-6">
-                <?= date('l, d F'); ?>
-            </p>
+        <p class="text-white"><?php 
+            $fecha = new DateTime();
+            $formatter = new IntlDateFormatter(
+                'es_ES',
+                IntlDateFormatter::FULL,
+                IntlDateFormatter::NONE,
+                null,
+                null,
+                "EEEE, d 'de' MMMM"
+            );
+            echo ucfirst($formatter->format($fecha));
+        ?></p>
+    
+        <div class="flex justify-end mr-4">
+            <a href="<?= WEB_ROOT ?>/category/add" 
+            class="py-2 px-4 rounded-xl bg-teal-800 text-white hover:opacity-90 transition-opacity">
+                ➕ Añadir categoría
+            </a>
+        </div>
+    </div>  
+</div>
+    
+<!-- linea gris -->
+<div class="m-6"><hr></div>
 
-            <!-- FILTRO - FRAN -->
-            <div class="filtersContainer">
-                <form action="<?= WEB_ROOT ?>/category/filter" method="GET" style="display: flex; gap: 10px; align-items: center;">
-                        
-                    <input type="text" name="search" placeholder="Buscar por nombre..." 
-                        value="<?= $_GET['search'] ?? '' ?>"
-                        style="color: black; padding: 5px 10px; border-radius: 8px; border: 1px solid #ccc;">
+<!-- FILTRO busqueda -->
+<div class="filtersContainer">
+    <form action="<?= WEB_ROOT ?>/category/filter" method="GET" class="flex gap-4 items-center">
 
-                    <button type="submit">Buscar</button>
-                </form>
+       
+        <input type="text" name="search" placeholder="Buscar por nombre..." 
+            value="<?= $_GET['search'] ?? '' ?>"
+            class="border-2 border-gray-400 rounded-xl px-4 py-2 text-black">
+
+        
+        <button type="submit" class="bg-teal-800 text-white px-4 py-2 rounded-xl">
+            Buscar
+        </button>
+
+        
+        <a href="<?= WEB_ROOT ?>/category" class="bg-gray-400 text-white px-4 py-2 rounded-xl">
+            Limpiar
+        </a>
+
+    </form>
+</div>
+
+<!-- linea gris -->
+<div class="m-6"><hr></div>
+
+<!-- Lista de categorías -->
+<div class="taskContainer p-4 pl-0 ml-6 mr-6 w-full self-center grid gap-x-4 gap-y-8 justify-center items-stretch [grid-template-columns:repeat(auto-fit,minmax(300px,1fr))]">
+
+    <?php foreach ($this->categories as $category): ?>
+        
+        <!-- Mini-pastilla de cada categoría -->
+        <div class="p-4 mb-4 bg-white rounded-3xl shadow-lg grid gap-2 h-full max-w-[300px] w-full">
+
+            <!-- nombre/descripcion -->
+            <div>
+                <p class="text-black-500 font-bold text-2xl break-keep">
+                    <?= htmlspecialchars($category['name']); ?>
+                </p>
+                <p class="text-sm text-gray-500 col-span-4 break-all h-20">
+                    <?= htmlspecialchars($category['description']); ?>
+                </p>
             </div>
 
-            <!-- FORMULARIO HORIZONTAL -->
-            <form method="POST" action="<?= WEB_ROOT ?>/category/add" class="flex gap-4 items-end">
-                
-                <!-- Campo NOMBRE -->
-                <div class="flex-1">
-                    <label for="name" class="block text-white font-semibold mb-2">
-                        Nombre:
-                    </label>
-                    <input type="text" 
-                           id="name" 
-                           name="name" 
-                           class="w-full border-2 border-gray-400 rounded-xl px-4 py-3 shadow-md text-gray-600"
-                           required>
-                </div>
-                
-                <!-- Campo DESCRIPCIÓN -->
-                <div class="flex-1">
-                    <label for="description" class="block text-white font-semibold mb-2">
-                        Descripción:
-                    </label>
-                    <input type="text" 
-                           id="description" 
-                           name="description" 
-                           class="w-full border-2 border-gray-400 rounded-xl px-4 py-3 shadow-md text-gray-600"
-                           required>
-                </div>
-                
-                <!-- Botón AÑADIR -->
-                <button type="submit" 
-                        class="bg-teal-700 text-white px-6 py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity border-2 border-white shadow-md">
-                    ➕ Añadir
-                </button>
-                
-            </form>
-            
+            <!-- botones a la derecha -->
+            <div class="mt-auto flex justify-end gap-3">
+
+                <!-- Editar -->
+                <a href="<?= WEB_ROOT ?>/category/edit?id=<?= $category['id'] ?>" class="text-2xl hover:scale-110 transition-transform">
+                    ✏️
+                </a>
+
+                <!-- Eliminar -->
+                <a href="<?= WEB_ROOT ?>/category/delete?id=<?= $category['id'] ?>" class="text-2xl hover:scale-110 transition-transform"
+                   onclick="return confirm('¿Seguro que quieres eliminar esta categoría?')">
+                    🗑️
+                </a>
+
+            </div>
+
         </div>
-        
-        <!-- PARTE BLANCA (abajo) - LISTA DE CATEGORÍAS -->
-        <div class="bg-white p-8">
-            
-            <?php foreach ($this->categories as $category): ?>
-                
-                <!-- Mini-pastilla de cada categoría -->
-                <div class="bg-white rounded-2xl p-5 mb-4 flex items-center justify-between shadow-md border-2 border-gray-400">
-                    
-                    <!-- Contenido: nombre y descripción -->
-                    <div>
-                        <h3 class="text-xl font-bold text-teal-700">
-                            <?= htmlspecialchars($category['name']); ?>
-                        </h3>
-                        <p class="text-gray-600 mt-1">
-                            <?= htmlspecialchars($category['description']); ?>
-                        </p>
-                    </div>
-                    
-                    <!-- Botones: editar y eliminar -->
-                    <div class="flex gap-3">
-                        
-                        <!-- Botón editar -->
-                        <a href="<?= WEB_ROOT ?>/category/edit?id=<?= $category['id'] ?>" 
-                           class="text-2xl hover:scale-110 transition-transform">
-                            ✏️
-                        </a>
-                        
-                        <!-- Botón eliminar -->
-                        <a href="<?= WEB_ROOT ?>/category/delete?id=<?= $category['id'] ?>" 
-                           class="text-2xl hover:scale-110 transition-transform"
-                           onclick="return confirm('¿Seguro que quieres eliminar esta categoría?')">
-                            🗑️
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-                
-            <?php endforeach; ?>
-            
-        </div>
-        
-    </div>
-    
+
+    <?php endforeach; ?>
+
 </div>

@@ -26,11 +26,15 @@ class CategoryController extends ApplicationController {
 
           $categoryModel = new Category();
           $categoryModel->addCategory($name, $description);
+
+          // Redirigir solo después de POST
+          header("Location: " . WEB_ROOT . "/category");
+          exit;
       }
 
-      header("Location: " . WEB_ROOT . "/category");
-      exit;
-    }
+      $this->view->category;
+  }
+
 
     public function deleteAction(){
       if (isset($_GET['id'])) { 

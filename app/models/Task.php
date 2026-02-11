@@ -11,7 +11,7 @@ class Task extends Model{
         // so the app stops looking for a MySQL server.
     } 
 
-    public function getAllTasks()
+    public function getAllTasks(): array
     {
         if (!file_exists($this->jsonFile)) {
             return [];
@@ -25,27 +25,16 @@ class Task extends Model{
         
         return isset($data['tasks']) ? $data['tasks'] : [];        
     }
-    public function getUserTasks(int $idUser)
+    public function getUserTasks(int $idUser): array
     {
-        if (!file_exists($this->jsonFile)) {
-            return [];
-        }
+        $data = $this->getAllTasks();
 
-        $jsonContent = file_get_contents($this->jsonFile); //exiting PHP functions -> retrieves a string
-        $data = json_decode($jsonContent, true);
-//var_dump($idUser);
-        $UserTasks=[];
-        foreach ($data['tasks'] as $task) {
-//var_dump($task['id_user']);
-            if ($task['id_user'] == $idUser) {
-                $UserTasks[]=$task;
-            }
-        }
-//echo "<br> UserTasks: ";
-//var_dump($UserTasks);
-        return isset($UserTasks['tasks']) ? $UserTasks['tasks'] : [];
+        return array_filter($data, function ($task) use ($idUser) {
+            return isset($task['id_user']) && $task['id_user'] === $idUser;
+        });
     }
-    public function addNewTask(string $name, string $description, int $category_id, string $start_date, string $start_time, string $end_time) {
+    public function addNewTask(string $name, string $description, int $category_id, string $start_date, string $start_time, string $end_time, int $id_user): void 
+    {
         $tasks = $this->getAllTasks();
         
         $newTask = [
@@ -58,7 +47,7 @@ class Task extends Model{
             'start_time' => $start_time,
             'end_time' => $end_time,
             'creation_date' => date("Y-m-d H:i:s"),
-            'id_user' => 1 // Assuming a default user for simplicity
+            'id_user' => $id_user 
         ];
 
         $tasks[] = $newTask;
@@ -66,7 +55,8 @@ class Task extends Model{
         $dataToSave = ['tasks' => $tasks];
         file_put_contents($this->jsonFile, json_encode($dataToSave, JSON_PRETTY_PRINT));      
     }
-    public function deleteTask(int $id_task) {
+    public function deleteTask(int $id_task): void 
+    {
         $tasks = $this->getAllTasks();
 
         // Filter out the task with the given id_task
@@ -116,7 +106,8 @@ class Task extends Model{
         file_put_contents($this->jsonFile, json_encode($data, JSON_PRETTY_PRINT));
     }
 
-   public function filterTasks(array $filters) : array {
+   public function filterTasks(array $filters) : array 
+   {
         $tasks = $this->getAllTasks();
         $results = []; 
 
