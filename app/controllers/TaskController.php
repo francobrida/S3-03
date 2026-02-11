@@ -140,6 +140,12 @@ class TaskController extends ApplicationController
         }
         $this->view->categoriesById = $categoriesById;
 
+        $categoriesColorById = [];
+        foreach ($this->view->categories as $category) {
+            $categoriesColorById[$category['id']] = $category['color'];
+        }
+        $this->view->categoriesColorById = $categoriesColorById; //send categories color diccionary
+
         // 3. Filtros!
        $filters = [
         'user_id'     => $_GET['user_id'] ?? '',

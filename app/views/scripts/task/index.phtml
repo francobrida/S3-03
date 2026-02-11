@@ -39,10 +39,10 @@
 </div>
  
 <!-- FILTRO -->
-    <div class="ml-6 py-2 pl-2">
-        <form action="<?= WEB_ROOT ?>/task/filter" method="GET" class="flex gap-4 items-center">
+    <div class="mr-6 py-2 pl-2">
+        <form action="<?= WEB_ROOT ?>/task/filter" method="GET" class="flex gap-4 items-center justify-end">
             
-            <input type="text" name="search" class="text-gray-500 pl-2 bg-gray-100 border-2 border-gray-400 rounded-xl" placeholder="Buscar por nombre..." 
+            <input type="text" name="search" class="border-2 border-gray-400 rounded-xl px-4 py-2 text-gray-500" placeholder="Buscar por nombre..." 
                 value="<?= $_GET['search'] ?? '' ?>">
 
             <?php if ($_SESSION['type'] === 'Admin'): ?>
@@ -122,14 +122,18 @@
                         $urlEdit = WEB_ROOT . "/task/editTask?id_task=" . $taskId;
                     ?>
                     <a href="<?php echo $urlEdit; ?>">                       
-                        <button type="button" class="py-2 px-4 rounded"><img src="<?= WEB_ROOT ?>/images/lapiz.png" alt="Editar" class="w-4 h-4"></img></button>
+                        <button type="button" class="py-2 px-4 rounded">
+                            <img src="<?= WEB_ROOT ?>/images/lapiz.png" alt="Editar" class="w-4 h-4"></img>
+                        </button>
                     </a>                
                     <?php 
-                        $taskId = isset($task['id_task']) ? $task['id_task'] : ''; 
                         $urlDelete = WEB_ROOT . "/task/deleteTask?id_task=" . $taskId;
                     ?>
-                    <a href="<?php echo $urlDelete; ?>" onclick="return confirm('¿Estas seguro que quieres eliminar esta tarea?');">
-                        <button type="button" class="py-2 px-4 rounded"><img src="<?= WEB_ROOT ?>/images/papelera.png" alt="Eliminar" class="w-4 h-4"></img></button>
+                    <a href="<?php echo $urlDelete; ?>" 
+                       onclick="return confirm('¿Estas seguro que quieres eliminar esta tarea?');">
+                        <button type="button" class="py-2 px-4 rounded">
+                            <img src="<?= WEB_ROOT ?>/images/papelera.png" alt="Eliminar" class="w-4 h-4"></img>
+                        </button>
                     </a>
                 </div>
             </div>
