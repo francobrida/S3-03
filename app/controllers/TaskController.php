@@ -22,13 +22,19 @@ class TaskController extends ApplicationController
         foreach ($categories as $category) {
             $categoriesById[$category['id']] = $category['name'];
         }
-        $this->view->categoriesById = $categoriesById; //send categories diccionary
+        $this->view->categoriesById = $categoriesById; //send categories name diccionary
+
+        $categoriesColorById = [];
+        foreach ($categories as $category) {
+            $categoriesColorById[$category['id']] = $category['color'];
+        }
+        $this->view->categoriesColorById = $categoriesColorById; //send categories color diccionary
 
         $userModel = new User(); //create user model
         $this->view->users = $userModel->getAllUsers(); //send all users for filters
 
         $this->view->states = State::cases(); //send the enum of states
-        if (isset($_SESSION['user_id'])){
+        if (isset($_SESSION['user_id']) && isset($_SESSION['type']) && $_SESSION['type']!= "Admin" ){
             $this->view->tasks = $this->tasks->getUserTasks($_SESSION['user_id']);
         }
         else {
@@ -102,7 +108,7 @@ class TaskController extends ApplicationController
 
     public function updateTaskAction() : void 
     {
-        echo "<br>updateTask" . var_dump($this->_getParam('category_id'));
+        //echo "<br>updateTask" . var_dump($this->_getParam('category_id'));
         $id_task = (int) $this->_getParam('id_task');
         $name = trim($this->_getParam('name'));
         $description = trim($this->_getParam('description'));
@@ -142,10 +148,20 @@ class TaskController extends ApplicationController
         'search'      => $_GET['search'] ?? '' // Captura texto del form
          ];
 
+        // Admin validation
+        if ($_SESSION['type'] !== 'Admin') {
+            $filters['user_id'] = $_SESSION['user_id']; 
+        } else {
+            $filters['user_id'] = $_GET['user_id'] ?? ''; // Admin can choose user_id
+        }
+
         $this->view->tasks = $this->tasks->filterTasks($filters);
 
         $this->view->render('task/index.phtml');
         exit;
+
+
     }
+
 
 }

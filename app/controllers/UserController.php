@@ -152,5 +152,6 @@ class UserController extends ApplicationController
       $this->view->render('user/admin.phtml');
       exit;
     }
+    
 
 }
