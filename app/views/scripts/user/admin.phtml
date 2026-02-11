@@ -51,7 +51,8 @@
     <hr class="border-gray-200">
 </div>
 
-<div class="userContainer p-4 ml-6 mr-6 grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(300px,1fr))]">
+<div class="userContainer p-4 mx-auto w-full grid gap-6 justify-center [grid-template-columns:repeat(auto-fill,300px)]">
+    
     <?php 
     $displayUsers = $this->view->users ?? $this->users ?? []; 
     
@@ -59,7 +60,7 @@
         <p class="text-gray-500 text-center col-span-full">No se encontraron usuarios.</p>
     <?php else:
         foreach ($displayUsers as $user): ?>
-        <div class="p-6 bg-white rounded-3xl shadow-lg border border-gray-50 flex flex-col justify-between hover:shadow-xl transition">
+         <div class="p-7 bg-white rounded-3xl [border-width:0.5px] border-gray-300 shadow-lg grid gap-2 h-full max-w-[300px] w-full">
             
             <div class="flex justify-between items-start mb-4">
                 <div class="rounded-2xl px-3 py-1 text-xs font-bold text-white shadow-md
