@@ -34,7 +34,7 @@ class TaskController extends ApplicationController
         $this->view->users = $userModel->getAllUsers(); //send all users for filters
 
         $this->view->states = State::cases(); //send the enum of states
-        if (isset($_SESSION['user_id'])){
+        if (isset($_SESSION['user_id']) && isset($_SESSION['type']) && $_SESSION['type']!= "Admin" ){
             $this->view->tasks = $this->tasks->getUserTasks($_SESSION['user_id']);
         }
         else {
@@ -148,10 +148,20 @@ class TaskController extends ApplicationController
         'search'      => $_GET['search'] ?? '' // Captura texto del form
          ];
 
+        // Admin validation
+        if ($_SESSION['type'] !== 'Admin') {
+            $filters['user_id'] = $_SESSION['user_id']; 
+        } else {
+            $filters['user_id'] = $_GET['user_id'] ?? ''; // Admin can choose user_id
+        }
+
         $this->view->tasks = $this->tasks->filterTasks($filters);
 
         $this->view->render('task/index.phtml');
         exit;
+
+
     }
+
 
 }

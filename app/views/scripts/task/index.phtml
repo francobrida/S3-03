@@ -46,14 +46,16 @@
             <input type="text" name="search" class="rounded-xl pl-2 bg-gray-100 text-gray-500" placeholder="Buscar por nombre..." 
                 value="<?= $_GET['search'] ?? '' ?>">
 
-            <select name="user_id" class="bg-gray-100 text-gray-500 rounded-xl shadow-lg py-1 px-2">
-                <option value="">Usuario</option>
-                <?php foreach ($this->users as $user): ?>
-                    <option value="<?= $user['id'] ?>" <?= (isset($_GET['user_id']) && $_GET['user_id'] == $user['id']) ? 'selected' : '' ?>>
-                        <?= $user['nickname'] ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
+            <?php if ($_SESSION['type'] === 'Admin'): ?>
+                <select name="user_id" class="bg-gray-100 text-gray-500 rounded-xl shadow-lg py-1 px-2">
+                    <option value="">Usuario</option>
+                    <?php foreach ($this->users as $user): ?>
+                        <option value="<?= $user['id'] ?>" <?= (isset($_GET['user_id']) && $_GET['user_id'] == $user['id']) ? 'selected' : '' ?>>
+                            <?= $user['nickname'] ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            <?php endif; ?>
 
             <select name="category_id" class="bg-gray-100 text-gray-500 rounded-xl shadow-lg py-1 px-2">
                 <option value="">Categoría</option>
