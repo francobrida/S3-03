@@ -39,15 +39,14 @@
 </div>
  
 <!-- FILTRO -->
-    <div class="filtersContainer ml-6 py-2 pl-2 border rounded-2xl shadow-lg bg-white">
-        <!-- <form action="<?= WEB_ROOT ?>/task/filter" method="GET" style="display: flex; gap: 10px; align-items: center;" >-->
-        <form action="<?= WEB_ROOT ?>/task/filter" method="GET" class="flex gap-2 align-center">
+    <div class="ml-6 py-2 pl-2">
+        <form action="<?= WEB_ROOT ?>/task/filter" method="GET" class="flex gap-4 items-center">
             
-            <input type="text" name="search" class="rounded-xl pl-2 bg-gray-100 text-gray-500" placeholder="Buscar por nombre..." 
+            <input type="text" name="search" class="text-gray-500 pl-2 bg-gray-100 border-2 border-gray-400 rounded-xl" placeholder="Buscar por nombre..." 
                 value="<?= $_GET['search'] ?? '' ?>">
 
             <?php if ($_SESSION['type'] === 'Admin'): ?>
-                <select name="user_id" class="bg-gray-100 text-gray-500 rounded-xl shadow-lg py-1 px-2">
+                <select name="user_id" class="text-gray-500 py-1 px-2 bg-gray-100">
                     <option value="">Usuario</option>
                     <?php foreach ($this->users as $user): ?>
                         <option value="<?= $user['id'] ?>" <?= (isset($_GET['user_id']) && $_GET['user_id'] == $user['id']) ? 'selected' : '' ?>>
@@ -57,7 +56,7 @@
                 </select>
             <?php endif; ?>
 
-            <select name="category_id" class="bg-gray-100 text-gray-500 rounded-xl shadow-lg py-1 px-2">
+            <select name="category_id" class="text-gray-500 py-1 px-2 bg-gray-100">
                 <option value="">Categoría</option>
                 <?php foreach ($this->categories as $category): ?>
                     <option value="<?= $category['id'] ?>" <?= (isset($_GET['category_id']) && $_GET['category_id'] == $category['id']) ? 'selected' : '' ?>>
@@ -66,15 +65,15 @@
                 <?php endforeach; ?>
             </select>
 
-            <select name="state" class="bg-gray-100 text-gray-500 rounded-xl shadow-lg py-1 px-2">
+            <select name="state" class="text-gray-500 py-1 px-2 bg-gray-100">
                 <option value="">Estado</option>
                 <option value="pending" <?= (isset($_GET['state']) && $_GET['state'] == 'pending') ? 'selected' : '' ?>>Pendiente</option>
                 <option value="inProgress" <?= (isset($_GET['state']) && $_GET['state'] == 'inProgress') ? 'selected' : '' ?>>En progreso</option>
                 <option value="completed" <?= (isset($_GET['state']) && $_GET['state'] == 'completed') ? 'selected' : '' ?>>Completada</option>
             </select>
 
-            <button type="submit" class="py-2 px-4 rounded-xl bg-teal-800 text-white hover:bg-teal-900 transition">Filtrar</button>
-            <a href="<?= WEB_ROOT ?>/task" class="py-2 px-4 rounded-xl bg-teal-800 text-white hover:bg-teal-900 transition">Limpiar</a>
+            <button type="submit" class="py-2 px-4 rounded-xl bg-teal-800 text-white hover:bg-teal-900 transition">Buscar</button>
+            <a href="<?= WEB_ROOT ?>/task" class="bg-gray-400 text-white px-4 py-2 rounded-xl hover:bg-gray-500 transition">Limpiar</a>
         </form>
     </div>
     <!-- HASTA AQUI CODIGO NUEVO DE FILTRO -->
