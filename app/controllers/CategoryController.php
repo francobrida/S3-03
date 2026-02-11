@@ -7,18 +7,22 @@ class CategoryController extends ApplicationController {
         $this->view->categories = $categoryModel->getAllCategories();
   }
 
-    public function addAction(){
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  public function addAction(){
+      if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           $name = $_POST['name'] ?? '';
           $description = $_POST['description'] ?? '';
 
           $categoryModel = new Category();
           $categoryModel->addCategory($name, $description);
+
+          // Redirigir solo después de POST
+          header("Location: " . WEB_ROOT . "/category");
+          exit;
       }
 
-      header("Location: " . WEB_ROOT . "/category");
-      exit;
-    }
+      $this->view->category;
+  }
+
 
     public function deleteAction(){
       if (isset($_GET['id'])) { 
