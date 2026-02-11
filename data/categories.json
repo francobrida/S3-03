@@ -4,19 +4,31 @@
             "id": 1,
             "name": "trabajo",
             "description": "trabajo",
-            "color": "teal-600"
+            "color": "red-500"
         },
         {
             "id": 2,
             "name": "general",
             "description": "general",
-            "color": "teal-600"
+            "color": "violet-500"
         },
         {
             "id": 3,
             "name": "compras",
             "description": "compras",
-            "color": "teal-600"
+            "color": "amber-500"
+        },
+        {
+            "id": 4,
+            "name": "prueba",
+            "description": "verde",
+            "color": "blue-500"
+        },
+        {
+            "id": 5,
+            "name": "cat 5",
+            "description": "blue",
+            "color": "cyan-500"
         }
     ]
 }
