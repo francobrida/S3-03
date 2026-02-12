@@ -1,94 +1,92 @@
 <?php
 
-class CategoryController extends ApplicationController {
+class CategoryController extends ApplicationController
+{
 
-    public function indexAction() {
-        $categoryModel = new Category();
+    protected Category $categoryModel;
 
-        if (!isset($_SESSION['user_id'])){
+    public function __construct()
+    {
+        $this->categoryModel = new Category();
+    }
+
+    public function checkLogin(): void
+    {
+        if (!isset($_SESSION['user_id'])) {
             header("Location: " . $this->_baseUrl() . "/index");
             exit;
         }
+    }
 
-        $this->view->categories = $categoryModel->getAllCategories();
-  }
+    public function indexAction(): void
+    {
+        $this->checkLogin();
+        $this->view->categories = $this->categoryModel->getAllCategories();
+    }
 
-    public function addAction(){
-
-        if (!isset($_SESSION['user_id'])){
-              header("Location: " . $this->_baseUrl() . "/index");
-              exit;
-        }
+    public function addAction(): void
+    {
+        $this->checkLogin();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-          $name = $_POST['name'] ?? '';
-          $description = $_POST['description'] ?? '';
-          $color = $_POST['color'] ?? 'teal-600';
+            $name = $_POST['name'] ?? '';
+            $description = $_POST['description'] ?? '';
+            $color = $_POST['color'] ?? '';
 
-          $categoryModel = new Category();
-          $categoryModel->addCategory($name, $description, $color);
+            $this->categoryModel->addCategory($name, $description, $color);
 
-          // Redirigir solo después de POST
-          header("Location: " . WEB_ROOT . "/category");
-          exit;
-      }
-
-      $this->view->category;
-  }
-
-
-    public function deleteAction(){
-      if (isset($_GET['id'])) { 
-          $id = (int) $_GET['id']; //casteo el id a numero entero
-
-          $categoryModel = new Category();
-          $categoryModel->deleteCategory($id);
-      }
-
-      header('Location: ' . WEB_ROOT . '/category');
-      exit;
-
+            header("Location: " . WEB_ROOT . "/category");
+            exit;
+        }
     }
 
-    public function editAction(){
-      
-      if (!isset($_SESSION['user_id'])){
-              header("Location: " . $this->_baseUrl() . "/index");
-              exit;
-      }
-      
-      if (isset($_GET['id'])){
-        $id = (int) $_GET['id'];
+    public function deleteAction(): void
+    {
+        $this->checkLogin();
 
-        $categoryModel = new Category();
-        $category = $categoryModel->searchCategory($id);
+        $id = (int) $this->_getParam('id');
+        if ($id > 0) {
+            $this->categoryModel->deleteCategory($id);
+        }
 
-        $this->view->category = $category;
-
-      }
+        header('Location: ' . WEB_ROOT . '/category');
+        exit;
     }
 
-    public function updateAction(){
-      $id = (int) $_POST['id'];
-      $name = $_POST['name'];
-      $description = $_POST['description'];
-      $color = $_POST['color'] ?? 'teal-600';
-        
-      $categoryModel = new Category();
-      $categoryModel->updateCategory($id, $name, $description, $color);
-        
-      header('Location: ' . WEB_ROOT . '/category');
-      exit;
+    public function editAction(): void
+    {
+        $this->checkLogin();
+
+        $id = (int) $this->_getParam('id');
+        if ($id > 0) {
+            $this->view->category = $this->categoryModel->searchCategory($id);
+        }
     }
 
-    public function filterAction() : void {
-      
-      $searchByName = $_GET['search'] ?? '';
-      $categoryModel = new Category();
-    
-      $this->view->categories = $categoryModel->filterCategory($searchByName);
+    public function updateAction(): void
+    {
+        $this->checkLogin();
 
-      $this->view->render('category/index.phtml');
-      exit;
+        $id = (int) $_POST['id'];
+        $name = $_POST['name'];
+        $description = $_POST['description'];
+        $color = $_POST['color'] ?? 'bg-red-500';
+
+        $this->categoryModel->updateCategory($id, $name, $description, $color);
+
+        header('Location: ' . WEB_ROOT . '/category');
+        exit;
+    }
+
+    public function filterAction(): void
+    {
+        $this->checkLogin();
+
+        $searchByName = $_GET['search'] ?? '';
+
+        $this->view->categories = $this->categoryModel->filterCategory($searchByName);
+
+        $this->view->render('category/index.phtml');
+        exit;
     }
 }

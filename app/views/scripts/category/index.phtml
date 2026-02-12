@@ -1,52 +1,47 @@
-<!-- Header -->
 <?php include __DIR__ . '/../header/header.phtml'; ?>
 
-<!-- Semiheader Verde (estilo de tu compi) -->
-<div class="pl-12 pb-1 pt-2 mb-4 bg-teal-800 self-center"> 
-    <!--
-    Cabecera
-    -->
-    <h1 class="text-4xl font-bold mb-2 text-white">Hoy</h1>
-    <p class="text-white text-xl"><?php 
-        $fecha = new DateTime();
-        $formatter = new IntlDateFormatter(
-            'es_ES',
-            IntlDateFormatter::FULL,
-            IntlDateFormatter::NONE,
-            null,
-            null,
-            "EEEE, d 'de' MMMM"
-        );
-        echo ucfirst($formatter->format($fecha));
-    ?></p>
+<div class="pl-12 pb-1 pt-2 mb-4 bg-teal-800 self-center">
 
-    <!-- Botón añadir -->
-    <div class="flex justify-end mr-6 -mt-9 pb-4"> 
+    <h1 class="text-4xl font-bold mb-2 text-white">Hoy</h1>
+    <p class="text-white text-xl"><?php
+                                    $fecha = new DateTime();
+                                    $formatter = new IntlDateFormatter(
+                                        'es_ES',
+                                        IntlDateFormatter::FULL,
+                                        IntlDateFormatter::NONE,
+                                        null,
+                                        null,
+                                        "EEEE, d 'de' MMMM"
+                                    );
+                                    echo ucfirst($formatter->format($fecha));
+                                    ?></p>
+
+    <div class="flex justify-end mr-6 -mt-9 pb-4">
         <?php $urlAdd = WEB_ROOT . "/category/add"; ?>
-        <a href="<?php echo $urlAdd; ?>">                       
+        <a href="<?php echo $urlAdd; ?>">
             <button type="button" class="inline-flex items-center gap-2 bg-teal-700 hover:bg-teal-400 
             text-white font-medium py-2 px-3 rounded-2xl shadow-lg">
                 + Añadir categoría
             </button>
-        </a>     
-    </div> 
+        </a>
+    </div>
 </div>
-    
-<!-- Separador -->
-<div class="m-4"><hr></div>
 
-<!-- FILTRO busqueda -->
+<div class="m-4">
+    <hr>
+</div>
+
 <div class="pr-6">
     <form action="<?= WEB_ROOT ?>/category/filter" method="GET" class="flex gap-4 items-center justify-end">
-       
-        <input type="text" name="search" placeholder="Buscar por nombre..." 
+
+        <input type="text" name="search" placeholder="Buscar por nombre..."
             value="<?= $_GET['search'] ?? '' ?>"
             class="border-2 border-gray-400 rounded-xl px-4 py-2 text-gray-500">
-        
+
         <button type="submit" class="bg-teal-800 text-white px-4 py-2 rounded-xl hover:bg-teal-900 transition">
             Buscar
         </button>
-        
+
         <a href="<?= WEB_ROOT ?>/category" class="bg-gray-400 text-white px-4 py-2 rounded-xl hover:bg-gray-500 transition">
             Limpiar
         </a>
@@ -54,60 +49,43 @@
     </form>
 </div>
 
-<!-- linea gris -->
-<div class="m-4"><hr></div>
+<div class="m-4">
+    <hr>
+</div>
 
-<!-- Lista de categorías -->
 <div class="taskContainer p-4 mx-auto w-full grid gap-6 justify-center [grid-template-columns:repeat(auto-fill,300px)]">
 
     <?php foreach ($this->categories as $category): ?>
-        
-        <!-- Mini-pastilla de cada categoría -->
-         <div class="p-7 mb-4 bg-white rounded-3xl [border-width:0.5px] border-gray-300 shadow-lg grid gap-2 h-full max-w-[300px] w-full">
 
-            <!-- nombre/descripcion -->
-            
-        <div class="flex justify-between items-start">   
-            <div>
-                <p class="text-black-500 pt-6 pb-6 font-bold text-2xl break-keep">
-                    <?= htmlspecialchars($category['name']); ?>
-                </p>
-                <p lang="es" class="text-sm text-gray-500 col-span-4 h-20 overflow-hidden hyphens-auto text-justify" style="hyphens: auto; -webkit-hyphens: auto;">
-                <?= htmlspecialchars($category['description']); ?>
-</p>
+        <div class="p-7 mb-4 bg-white rounded-3xl [border-width:0.5px] border-gray-300 shadow-lg grid gap-2 h-full max-w-[300px] w-full">
+
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="text-black-500 pt-6 pb-6 font-bold text-2xl break-keep">
+                        <?= htmlspecialchars($category['name']); ?>
+                    </p>
+                    <p lang="es" class="text-sm text-gray-500 col-span-4 h-20 overflow-hidden hyphens-auto text-justify" style="hyphens: auto; -webkit-hyphens: auto;">
+                        <?= htmlspecialchars($category['description']); ?>
+                    </p>
+                </div>
+
+
+                <span class="flex-shrink-0 inline-block w-3 h-3 rounded-full bg-<?= $category['color'] ?>"></span>
             </div>
 
-            <!-- circulito de color -->
-            <span class="flex-shrink-0 inline-block w-3 h-3 rounded-full bg-<?= $category['color'] ?>"></span>
-        </div>
-        
-            
-            <!-- botones a la derecha -->
             <div class="mt-auto pt-4 border-t border-gray-100 flex justify-end gap-3">
 
-                <!-- Editar -->
-                <!--
-                <a href="<?php //echo WEB_ROOT ?>/category/edit?id=<?php //echo $category['id'] ?>" class="text-2xl hover:scale-110 transition-transform">
-                    ✏️
-                </a>
-                -->
-                <?php 
-                    $CategoryId = isset($category['id']) ? $category['id'] : ''; 
-                    $urlEdit = WEB_ROOT . "/category/edit?id=" . $CategoryId;
+                <?php
+                $CategoryId = isset($category['id']) ? $category['id'] : '';
+                $urlEdit = WEB_ROOT . "/category/edit?id=" . $CategoryId;
                 ?>
-                <a href="<?php echo $urlEdit; ?>">                       
+                <a href="<?php echo $urlEdit; ?>">
                     <button type="button" class="py-2 px-4 rounded"><img src="<?= WEB_ROOT ?>/images/lapiz.png" alt="Editar" class="w-4 h-4"></img></button>
                 </a>
 
-                <!-- Eliminar -->
-                <!--
-                <a href="<?php //echo WEB_ROOT ?>/category/delete?id=<?php //echo $category['id'] ?>" class="text-2xl hover:scale-110 transition-transform"
-                   onclick="return confirm('¿Seguro que quieres eliminar esta categoría?')">
-                    🗑️
-                </a>
-                -->
-                <?php 
-                    $urlDelete = WEB_ROOT . "/category/delete?id=" . $CategoryId;
+
+                <?php
+                $urlDelete = WEB_ROOT . "/category/delete?id=" . $CategoryId;
                 ?>
                 <a href="<?php echo $urlDelete; ?>" onclick="return confirm('¿Seguro que quieres eliminar esta categoría?');">
                     <button type="button" class="py-2 px-4 rounded"><img src="<?= WEB_ROOT ?>/images/papelera.png" alt="Eliminar" class="w-4 h-4"></img></button>
