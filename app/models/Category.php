@@ -1,52 +1,53 @@
 <?php
 
-class Category extends Model{
+class Category extends Model
+{
 
- 
+
     protected $jsonFile = ROOT_PATH . '/data/categories.json';
-    
-    public function __construct(){
-      
-    } 
 
-    public function getAllCategories(){
+    public function __construct() {}
+
+    public function getAllCategories()
+    {
         if (!file_exists($this->jsonFile)) {
             return [];
         }
-        $jsonContent = file_get_contents($this->jsonFile); 
-        $data = json_decode($jsonContent, true); 
-        return isset($data['categories']) ? $data['categories'] : [];        
+        $jsonContent = file_get_contents($this->jsonFile);
+        $data = json_decode($jsonContent, true);
+        return isset($data['categories']) ? $data['categories'] : [];
     }
 
-    public function addCategory(string $name, string $description, string $color){
-        
+    public function addCategory(string $name, string $description, string $color): void
+    {
         $categories = $this->getAllCategories();
-            if (empty($categories)) {
-                $newId = 1;
-            } else{
-                $lastCategory = end($categories);
-                $newId = $lastCategory['id'] + 1;
-            }
 
-            $categories[] = [
-                'id' => $newId,
-                'name' => $name,
-                'description' => $description,
-                'color' => $color
-                ];
-
-                
-            return file_put_contents(
-                $this->jsonFile,
-                json_encode(['categories' => $categories], JSON_PRETTY_PRINT)
-            );
+        if (empty($categories)) {
+            $newId = 1;
+        } else {
+            $lastCategory = end($categories);
+            $newId = $lastCategory['id'] + 1;
         }
 
-    public function deleteCategory(int $id){
+        $categories[] = [
+            'id' => $newId,
+            'name' => $name,
+            'description' => $description,
+            'color' => $color
+        ];
+
+        file_put_contents(
+            $this->jsonFile,
+            json_encode(['categories' => $categories], JSON_PRETTY_PRINT)
+        );
+    }
+
+    public function deleteCategory(int $id) : void
+    {
 
         $categories = $this->getAllCategories();
 
-        $categories = array_filter($categories, function($category) use ($id){
+        $categories = array_filter($categories, function ($category) use ($id) {
             return $category['id'] !== $id;
         });
 
@@ -54,26 +55,26 @@ class Category extends Model{
 
         $data = ['categories' => $categories];
         file_put_contents($this->jsonFile, json_encode($data, JSON_PRETTY_PRINT));
-
     }
-    
-    public function searchCategory(int $id){
+
+    public function searchCategory(int $id) : ?array
+    {
 
         $categories = $this->getAllCategories();
 
-        foreach($categories as $category){
-            if($category['id'] === $id){
+        foreach ($categories as $category) {
+            if ($category['id'] === $id) {
                 return $category;
             }
         }
 
         return null;
-
     }
 
-    public function updateCategory(int $id, string $name, string $description, string $color) {
+    public function updateCategory(int $id, string $name, string $description, string $color)
+    {
         $categories = $this->getAllCategories();
-        
+
         foreach ($categories as $key => $category) {
             if ($category['id'] === $id) {
                 $categories[$key]['name'] = $name;
@@ -82,14 +83,15 @@ class Category extends Model{
                 break;
             }
         }
-        
+
         return file_put_contents(
             $this->jsonFile,
             json_encode(['categories' => $categories], JSON_PRETTY_PRINT)
         );
     }
 
-    public function filterCategory($searchByName) : array {
+    public function filterCategory($searchByName): array
+    {
         $categories = $this->getAllCategories();
         $filteredCategories = [];
 
@@ -101,8 +103,4 @@ class Category extends Model{
 
         return $filteredCategories;
     }
-    
-
 }
-
-?>

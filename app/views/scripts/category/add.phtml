@@ -1,42 +1,38 @@
 <?php include __DIR__ . '/../header/header.phtml'; ?>
 
-<!-- header -->
+
 <div class="pl-6 pb-4 pt-10 mb-4 bg-teal-800 self-center h-40">
-    
+
 </div>
 
-<!-- formulaarioo -->
+
 <div class="p-4 max-w-xl absolute top-16 left-1/2 -translate-x-1/2 w-full">
     <form method="POST" action="<?= WEB_ROOT ?>/category/add">
-        
-        <!-- Card blanca-->
+
+
         <div class="min-w-3xl taskItem border p-6 pb-8 mb-4 bg-white rounded-3xl shadow-lg grid gap-4">
-            
-            <!-- Título -->
+
             <div class="text-black-500 font-bold text-3xl">Añadir Categoría</div>
             <div class="text-black-500 text-m">Define una categoría donde englobar tus tareas</div>
 
-            <!-- Campos-->
             <div class="w-full">
-                <!-- Nombre -->
-                <div class="text-black-500 font-bold text-base py-2 ">Nombre</div>
-                <input type="text" name="name" 
-                       class="bg-gray-100 text-gray-500 pl-2 rounded-xl shadow-lg py-2 w-full border p-6"
-                       required>
 
-                <!-- Descripción -->
+                <div class="text-black-500 font-bold text-base py-2 ">Nombre</div>
+                <input type="text" name="name"
+                    class="bg-gray-100 text-gray-500 pl-2 rounded-xl shadow-lg py-2 w-full border p-6"
+                    required>
+
+
                 <div class="text-black-500 font-bold text-base py-2">Descripción</div>
-                <textarea name="description" 
-                          class="bg-gray-100 text-gray-500 pl-2 rounded-xl shadow-lg py-2 w-full h-32 resize-none border p-6"
-                          required></textarea>
+                <textarea name="description"
+                    class="bg-gray-100 text-gray-500 pl-2 rounded-xl shadow-lg py-2 w-full h-32 resize-none border p-6"
+                    required></textarea>
 
                 <div class="text-black-500 font-bold text-base py-2">Color</div>
 
-                <!-- color -->
                 <div class="flex gap-4 justify-center">
-                    
-                 <!-- color 1 -->
-                    <label class="cursor-pointer">                        
+
+                    <label class="cursor-pointer">
                         <input type="radio" name="color" value="red-500" class="hidden peer">
                         <div class="w-8 h-8 rounded-full bg-red-500
                                     opacity-40
@@ -45,20 +41,20 @@
                                     peer-checked:scale-110">
                         </div>
                     </label>
-                    
-                <!-- color 2 -->
-                    <label class="cursor-pointer">                        
+
+
+                    <label class="cursor-pointer">
                         <input type="radio" name="color" value="emerald-500" class="hidden peer">
                         <div class="w-8 h-8 rounded-full bg-emerald-500
                                     opacity-40
                                     transition-all duration-200
                                     peer-checked:opacity-100
                                     peer-checked:scale-110">
-                        </div>                        
+                        </div>
                     </label>
 
-                    <!-- color 3 -->
-                    <label class="cursor-pointer">                        
+
+                    <label class="cursor-pointer">
                         <input type="radio" name="color" value="blue-500" class="hidden peer">
 
                         <div class="w-8 h-8 rounded-full bg-blue-500
@@ -69,8 +65,8 @@
                         </div>
                     </label>
 
-                    <!-- color 4 -->
-                    <label class="cursor-pointer">                        
+
+                    <label class="cursor-pointer">
                         <input type="radio" name="color" value="indigo-500" class="hidden peer">
                         <div class="w-8 h-8 rounded-full bg-indigo-500
                                     opacity-40
@@ -80,8 +76,8 @@
                         </div>
                     </label>
 
-                    <!-- color 5 -->
-                    <label class="cursor-pointer">                        
+    
+                    <label class="cursor-pointer">
                         <input type="radio" name="color" value="violet-500" class="hidden peer">
                         <div class="w-8 h-8 rounded-full bg-violet-500
                                     opacity-40
@@ -91,8 +87,8 @@
                         </div>
                     </label>
 
-                    <!-- color 6 -->
-                    <label class="cursor-pointer">                        
+      
+                    <label class="cursor-pointer">
                         <input type="radio" name="color" value="slate-500" class="hidden peer">
                         <div class="w-8 h-8 rounded-full bg-slate-500
                                     opacity-40
@@ -102,8 +98,8 @@
                         </div>
                     </label>
 
-                    <!-- color 7 -->
-                    <label class="cursor-pointer">                        
+       
+                    <label class="cursor-pointer">
                         <input type="radio" name="color" value="amber-500" class="hidden peer">
                         <div class="w-8 h-8 rounded-full bg-amber-500
                                     opacity-40
@@ -113,8 +109,8 @@
                         </div>
                     </label>
 
-                    <!-- color 8 -->
-                    <label class="cursor-pointer">                        
+      
+                    <label class="cursor-pointer">
                         <input type="radio" name="color" value="cyan-500" class="hidden peer">
                         <div class="w-8 h-8 rounded-full bg-cyan-500
                                     opacity-40
@@ -124,8 +120,8 @@
                         </div>
                     </label>
 
-                    <!-- color 9 -->
-                    <label class="cursor-pointer">                        
+            
+                    <label class="cursor-pointer">
                         <input type="radio" name="color" value="stone-700" class="hidden peer">
                         <div class="w-8 h-8 rounded-full bg-stone-700
                                     opacity-40
@@ -135,8 +131,8 @@
                         </div>
                     </label>
 
-                    <!-- color 10 -->
-                    <label class="cursor-pointer">                        
+               
+                    <label class="cursor-pointer">
                         <input type="radio" name="color" value="teal-500" class="hidden peer">
                         <div class="w-8 h-8 rounded-full bg-teal-500
                                     opacity-40
@@ -145,21 +141,21 @@
                                     peer-checked:scale-110">
                         </div>
                     </label>
-                </div>               
+                </div>
             </div>
 
-            <!-- linea gris -->
+       
             <hr class="border-t border-gray-300 my-4">
 
-            <!-- boton cancelar / aceptar derecha-->
+         
             <div class="flex justify-end gap-4">
-                
-                <!-- Cancelar -->
-                <a href="<?= WEB_ROOT ?>/category" 
+
+           
+                <a href="<?= WEB_ROOT ?>/category"
                     class="py-2 px-6 rounded-xl border border-teal-800 text-teal-800 hover:bg-gray-100 transition-colors shadow-lg">
                     Cancelar
                 </a>
-                <!-- Guardar -->
+      
                 <button type="submit" class="py-2 px-6 rounded-xl border bg-teal-800 text-white shadow-lg">
                     Aceptar
                 </button>
