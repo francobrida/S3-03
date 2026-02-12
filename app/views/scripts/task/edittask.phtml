@@ -1,6 +1,5 @@
-<div class="pb-4 mb-4 bg-teal-600 self-center h-40"> 
+<div class="pb-4 mb-4 bg-teal-800 self-center h-40"> 
     <?php include __DIR__ . '/../header/header.phtml'; ?>
-    
 </div>
 <div class="p-4 max-w-2xl absolute top-16 left-1/2 -translate-x-1/2 w-full">
     <?php if ($this->task): ?>
@@ -44,15 +43,18 @@
                         <input class="bg-gray-100 text-gray-500 py-1 px-2 rounded-xl shadow-lg w-full" type="time" name="end_time" value="<?= htmlspecialchars($this->task['end_time']); ?>" maxlength="20">
                     </div>
                 </div>                   
-                
-                <hr>
 
-                <div class="grid grid-cols-2 justify-end mg-6">
+              <!-- linea gris -->
+                 <hr class="border-t border-gray-300 my-4">
+
+                <div class="flex justify-end gap-4">
                     <div class="grid justify-center">
-                        <button type="submit" class="py-2 px-4 rounded-xl border bg-teal-800 text-white hover:bg-teal-900 transition">Aceptar</button>
+                        <a href="javascript:window.location='<?php echo WEB_ROOT; ?>/task';" class="py-2 px-6 rounded-xl border 
+                        border-teal-800 text-teal-800 hover:bg-gray-100 transition-colors shadow-lg">Cancelar</a>
                     </div>
+
                     <div class="grid justify-center">
-                        <a href="javascript:window.location='<?php echo WEB_ROOT; ?>/task';" class="grid py-2 px-4 rounded-xl border border-teal-800 text-teal-800 w-24 hover:text-teal-900 hover:bg-stone-100 transition">Cancelar</a>
+                        <button type="submit" class="py-2 px-6 rounded-xl border bg-teal-800 text-white shadow-lg">Aceptar</button>
                     </div>
                 </div>
             </div>
