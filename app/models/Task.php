@@ -1,9 +1,8 @@
 <?php
 
 class Task extends Model{
-
-    // Path to the JSON file storing tasks
-    protected $jsonFile = ROOT_PATH . '/data/tasks.json'; 
+    
+    protected $jsonFile = ROOT_PATH . '/data/tasks.json'; // Path to the JSON file storing tasks
     
     public function __construct()
     {
@@ -13,16 +12,7 @@ class Task extends Model{
 
     public function getAllTasks(): array
     {
-        if (!file_exists($this->jsonFile)) {
-            return [];
-        }
-
-        $jsonContent = file_get_contents($this->jsonFile); //exiting PHP functions -> retrieves a string
-        $data = json_decode($jsonContent, true); // existing PHP function  -> decodes THE string 
-        // true: turns the string into and array  -> $task['name']
-
-        // ** DEBUG: See what PHP actually thinks the data looks like
-        
+         $data = $this->ReadData();
         return isset($data['tasks']) ? $data['tasks'] : [];        
     }
     public function getUserTasks(int $idUser): array
@@ -53,7 +43,8 @@ class Task extends Model{
         $tasks[] = $newTask;
 
         $dataToSave = ['tasks' => $tasks];
-        file_put_contents($this->jsonFile, json_encode($dataToSave, JSON_PRETTY_PRINT));      
+        $this->SaveData($dataToSave);
+
     }
     public function deleteTask(int $id_task): void 
     {
@@ -68,7 +59,7 @@ class Task extends Model{
         $tasks = array_values($tasks);
 
         $dataToSave = ['tasks' => $tasks];
-        file_put_contents($this->jsonFile, json_encode($dataToSave, JSON_PRETTY_PRINT));      
+        $this->SaveData($dataToSave);      
     }
 
     public function searchTask(int $id_task) : ?array 
@@ -102,8 +93,8 @@ class Task extends Model{
             $newTasksList[] = $task;
         }
 
-        $data = ['tasks' => $newTasksList];
-        file_put_contents($this->jsonFile, json_encode($data, JSON_PRETTY_PRINT));
+        $dataToSave = ['tasks' => $newTasksList];
+        $this->SaveData($dataToSave);
     }
 
    public function filterTasks(array $filters) : array 
@@ -114,30 +105,44 @@ class Task extends Model{
         foreach ($tasks as $task) {
             $keepTask = true;
 
-            // Filtro por Usuario
+            // User filter
             if ($filters['user_id'] != '' && $task['id_user'] != $filters['user_id']) {
                 $keepTask = false;
             }
-
-            // Filtro por Categoría
+            // Category filter
             if ($filters['category_id'] != '' && $task['category_id'] != $filters['category_id']) {
                 $keepTask = false;
             }
-
-            // Filtro por Estado
+            // State filter
             if ($filters['state'] != '' && $task['state'] != $filters['state']) {
                 $keepTask = false;
             }
-            // Filtro por Nombre (texto ingresado en form)
+            // name filter (input by user)
             if ($filters['search'] != '' && stripos($task['name'], $filters['search']) === false) {
                 $keepTask = false;
             }
-
+            // apply the filters
             if ($keepTask) {
                 $results[] = $task;
             }
         }
         return $results;
+    }
+    public function ReadData() : array{
+        if (!file_exists($this->jsonFile)) {
+            return [];
+        }
+
+        $jsonContent = file_get_contents($this->jsonFile); //exiting PHP functions -> retrieves a string
+        $data = json_decode($jsonContent, true); // existing PHP function  -> decodes THE string 
+        return $data;
+        // true: turns the string into and array  -> $task['name']
+
+        // ** DEBUG: See what PHP actually thinks the data looks like
+    }
+    public function SaveData(array $dataToSave) : void
+    {
+        file_put_contents($this->jsonFile, json_encode($dataToSave, JSON_PRETTY_PRINT));
     }
 }
 
