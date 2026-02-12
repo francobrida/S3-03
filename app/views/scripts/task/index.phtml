@@ -32,20 +32,19 @@
     </div>
 </div>
 
-<div class="m-6">
+<div class="m-4">
     <hr>
 </div>
  
 <!-- FILTRO -->
-    <div class="filtersContainer ml-6 py-2 pl-2 border rounded-2xl shadow-lg bg-white">
-        <!-- <form action="<?= WEB_ROOT ?>/task/filter" method="GET" style="display: flex; gap: 10px; align-items: center;" >-->
-        <form action="<?= WEB_ROOT ?>/task/filter" method="GET" class="flex gap-2 align-center">
+    <div class="mr-6 ">
+        <form action="<?= WEB_ROOT ?>/task/filter" method="GET" class="flex gap-4 items-center justify-end">
             
-            <input type="text" name="search" class="rounded-xl pl-2 bg-gray-100 text-gray-500" placeholder="Buscar por nombre..." 
+            <input type="text" name="search" class="border-2 border-gray-400 rounded-xl px-4 py-2 text-gray-500" placeholder="Buscar por nombre..." 
                 value="<?= $_GET['search'] ?? '' ?>">
 
             <?php if ($_SESSION['type'] === 'Admin'): ?>
-                <select name="user_id" class="bg-gray-100 text-gray-500 rounded-xl shadow-lg py-1 px-2">
+                <select name="user_id" class="text-gray-500 py-1 px-2 bg-gray-100">
                     <option value="">Usuario</option>
                     <?php foreach ($this->users as $user): ?>
                         <option value="<?= $user['id'] ?>" <?= (isset($_GET['user_id']) && $_GET['user_id'] == $user['id']) ? 'selected' : '' ?>>
@@ -55,7 +54,7 @@
                 </select>
             <?php endif; ?>
 
-            <select name="category_id" class="bg-gray-100 text-gray-500 rounded-xl shadow-lg py-1 px-2">
+            <select name="category_id" class="text-gray-500 py-1 px-2 bg-gray-100">
                 <option value="">Categoría</option>
                 <?php foreach ($this->categories as $category): ?>
                     <option value="<?= $category['id'] ?>" <?= (isset($_GET['category_id']) && $_GET['category_id'] == $category['id']) ? 'selected' : '' ?>>
@@ -64,20 +63,20 @@
                 <?php endforeach; ?>
             </select>
 
-            <select name="state" class="bg-gray-100 text-gray-500 rounded-xl shadow-lg py-1 px-2">
+            <select name="state" class="text-gray-500 py-1 px-2 bg-gray-100">
                 <option value="">Estado</option>
                 <option value="pending" <?= (isset($_GET['state']) && $_GET['state'] == 'pending') ? 'selected' : '' ?>>Pendiente</option>
                 <option value="inProgress" <?= (isset($_GET['state']) && $_GET['state'] == 'inProgress') ? 'selected' : '' ?>>En progreso</option>
                 <option value="completed" <?= (isset($_GET['state']) && $_GET['state'] == 'completed') ? 'selected' : '' ?>>Completada</option>
             </select>
 
-            <button type="submit" class="py-2 px-4 rounded-xl bg-teal-800 text-white hover:bg-teal-900 transition">Filtrar</button>
-            <a href="<?= WEB_ROOT ?>/task" class="py-2 px-4 rounded-xl bg-teal-800 text-white hover:bg-teal-900 transition">Limpiar</a>
+            <button type="submit" class="py-2 px-4 rounded-xl bg-teal-800 text-white hover:bg-teal-900 transition">Buscar</button>
+            <a href="<?= WEB_ROOT ?>/task" class="bg-gray-400 text-white px-4 py-2 rounded-xl hover:bg-gray-500 transition">Limpiar</a>
         </form>
     </div>
     <!-- HASTA AQUI CODIGO NUEVO DE FILTRO -->
 
-<div class="m-6">
+<div class="m-4">
     <hr>
 </div>
 <div class="taskContainer p-4 mx-auto w-full grid gap-6 justify-center [grid-template-columns:repeat(auto-fill,300px)]">
@@ -117,22 +116,36 @@
             <div><!--5 hora inicio y final -->
                 <p class="text-sm text-gray-800"><?php echo $task['start_time'] . " - " . $task['end_time'] ?></p>
             </div>
+<<<<<<< HEAD
             
             <div class="mt-auto"><!--6 botones -->
                 <div class="mt-auto pt-4 border-t border-gray-100 flex justify-end gap-3">
+=======
+            <div class="mt-auto grid grid-cols-2"><!--6 botones -->
+                <div class="flex">
+<?php //echo "<br>" . $_SESSION['type'] . "<br>" ?>
+                    <p class="<?= $_SESSION['type'] == 'Admin' ? '' : 'invisible' ?>"> @<?= $this->userNameById[$task['id_user']] ?></p>
+                </div>
+
+                <div class="flex justify-end">
+>>>>>>> 1fac799ed5ace65f1c6d272e6979d1919798284e
                     <?php 
                         $taskId = isset($task['id_task']) ? $task['id_task'] : ''; 
                         $urlEdit = WEB_ROOT . "/task/editTask?id_task=" . $taskId;
                     ?>
                     <a href="<?php echo $urlEdit; ?>">                       
-                        <button type="button" class="py-2 px-4 rounded"><img src="<?= WEB_ROOT ?>/images/lapiz.png" alt="Editar" class="w-4 h-4"></img></button>
+                        <button type="button" class="py-2 px-4 rounded">
+                            <img src="<?= WEB_ROOT ?>/images/lapiz.png" alt="Editar" class="w-4 h-4"></img>
+                        </button>
                     </a>                
                     <?php 
-                        $taskId = isset($task['id_task']) ? $task['id_task'] : ''; 
                         $urlDelete = WEB_ROOT . "/task/deleteTask?id_task=" . $taskId;
                     ?>
-                    <a href="<?php echo $urlDelete; ?>" onclick="return confirm('¿Estas seguro que quieres eliminar esta tarea?');">
-                        <button type="button" class="py-2 px-4 rounded"><img src="<?= WEB_ROOT ?>/images/papelera.png" alt="Eliminar" class="w-4 h-4"></img></button>
+                    <a href="<?php echo $urlDelete; ?>" 
+                        onclick="return confirm('¿Estas seguro que quieres eliminar esta tarea?');">
+                        <button type="button" class="py-2 px-4 rounded">
+                            <img src="<?= WEB_ROOT ?>/images/papelera.png" alt="Eliminar" class="w-4 h-4"></img>
+                        </button>
                     </a>
                 </div>
             </div>
