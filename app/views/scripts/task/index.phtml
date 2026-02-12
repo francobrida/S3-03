@@ -7,9 +7,6 @@
 <?php include __DIR__ . '/../header/header.phtml'; ?>
 
 <div class="pl-12 pb-1 pt-2 mb-4 bg-teal-800 self-center"> 
-    <!--
-    Cabecera
-    -->
     <h1 class="text-4xl font-bold mb-2 text-white">Hoy</h1>
     <p class="text-white text-xl"><?php 
         $fecha = new DateTime();
@@ -36,7 +33,7 @@
     <hr>
 </div>
  
-<!-- FILTRO -->
+<!-- FILTER -->
     <div class="mr-6 ">
         <form action="<?= WEB_ROOT ?>/task/filter" method="GET" class="flex gap-4 items-center justify-end">
             
@@ -65,16 +62,21 @@
 
             <select name="state" class="text-gray-500 py-1 px-2 bg-gray-100">
                 <option value="">Estado</option>
-                <option value="pending" <?= (isset($_GET['state']) && $_GET['state'] == 'pending') ? 'selected' : '' ?>>Pendiente</option>
-                <option value="inProgress" <?= (isset($_GET['state']) && $_GET['state'] == 'inProgress') ? 'selected' : '' ?>>En progreso</option>
-                <option value="completed" <?= (isset($_GET['state']) && $_GET['state'] == 'completed') ? 'selected' : '' ?>>Completada</option>
+                <?php $selectedState = $_GET['state'] ?? null; ?>
+                <?php foreach (State::cases() as $state): ?>
+                    <option 
+                        value="<?= $state->value ?>"
+                        <?= ($selectedState === $state->value) ? 'selected' : '' ?>>
+                        <?= $state->label() ?>
+                    </option>
+                <?php endforeach; ?>
             </select>
 
             <button type="submit" class="py-2 px-4 rounded-xl bg-teal-800 text-white hover:bg-teal-900 transition">Buscar</button>
             <a href="<?= WEB_ROOT ?>/task" class="bg-gray-400 text-white px-4 py-2 rounded-xl hover:bg-gray-500 transition">Limpiar</a>
         </form>
     </div>
-    <!-- HASTA AQUI CODIGO NUEVO DE FILTRO -->
+    <!-- END FILTER -->
 
 <div class="m-4">
     <hr>
@@ -88,36 +90,36 @@
     else:
         foreach ($displayTasks as $task): ?>
 
-
          <div class="p-7 mb-4 bg-white rounded-3xl [border-width:0.5px] border-gray-300 shadow-lg grid gap-2 h-full max-w-[300px] w-full">
-
-
-            <div class="flex justify-between items-center w-full pb-5"> <!--1 estado y categoria-->
-                
-                <div class="flex-shrink-0 rounded-xl shadow-lg text-white flex justify-center h-7 w-20 text-xs items-center
-                    <?= $task['state'] === 'completed' ? 'bg-teal-800 opacity-50' : '' ?>
-                    <?= $task['state'] === 'inProgress' ? 'bg-teal-800' : '' ?>
-                    <?= $task['state'] === 'pending' ? 'bg-gray-400' : '' ?>
-                ">
-                    <?php echo $task['state'] ?>
+            <div class="flex justify-between items-center w-full pb-5">
+                <?php
+                $state = State::from($task['state']);
+                $stateClass = match ($state) {
+                    State::completed   => 'bg-teal-800 opacity-50',
+                    State::inProgress  => 'bg-teal-800',
+                    State::pending     => 'bg-gray-400',
+                };
+                ?>
+                <div class="flex-shrink-0 rounded-xl shadow-lg text-white flex justify-center h-7 w-20 text-xs items-center <?= $stateClass ?>">
+                    <?php echo $state->label(); ?>                   
                 </div>
+               
                 <div class="flex-shrink-0 shadow-lg text-xs flex justify-center h-7 w-20 border border-<?= $this->categoriesColorById[$task['category_id']] ?> text-<?= $this->categoriesColorById[$task['category_id']] ?>">
                     <p class="flex justify-end items-center"><?php echo htmlspecialchars($this->categoriesById[$task['category_id']]); ?></p>
                 </div>
             </div>
-            <div><!--2 nombre tarea -->
+            <div>
                 <p class="text-black-500 font-bold text-2xl break-keep"><?php echo htmlspecialchars($task['name']); ?></p>
             </div>
             <div class="h-20 overflow-hidden"> <p lang="es" class="text-sm text-gray-500 break-all hyphens-auto"><?php echo htmlspecialchars($task['description']);  ?></p>
             </div>
-            <div><!--4 fecha inicio -->
+            <div>
                 <p class="text-sm text-gray-800"><?php echo htmlspecialchars($task['start_date']); ?></p>
             </div>
-            <div><!--5 hora inicio y final -->
+            <div>
                 <p class="text-sm text-gray-800"><?php echo $task['start_time'] . " - " . $task['end_time'] ?></p>
-            </div>
-            
-            <div class="mt-auto"><!--6 botones -->
+            </div>            
+            <div class="mt-auto">
                 <div class="mt-auto pt-4 border-t border-gray-100 flex justify-end gap-3">
                     <?php 
                         $taskId = isset($task['id_task']) ? $task['id_task'] : ''; 

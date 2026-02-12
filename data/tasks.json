@@ -119,6 +119,18 @@
             "end_time": "12:00",
             "creation_date": "2026-02-10 13:07:58",
             "id_user": 3
+        },
+        {
+            "id_task": 11,
+            "name": "dter",
+            "description": "erter",
+            "category_id": 2,
+            "state": "inProgress",
+            "start_date": "2026-02-12",
+            "start_time": "09:00",
+            "end_time": "12:00",
+            "creation_date": "2026-02-12 12:24:57",
+            "id_user": 1
         }
     ]
 }
