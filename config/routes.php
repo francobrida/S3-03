@@ -31,7 +31,7 @@ $routes = array(
 
     // USER (Admin)
     '/userAdmin' => 'user#admin',
-    '/userAddView' => 'user#addView',
+    '/user/addView' => 'user#addView',
     '/user/add' => 'user#add',
     '/user/delete' => 'user#delete',
     '/user/edit' => 'user#edit',
