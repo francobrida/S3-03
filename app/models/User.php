@@ -4,7 +4,7 @@ require_once 'UserType.php';
 
 class User extends Model{
 
-    // Path to the JSON file storing users
+    // Path to the JSON files storing users and tasks
     protected $jsonUsers = ROOT_PATH . '/data/users.json';
     protected $jsonTasks = ROOT_PATH . '/data/tasks.json';
 
@@ -14,11 +14,12 @@ class User extends Model{
     {
         if (!file_exists($this->jsonUsers)) {
             return [];
-        }
+        } // If the file doesn't exist, return an empty array (no users)
 
-        $jsonContent = file_get_contents($this->jsonUsers); //exiting PHP functions -> retrieves a string
-        $data = json_decode($jsonContent, true); // existing PHP function  -> decodes THE string 
-        // true: turns the string into and array  -> $task['name']
+        $jsonContent = file_get_contents($this->jsonUsers); // Get the content of the JSON file as a string
+        $data = json_decode($jsonContent, true); /* Decode the JSON string into a PHP array. 
+        The second parameter 'true' is important, it tells json_decode to return an associative 
+        array instead of an object. So we can access properties like $task['name'] instead of $task->name.*/
 
         // Uncomment to debug:
         // die(var_dump($data));
@@ -38,7 +39,7 @@ class User extends Model{
                 $lastId = $user['id'];
             }
         }
-        // Create a new users array
+
         $newUser = [
             'id' => $lastId + 1, 
             'nickname' => strtolower($nickname),
@@ -50,12 +51,11 @@ class User extends Model{
             'creation_date' => (new DateTime())->format('Y-m-d H:i:s')
         ];
 
-        // Add the new user to the users array
         $users[] = $newUser;
+
         // Save the updated tasks array back to the JSON file
         $data = ['users' => $users];
-        file_put_contents($this->jsonUsers, json_encode($data, JSON_PRETTY_PRINT));
-        
+        file_put_contents($this->jsonUsers, json_encode($data, JSON_PRETTY_PRINT)); // JSON_PRETTY_PRINT makes the JSON file more readable for us.
         return $newUser;
     }
 
@@ -86,7 +86,7 @@ class User extends Model{
         file_put_contents($this->jsonUsers, json_encode($data, JSON_PRETTY_PRINT));
     }
 
-    public function searchUser(int $id_user) : ?array 
+    public function searchUser(int $id_user) : ?array // return either the user found or null if not found
     {
         $users = $this->getAllUsers();
         foreach ($users as $user) {
@@ -130,9 +130,10 @@ class User extends Model{
             }
         }
         return null;
-    }
+    } 
 
-    public function isAlreadyUsed(string $nickname): bool { 
+    public function isAlreadyUsed(string $nickname): bool 
+    { 
         $users = $this->getAllUsers();
         
         foreach ($users as $user) {
@@ -143,7 +144,8 @@ class User extends Model{
         return false; // No match found
     }
 
-    public function filterUser($searchByNickname) : array {
+    public function filterUser($searchByNickname) : array 
+    {
         $users = $this->getAllUsers();
         $filteredUsers = [];
 
