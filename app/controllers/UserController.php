@@ -6,24 +6,24 @@ class UserController extends ApplicationController
 
     public function __construct()
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();// To save user info during navigation
+        if (session_status() === PHP_SESSION_NONE) { // If session isn't started...
+            session_start();// Start session to save user info during navigation
         }
         $this->user = new User();
     }
     
-    public function indexAction() : void
+    public function indexAction() : void // Landing page
     {
-       if (isset($_SESSION['user_id']) && $_SESSION['user_id'] != ''){
-            $_SESSION['info_message'] = "Ya tienes una sesión iniciada. ¡Bienvenido de nuevo! Haz logout si eres otro usuario, sorry ;)";
+       if (isset($_SESSION['user_id']) && $_SESSION['user_id'] != ''){ 
+            $_SESSION['info_message'] = "Ya tienes una sesión iniciada. Haz logout si eres otro usuario, sorry not sorry ;)";
             header("Location: " . $this->_baseUrl() . "/task");
             exit;
         }
     }
 
-    public function adminAction() : void 
+    public function adminAction() : void // User Admin page
     {
-        // Esta es para el panel de gestión
+        
         if (isset($_SESSION['user_id']) && $_SESSION['type'] != 'Admin'){
             $_SESSION['info_message'] = "No puedes acceder a este panel si no eres Admin";
             header("Location: " . $this->_baseUrl() . "/task");
@@ -34,7 +34,8 @@ class UserController extends ApplicationController
 
     public function addViewAction() : void {}
 
-    public function addAction() : void {
+    public function addAction() : void 
+    {
     
         $nickname = $this->_getParam('nickname');
 
@@ -58,7 +59,8 @@ class UserController extends ApplicationController
         exit;
     }
 
-    public function deleteAction() : void {
+    public function deleteAction() : void 
+    {
         $id_user = $this->_getParam('id');
 
         $this->user->deleteUser($id_user);
@@ -67,10 +69,11 @@ class UserController extends ApplicationController
         exit;
     }
 
-     public function editAction() : void {
+    public function editAction() : void 
+    {
         $id_user = $this->_getParam('id');
 
-        $foundUser = $this->user->searchUser((int)$id_user); // casting to int, if not it's a string 
+        $foundUser = $this->user->searchUser((int)$id_user); // casting to int
         
         $this->view->user = $foundUser;
     }
@@ -91,8 +94,8 @@ class UserController extends ApplicationController
         exit;
     }
 
-   public function loginAction() : void {
-
+   public function loginAction() : void 
+   {
         $foundUser = $this->user->authenticateUser($this->_getParam('nickname'), $this->_getParam('password'));
 
         if ($foundUser) {
@@ -114,11 +117,12 @@ class UserController extends ApplicationController
         session_unset();
         session_destroy();
 
-        header("Location: " . $this->_baseUrl() . "/index");
+        header("Location: " . $this->_baseUrl() . "/index"); // redirects to landing page
         exit;
    }
 
-    public function registerAction(): void {
+    public function registerAction(): void 
+    {
 
         $nickname = $this->_getParam('nickname');
 
@@ -143,15 +147,16 @@ class UserController extends ApplicationController
         exit;
     }
 
-    public function filterAction() : void {
-      
-      $searchByNickname = $_GET['search'] ?? '';
+    public function filterAction() : void 
+    {
+      $searchByNickname = $_GET['search'] ?? ''; /* This is just an example, in real life should 
+      validate/sanitize this input to avoid security issues */
     
       $this->view->users = $this->user->filterUser($searchByNickname);
 
       $this->view->render('user/admin.phtml');
       exit;
+
     }
     
-
 }

@@ -29,7 +29,7 @@ $routes = array(
     '/category/update' => 'category#update',
     '/category/filter' => 'category#filter',
 
-    // USER (Admin)
+    // USER 
     '/userAdmin' => 'user#admin',
     '/user/addView' => 'user#addView',
     '/user/add' => 'user#add',
@@ -38,17 +38,15 @@ $routes = array(
     '/user/update' => 'user#update',
     '/user/filter' => 'user#filter',
 
-    // Esta parte nueva la explico en castellano hasta que la tengamos super claro para no liarnos (Fran)
-    
-    // Root route: Pagina principal de entrada! "Landing Page" (Login/Register)
+    // Root route:"Landing Page" (Login/Register)
     '/index' => 'user#index',
     
-    // Login: Ruta que envia el nickname y password para loguearse
+    // Login: route to authenticate user and create session
     '/login' => 'user#login',
     
-    // Register: Registra nuevo usuario (Público - se crea automaticamente como Type::Member)
+    // Register: route to create a new user as member
     '/register' => 'user#register',
     
-    // Logout: Clear session and redirect to home (TO DO, si tenemos login, necesitamos un logout)
+    // Logout: Clear session and redirect to home
     '/logout' => 'user#logout'
 );
