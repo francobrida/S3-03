@@ -3,159 +3,147 @@ require_once __DIR__ . '/../../lib/base/Model.php';
 require_once 'UserType.php';
 
 class User extends Model{
-
+    /*
     // Path to the JSON files storing users and tasks
     protected $jsonUsers = ROOT_PATH . '/data/users.json';
     protected $jsonTasks = ROOT_PATH . '/data/tasks.json';
+    */
 
-    public function __construct(){}
-
-    public function getAllUsers()
+    public function __construct()
     {
+        // 1. Calls the parent constructor to establish the database connection and store it in $this->_dbh
+        parent::__construct(); 
+    }
+
+    // 2. We use init to set the table name
+    public function init()
+    {
+        $this->_setTable('users'); 
+    }
+
+    public function getAllUsers() : array
+    {   /*
         if (!file_exists($this->jsonUsers)) {
             return [];
         } // If the file doesn't exist, return an empty array (no users)
 
         $jsonContent = file_get_contents($this->jsonUsers); // Get the content of the JSON file as a string
-        $data = json_decode($jsonContent, true); /* Decode the JSON string into a PHP array. 
+        $data = json_decode($jsonContent, true);  Decode the JSON string into a PHP array. 
         The second parameter 'true' is important, it tells json_decode to return an associative 
-        array instead of an object. So we can access properties like $task['name'] instead of $task->name.*/
+        array instead of an object. So we can access properties like $task['name'] instead of $task->name.
 
         // Uncomment to debug:
         // die(var_dump($data));
 
         return isset($data['users']) ? $data['users'] : [];
+        */
+
+        $sql = "SELECT * FROM users";
+        
+        // 1. Prepare
+        $preparedQuery = $this->_dbh->prepare($sql);
+        
+        // 2. Execute
+        $preparedQuery->execute();
+        
+        // 3. We bring the results as an associative array.
+        return $preparedQuery->fetchAll(PDO::FETCH_ASSOC);
 
     }
 
     public function addUser(string $nickname, string $name, string $surname, string $password, 
     string $email, UserType $type) : array
     {
-        $users = $this->getAllUsers();
-
-        $lastId = 0;
-        foreach ($users as $user) {
-            if ($user['id'] > $lastId) {
-                $lastId = $user['id'];
-            }
-        }
-
         $newUser = [
-            'id' => $lastId + 1, 
-            'nickname' => strtolower($nickname),
-            'name' => $name,
-            'surname' => $surname,
-            'password' => $password,
-            'email' => $email,
-            'type' => $type->value,
-            'creation_date' => (new DateTime())->format('Y-m-d H:i:s')
+        'nickname' => strtolower($nickname),
+        'name' => $name,
+        'surname' => $surname,
+        'password' => $password,
+        'email' => $email,
+        'type' => $type->value,
+        'creation_date' => date('Y-m-d H:i:s')
         ];
 
-        $users[] = $newUser;
-
-        // Save the updated tasks array back to the JSON file
-        $data = ['users' => $users];
-        file_put_contents($this->jsonUsers, json_encode($data, JSON_PRETTY_PRINT)); // JSON_PRETTY_PRINT makes the JSON file more readable for us.
+        $id = $this->save($newUser); // save() from Model, will insert the new user into the database and return the new ID.
+        $newUser['id'] = $id; // Add the generated ID to the new user array.
+        
         return $newUser;
     }
 
-    public function deleteUser(int $id_user)
+    public function deleteUser(int $id_user) : bool
     {
-        $users = $this->getAllUsers();
-        $task = new Task ();
-        $tasks = $task->getAllTasks();
+        $sqlTasks = "DELETE FROM tasks WHERE id_user = ?";
+        $queryTasks = $this->_dbh->prepare($sqlTasks);
+        $queryTasks->execute([$id_user]);
 
-        // Filter out the users with the given id_user
-        $users = array_filter($users, function ($user) use ($id_user) {
-            return $user['id'] !== $id_user;
-        });
-        $users = array_values($users);
-
-        // Delete every task associated with this user also
-        $tasks = array_filter($tasks, function ($task) use ($id_user) {
-             return $task['id_user'] !== $id_user;
-        });
-
-        $tasks = array_values($tasks);
-
-        $dataToSave = ['tasks' => $tasks];
-        file_put_contents($this->jsonTasks, json_encode($dataToSave, JSON_PRETTY_PRINT));  
-
-        // Save the updated user array back to the JSON file
-        $data = ['users' => $users];
-        file_put_contents($this->jsonUsers, json_encode($data, JSON_PRETTY_PRINT));
+        // Aprovechamos el método delete() que ya viene en el Model.php base
+        return $this->delete($id_user); // devuelve 
     }
 
     public function searchUser(int $id_user) : ?array // return either the user found or null if not found
     {
-        $users = $this->getAllUsers();
-        foreach ($users as $user) {
-            if ($user['id'] === $id_user) {
-                return $user;
-            }
+        $user = $this->fetchOne($id_user);
+        if (!$user){
+            return null;
         }
-        return null;
+        return (array) $user; // converting object to array
     }
 
     public function editUser(int $id_user, string $nickname, string $name, string $surname, 
-    string $password, string $email, UserType $type) : void 
+    string $password, string $email, UserType $type) : bool 
     {
-        $users = $this->getAllUsers();
-        $newUsersList = [];
+        $updated = [
+            'id'       => $id_user, 
+            'nickname' => strtolower($nickname),
+            'name'     => $name,
+            'surname'  => $surname,
+            'password' => $password,
+            'email'    => $email,
+            'type'     => $type->value
+        ];
 
-        foreach ($users as $user) {
-            if ((int)$user['id'] === (int)$id_user) {
-                $user['nickname'] = strtolower($nickname);
-                $user['name'] = $name;
-                $user['surname'] = $surname;
-                $user['password'] = $password;
-                $user['email'] = $email;
-                $user['type'] = $type->value;
-            }
-            $newUsersList[] = $user;
-        }
+        return $this->save($updated);
 
-        $data = ['users' => $newUsersList];
-        file_put_contents($this->jsonUsers, json_encode($data, JSON_PRETTY_PRINT));
     }
 
-    public function authenticateUser(string $nickname, string $password) : ?array 
+   public function authenticateUser(string $nickname, string $password) : ?array 
     {
-        $users = $this->getAllUsers();
-        foreach ($users as $user) {
-            if (strtolower($user['nickname']) === strtolower(trim($nickname))){ // trim() to erase possible space errors, tolowercase for case insensitive
-                if ($user['password'] === $password ) {
-                return $user;
-                }
-            }
+        // 1. Search for the user by nickname in the database.
+        $user = "SELECT * FROM users WHERE nickname = ?";
+        $query = $this->_dbh->prepare($user);
+        $query->execute([$nickname]);
+        
+        $userFound = $query->fetch(PDO::FETCH_ASSOC);
+
+        // 2. If user exists and the password matches, return the user data. Otherwise, return null.
+        if ($userFound && $userFound['password'] === $password) {
+            return $userFound;
         }
-        return null;
-    } 
+
+        return null; 
+    }
 
     public function isAlreadyUsed(string $nickname): bool 
-    { 
-        $users = $this->getAllUsers();
-        
-        foreach ($users as $user) {
-            if (strtolower(trim($user['nickname'])) === strtolower(trim($nickname))) { // Compare nicknames using lowercase
-                return true; // Match found
-            }
-        }
-        return false; // No match found
+    {   
+        $cleanNickname = strtolower(trim($nickname));
+
+        $sql = "SELECT * FROM users WHERE nickname = ?";
+        $query = $this->_dbh->prepare($sql);
+        $query->execute([$cleanNickname]);
+    
+        $userId = $query->fetch(PDO::FETCH_ASSOC);
+        return $userId ? true : false;
     }
 
     public function filterUser($searchByNickname) : array 
     {
-        $users = $this->getAllUsers();
-        $filteredUsers = [];
+        $cleanNickname = strtolower(trim($searchByNickname));
 
-        foreach ($users as $user) {
-            if (stripos($user['nickname'], $searchByNickname) !== false) {
-                $filteredUsers[] = $user;
-            }
-        }
-
-        return $filteredUsers;
+        $sql = "SELECT * FROM users WHERE nickname LIKE ?";
+        $query = $this->_dbh->prepare($sql);
+        $query->execute(['%' . $cleanNickname . '%']);
+        
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 
