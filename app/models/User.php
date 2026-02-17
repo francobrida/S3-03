@@ -12,19 +12,8 @@ class User extends Model{
 
     public function getAllUsers() : array
     {
-        if (!file_exists($this->jsonUsers)) {
-            return [];
-        } // If the file doesn't exist, return an empty array (no users)
-
-        $jsonContent = file_get_contents($this->jsonUsers); // Get the content of the JSON file as a string
-        $data = json_decode($jsonContent, true); /* Decode the JSON string into a PHP array. 
-        The second parameter 'true' is important, it tells json_decode to return an associative 
-        array instead of an object. So we can access properties like $task['name'] instead of $task->name.*/
-
-        // Uncomment to debug:
-        // die(var_dump($data));
-
-        return isset($data['users']) ? $data['users'] : [];
+        $data = $this->ReadData();
+        return isset($data['users']) ? $data['users'] : [];  
 
     }
 
@@ -83,7 +72,7 @@ class User extends Model{
 
         // Save the updated user array back to the JSON file
         $data = ['users' => $users];
-        file_put_contents($this->jsonUsers, json_encode($data, JSON_PRETTY_PRINT));
+        $this->SaveData($data);
     }
 
     public function searchUser(int $id_user) : ?array // return either the user found or null if not found
@@ -116,7 +105,7 @@ class User extends Model{
         }
 
         $data = ['users' => $newUsersList];
-        file_put_contents($this->jsonUsers, json_encode($data, JSON_PRETTY_PRINT));
+        $this->SaveData($data);
     }
 
     public function authenticateUser(string $nickname, string $password) : ?array 
@@ -157,6 +146,24 @@ class User extends Model{
 
         return $filteredUsers;
     }
-}
 
+    public function ReadData() : array
+    {
+        if (!file_exists($this->jsonUsers)) {
+            return [];
+        }
+
+        $jsonContent = file_get_contents($this->jsonUsers); //exiting PHP functions -> retrieves a string
+        $data = json_decode($jsonContent, true); // existing PHP function  -> decodes THE string 
+        return $data;
+        // true: turns the string into and array  -> $user['name']
+
+        // ** DEBUG: See what PHP actually thinks the data looks like
+    }
+
+    public function SaveData(array $dataToSave) : void
+    {
+        file_put_contents($this->jsonUsers, json_encode($dataToSave, JSON_PRETTY_PRINT));
+    }
+}
 ?>
