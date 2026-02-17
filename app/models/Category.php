@@ -36,10 +36,8 @@ class Category extends Model
             'color' => $color
         ];
 
-        file_put_contents(
-            $this->jsonFile,
-            json_encode(['categories' => $categories], JSON_PRETTY_PRINT)
-        );
+        $this->SaveData(['categories' => $categories]);
+
     }
 
     public function deleteCategory(int $id) : void
@@ -53,8 +51,7 @@ class Category extends Model
 
         $categories = array_values($categories);
 
-        $data = ['categories' => $categories];
-        file_put_contents($this->jsonFile, json_encode($data, JSON_PRETTY_PRINT));
+        $this->SaveData(['categories' => $categories]);
     }
 
     public function searchCategory(int $id) : ?array
@@ -84,10 +81,7 @@ class Category extends Model
             }
         }
 
-        file_put_contents(
-            $this->jsonFile,
-            json_encode(['categories' => $categories], JSON_PRETTY_PRINT)
-        );
+        $this->SaveData(['categories' => $categories]);
     }
 
     public function filterCategory($searchByName): array
@@ -102,5 +96,10 @@ class Category extends Model
         }
 
         return $filteredCategories;
+    }
+
+    public function SaveData(array $dataToSave) : void
+    {
+        file_put_contents($this->jsonFile, json_encode($dataToSave, JSON_PRETTY_PRINT));
     }
 }
