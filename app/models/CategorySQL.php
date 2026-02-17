@@ -9,7 +9,7 @@ class Category extends Model
         $this->_setTable('categories');
     }
 
-    public function getAllCategories()
+    public function getAll() : array
     {
         //ejecutamos la consulta con la qwey para todas las categorias
         $stmt = $this->_dbh->query("SELECT * FROM " . $this->_table);
@@ -28,18 +28,18 @@ class Category extends Model
 
     }
 
-    public function deleteCategory(int $id) : void
+    public function deleteData(int $id) : bool
     {
 
         $sql = "DELETE FROM " . $this->_table . " WHERE id = ?"; //preparamos la consulta con el placeholder
 
         $stmt = $this->_dbh->prepare($sql); //statment preparado con PDO
 
-        $stmt->execute([$id]); //ejecutamos la consulta con el valor proporcionado
+        return $stmt->execute([$id]); //ejecutamos la consulta con el valor proporcionado
 
     }
 
-    public function searchCategory(int $id) : ?array
+    public function searchData(int $id) : ?array
     {
 
         $sql = "SELECT * FROM " . $this->_table . " WHERE id = ?"; //preparamos la consulta con el placeholder
