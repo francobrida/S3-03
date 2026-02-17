@@ -8,7 +8,7 @@ class Category extends Model
 
     public function __construct() {}
 
-    public function getAllCategories()
+    public function getAllCategories() : array
     {
         if (!file_exists($this->jsonFile)) {
             return [];
@@ -71,7 +71,7 @@ class Category extends Model
         return null;
     }
 
-    public function updateCategory(int $id, string $name, string $description, string $color)
+    public function updateCategory(int $id, string $name, string $description, string $color) : void
     {
         $categories = $this->getAllCategories();
 
@@ -84,7 +84,7 @@ class Category extends Model
             }
         }
 
-        return file_put_contents(
+        file_put_contents(
             $this->jsonFile,
             json_encode(['categories' => $categories], JSON_PRETTY_PRINT)
         );

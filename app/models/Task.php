@@ -15,6 +15,7 @@ class Task extends Model{
          $data = $this->ReadData();
         return isset($data['tasks']) ? $data['tasks'] : [];        
     }
+
     public function getUserTasks(int $idUser): array
     {
         $data = $this->getAllTasks();
@@ -23,6 +24,7 @@ class Task extends Model{
             return isset($task['id_user']) && $task['id_user'] === $idUser;
         });
     }
+    
     public function addNewTask(string $name, string $description, int $category_id, string $start_date, string $start_time, string $end_time, int $id_user): void 
     {
         $tasks = $this->getAllTasks();
@@ -46,6 +48,7 @@ class Task extends Model{
         $this->SaveData($dataToSave);
 
     }
+    
     public function deleteTask(int $id_task): void 
     {
         $tasks = $this->getAllTasks();
@@ -128,7 +131,8 @@ class Task extends Model{
         }
         return $results;
     }
-    public function ReadData() : array{
+    public function ReadData() : array
+    {
         if (!file_exists($this->jsonFile)) {
             return [];
         }
