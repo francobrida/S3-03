@@ -3,72 +3,55 @@
 class Category extends Model
 {
 
+    //public function __construct() {}
 
-    protected $jsonFile = ROOT_PATH . '/data/categories.json';
-
-    public function __construct() {}
+    public function init(){
+        $this->_setTable('categories');
+    }
 
     public function getAllCategories()
     {
-        if (!file_exists($this->jsonFile)) {
-            return [];
-        }
-        $jsonContent = file_get_contents($this->jsonFile);
-        $data = json_decode($jsonContent, true);
-        return isset($data['categories']) ? $data['categories'] : [];
+        //ejecutamos la consulta con la qwey para todas las categorias
+        $stmt = $this->_dbh->query("SELECT * FROM " . $this->_table);
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); //devuelve datos en un array asociativo
+        
     }
 
-    public function addCategory(string $name, string $description, string $color): void
+    public function addCategory(string $name, string $description, string $color) : void
     {
-        $categories = $this->getAllCategories();
+        $sql = "INSERT INTO " . $this->_table . " (name, description, color) VALUES (?, ?, ?)"; //preparamos la consulta con los placeholders
 
-        if (empty($categories)) {
-            $newId = 1;
-        } else {
-            $lastCategory = end($categories);
-            $newId = $lastCategory['id'] + 1;
-        }
+        $stmt = $this->_dbh->prepare($sql); //statment preparado con PDO
 
-        $categories[] = [
-            'id' => $newId,
-            'name' => $name,
-            'description' => $description,
-            'color' => $color
-        ];
+        $stmt->execute([$name, $description, $color]); //ejecutamos la consulta con los valores proporcionados
 
-        file_put_contents(
-            $this->jsonFile,
-            json_encode(['categories' => $categories], JSON_PRETTY_PRINT)
-        );
     }
 
     public function deleteCategory(int $id) : void
     {
 
-        $categories = $this->getAllCategories();
+        $sql = "DELETE FROM " . $this->_table . " WHERE id = ?"; //preparamos la consulta con el placeholder
 
-        $categories = array_filter($categories, function ($category) use ($id) {
-            return $category['id'] !== $id;
-        });
+        $stmt = $this->_dbh->prepare($sql); //statment preparado con PDO
 
-        $categories = array_values($categories);
+        $stmt->execute([$id]); //ejecutamos la consulta con el valor proporcionado
 
-        $data = ['categories' => $categories];
-        file_put_contents($this->jsonFile, json_encode($data, JSON_PRETTY_PRINT));
     }
 
     public function searchCategory(int $id) : ?array
     {
 
-        $categories = $this->getAllCategories();
+        $sql = "SELECT * FROM " . $this->_table . " WHERE id = ?"; //preparamos la consulta con el placeholder
 
-        foreach ($categories as $category) {
-            if ($category['id'] === $id) {
-                return $category;
-            }
-        }
+        $stmt = $this->_dbh->prepare($sql); //statment preparado con PDO
 
-        return null;
+        $stmt->execute([$id]); //ejecutamos la consulta con el valor proporcionado
+
+        $category = $stmt->fetch(PDO::FETCH_ASSOC); //obtenemos el resultado como un array asociativo
+
+        return $category ?: null; //devolvemos la categoría o null si no se encuentra
+
     }
 
     public function updateCategory(int $id, string $name, string $description, string $color)
