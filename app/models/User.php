@@ -10,7 +10,7 @@ class User extends Model{
 
     public function __construct(){}
 
-    public function getAllUsers()
+    public function getAllUsers() : array
     {
         if (!file_exists($this->jsonUsers)) {
             return [];
@@ -59,7 +59,7 @@ class User extends Model{
         return $newUser;
     }
 
-    public function deleteUser(int $id_user)
+    public function deleteUser(int $id_user) : void
     {
         $users = $this->getAllUsers();
         $task = new Task ();
