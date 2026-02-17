@@ -93,14 +93,11 @@ class Task extends Model{
 
     public function searchTask(int $id_task) : ?array 
     {
-        $tasks = $this->getAllTasks();
-        foreach ($tasks as $task) {
-            //if ($task['id_task'] == $id_task) {
-            if ($task['id'] == $id_task) {
-                return $task;
-            }
+        $task = $this->fetchOne($id_task);
+        if (!$task) {
+            return null;
         }
-        return null;
+        return (array) $task;            
     }
 
     public function editTask(int $id_task, string $name, string $description, 
