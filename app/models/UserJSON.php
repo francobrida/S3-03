@@ -73,9 +73,10 @@ class User extends Model implements StorageInterface {
         // Save the updated user array back to the JSON file
         $data = ['users' => $users];
         $this->SaveData($data);
+        return true;
     }
 
-    public function searchUser(int $id_user) : ?array // return either the user found or null if not found
+    public function search(int $id_user) : ?array // return either the user found or null if not found
     {
         $users = $this->getAll();
         foreach ($users as $user) {
