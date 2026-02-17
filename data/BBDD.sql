@@ -29,6 +29,7 @@ CREATE TABLE tasks (
     end_time TIME,
     user_id INT NOT NULL,
     category_id INT NOT NULL,
+    creation_date DATE NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
 ); 
