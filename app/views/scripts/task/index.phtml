@@ -122,8 +122,10 @@
             <div class="mt-auto">
                 <div class="mt-auto pt-4 border-t border-gray-100 flex justify-end gap-3">
                     <?php 
-                        $taskId = isset($task['id_task']) ? $task['id_task'] : ''; 
-                        $urlEdit = WEB_ROOT . "/task/editTask?id_task=" . $taskId;
+                        //$taskId = isset($task['id_task']) ? $task['id_task'] : ''; 
+                        $taskId = isset($task['id']) ? $task['id'] : ''; 
+                        //$urlEdit = WEB_ROOT . "/task/editTask?id_task=" . $taskId;
+                        $urlEdit = WEB_ROOT . "/task/editTask?id=" . $taskId;
                     ?>
                     <a href="<?php echo $urlEdit; ?>">                       
                         <button type="button" class="py-2 px-4 rounded">

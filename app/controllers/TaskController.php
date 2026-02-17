@@ -65,7 +65,8 @@ class TaskController extends ApplicationController
             header("Location: " . $this->_baseUrl() . "/index");
             exit;
         }
-        $id_task = $this->_getParam('id_task');
+        //$id_task = $this->_getParam('id_task');
+        $id_task = $this->_getParam('id');
         $foundTask = $this->tasks->searchTask($id_task);
         $this->view->task = $foundTask;
         $this->view->states = State::cases(); //send the enum of states        
