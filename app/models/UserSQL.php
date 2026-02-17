@@ -52,7 +52,7 @@ class User extends Model implements StorageInterface {
         return $this->delete($id_user); // devuelve bool
     }
 
-    public function search(int $id_user) : ?array // return either the user found or null if not found
+    public function searchData(int $id_user) : ?array // return either the user found or null if not found
     {
         $user = $this->fetchOne($id_user);
         if (!$user){

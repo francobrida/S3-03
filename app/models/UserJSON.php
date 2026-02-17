@@ -76,7 +76,7 @@ class User extends Model implements StorageInterface {
         return true;
     }
 
-    public function search(int $id_user) : ?array // return either the user found or null if not found
+    public function searchData(int $id_user) : ?array // return either the user found or null if not found
     {
         $users = $this->getAll();
         foreach ($users as $user) {
