@@ -2,12 +2,8 @@
 require_once __DIR__ . '/../../lib/base/Model.php';
 require_once 'UserType.php';
 
-class User extends Model{
-    /*
-    // Path to the JSON files storing users and tasks
-    protected $jsonUsers = ROOT_PATH . '/data/users.json';
-    protected $jsonTasks = ROOT_PATH . '/data/tasks.json';
-    */
+class User extends Model implements StorageInterface {
+   
 
     public function __construct()
     {
@@ -21,34 +17,9 @@ class User extends Model{
         $this->_setTable('users'); 
     }
 
-    public function getAllUsers() : array
-    {   /*
-        if (!file_exists($this->jsonUsers)) {
-            return [];
-        } // If the file doesn't exist, return an empty array (no users)
-
-        $jsonContent = file_get_contents($this->jsonUsers); // Get the content of the JSON file as a string
-        $data = json_decode($jsonContent, true);  Decode the JSON string into a PHP array. 
-        The second parameter 'true' is important, it tells json_decode to return an associative 
-        array instead of an object. So we can access properties like $task['name'] instead of $task->name.
-
-        // Uncomment to debug:
-        // die(var_dump($data));
-
-        return isset($data['users']) ? $data['users'] : [];
-        */
-
-        $sql = "SELECT * FROM users";
-        
-        // 1. Prepare
-        $preparedQuery = $this->_dbh->prepare($sql);
-        
-        // 2. Execute
-        $preparedQuery->execute();
-        
-        // 3. We bring the results as an associative array.
-        return $preparedQuery->fetchAll(PDO::FETCH_ASSOC);
-
+    public function getAll() : array
+    {   
+        return $this->readData();
     }
 
     public function addUser(string $nickname, string $name, string $surname, string $password, 
@@ -67,20 +38,21 @@ class User extends Model{
         $id = $this->save($newUser); // save() from Model, will insert the new user into the database and return the new ID.
         $newUser['id'] = $id; // Add the generated ID to the new user array.
         
+        
         return $newUser;
     }
 
-    public function deleteUser(int $id_user) : bool
+    public function deleteData(int $id_user) : bool
     {
         $sqlTasks = "DELETE FROM tasks WHERE id_user = ?";
         $queryTasks = $this->_dbh->prepare($sqlTasks);
         $queryTasks->execute([$id_user]);
 
         // Aprovechamos el método delete() que ya viene en el Model.php base
-        return $this->delete($id_user); // devuelve 
+        return $this->delete($id_user); // devuelve bool
     }
 
-    public function searchUser(int $id_user) : ?array // return either the user found or null if not found
+    public function search(int $id_user) : ?array // return either the user found or null if not found
     {
         $user = $this->fetchOne($id_user);
         if (!$user){
@@ -90,7 +62,7 @@ class User extends Model{
     }
 
     public function editUser(int $id_user, string $nickname, string $name, string $surname, 
-    string $password, string $email, UserType $type) : bool 
+    string $password, string $email, UserType $type) : void
     {
         $updated = [
             'id'       => $id_user, 
@@ -102,7 +74,7 @@ class User extends Model{
             'type'     => $type->value
         ];
 
-        return $this->save($updated);
+        $this->saveData($updated);
 
     }
 
@@ -145,6 +117,24 @@ class User extends Model{
         
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function readData() : array
+    {
+        //MySQL reading logic
+        $this->_setTable('users');
+        $sql = "SELECT FROM users";
+        $statement = $this->_dbh->query($sql);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function saveData(array $dataToSave) : void
+    {
+        //MysQL saving logic
+        $this->save($dataToSave);
+    }
+
+
+
 }
 
 ?>
