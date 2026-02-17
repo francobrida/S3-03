@@ -72,7 +72,6 @@ class User extends Model{
 
         // Save the updated user array back to the JSON file
         $data = ['users' => $users];
-        $dataToSave = ['tasks' => $tasks];
         $this->SaveData($data);
     }
 
