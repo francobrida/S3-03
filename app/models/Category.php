@@ -48,42 +48,35 @@ class Category extends Model
 
         $stmt->execute([$id]); //ejecutamos la consulta con el valor proporcionado
 
-        $category = $stmt->fetch(PDO::FETCH_ASSOC); //obtenemos el resultado como un array asociativo
+        $category = $stmt->fetch(PDO::FETCH_ASSOC); //obtenemos el resultado como un array asociativo. El fetch es para obtener un solo resultado, si hubiera varios se usaría fetchAll
 
         return $category ?: null; //devolvemos la categoría o null si no se encuentra
 
     }
 
-    public function updateCategory(int $id, string $name, string $description, string $color)
+    public function updateCategory(int $id, string $name, string $description, string $color) : void
     {
-        $categories = $this->getAllCategories();
+        $sql = "UPDATE " . $this->_table . 
+            " SET name = ?, 
+            description = ?, 
+            color = ? 
+            WHERE id = ?"; //preparamos la consulta con los placeholders
 
-        foreach ($categories as $key => $category) {
-            if ($category['id'] === $id) {
-                $categories[$key]['name'] = $name;
-                $categories[$key]['description'] = $description;
-                $categories[$key]['color'] = $color;
-                break;
-            }
-        }
+        $stmt = $this->_dbh->prepare($sql); //statment preparado con PDO
 
-        return file_put_contents(
-            $this->jsonFile,
-            json_encode(['categories' => $categories], JSON_PRETTY_PRINT)
-        );
+        $stmt->execute([$name, $description, $color, $id]); //ejecutamos la consulta con los valores proporcionados
     }
 
-    public function filterCategory($searchByName): array
+    public function filterCategory(string $searchByName): array
     {
-        $categories = $this->getAllCategories();
-        $filteredCategories = [];
+        $sql = "SELECT * FROM " . $this->_table . " WHERE name LIKE ?"; //preparamos la consulta con el placeholder
 
-        foreach ($categories as $category) {
-            if (stripos($category['name'], $searchByName) !== false) {
-                $filteredCategories[] = $category;
-            }
-        }
+        $stmt = $this->_dbh->prepare($sql); //statment preparado con PDO
 
-        return $filteredCategories;
+        $stmt->execute(['%' . $searchByName . '%']); //ejecutamos la consulta con el valor proporcionado, usando % para buscar coincidencias parciales
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); //devolvemos los resultados como un array asociativo
+
+
     }
 }
