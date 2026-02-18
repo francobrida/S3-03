@@ -1,7 +1,7 @@
 <?php
 
-require_once 'UserSQL.php';
-require_once 'UserJSON.php';
+require_once 'Adapters/UserSQL.php';
+require_once 'Adapters/UserJSON.php';
 
 class User {
 
