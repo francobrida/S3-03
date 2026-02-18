@@ -1,7 +1,7 @@
 <?php
 
-require_once 'CategorySQL.php';
-require_once 'CategoryJSON.php';
+require_once 'Adapters/CategorySQL.php';
+require_once 'Adapters/CategoryJSON.php';
 
 class Category 
 {
@@ -9,8 +9,8 @@ class Category
 
     public function __construct() 
     {
-        // Switch here between new CategorySQL() and new CategoryJSON()
-        $this->adapter = new CategoryJSON(); 
+        // Switch here between new CategorySQL() and new CategoryJSON() to change persistance.
+        $this->adapter = new CategorySQL(); 
     }
 
 
