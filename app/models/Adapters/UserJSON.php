@@ -1,6 +1,4 @@
 <?php
-require_once __DIR__ . '/../../lib/base/Model.php';
-require_once 'UserType.php';
 
 class UserJSON extends Model implements StorageInterface {
 
