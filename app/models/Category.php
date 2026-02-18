@@ -11,11 +11,12 @@ class Category
     {
         // Switch here between new CategorySQL() and new CategoryJSON() to change persistance.
         $this->adapter = new CategorySQL(); 
+        //$this->adapter = new CategoryJSON(); 
     }
 
 
     public function getAllCategories() : array {
-        return $this->adapter->readData();
+        return $this->adapter->getAll();
     }
 
     public function addCategory(string $name, string $description, string $color) : void {

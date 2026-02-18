@@ -12,11 +12,12 @@ class User {
         // PERSISTENCE switch
         // Switch between new UserSQL() and new UserJSON() to change persistance.
         $this->adapter = new UserSQL(); 
+        //$this->adapter = new UserJSON(); 
     }
 
     public function getAllUsers() : array
     {
-        return $this->adapter->readData();
+        return $this->adapter->getAll();
     }
 
     public function addUser(string $nickname, string $name, string $surname, string $password, string $email, UserType $type) : array

@@ -12,11 +12,12 @@ class Task {
         // PERSISTENCE switch
         // Switch between new TaskSQL() and new TaskJSON() to change persistance.
         $this->adapter = new TaskSQL(); 
+        //$this->adapter = new TaskJSON(); 
     }
 
      public function getAllTasks() : array
     {
-        return $this->adapter->readData();
+        return $this->adapter->getAll();
     }
 
     public function addTask(string $name, string $description, int $category_id, string $start_date, string $start_time, string $end_time, int $id_user) : void
