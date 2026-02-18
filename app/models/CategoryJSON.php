@@ -1,8 +1,7 @@
 <?php
 
-class Category extends Model
+class CategoryJSON extends Model
 {
-
 
     protected $jsonFile = ROOT_PATH . '/data/categories.json';
 
@@ -10,12 +9,7 @@ class Category extends Model
 
     public function getAll() : array
     {
-        if (!file_exists($this->jsonFile)) {
-            return [];
-        }
-        $jsonContent = file_get_contents($this->jsonFile);
-        $data = json_decode($jsonContent, true);
-        return isset($data['categories']) ? $data['categories'] : [];
+        return $this->readData();
     }
 
     public function addCategory(string $name, string $description, string $color): void
@@ -97,6 +91,15 @@ class Category extends Model
         }
 
         return $filteredCategories;
+    }
+
+    public function readData() : array {
+        if (!file_exists($this->jsonFile)) {
+            return [];
+        }
+        $jsonContent = file_get_contents($this->jsonFile);
+        $data = json_decode($jsonContent, true);
+        return isset($data['categories']) ? $data['categories'] : [];
     }
 
     public function saveData(array $dataToSave) : void

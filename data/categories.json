@@ -23,12 +23,6 @@
             "name": "prueba",
             "description": "verde",
             "color": "blue-500"
-        },
-        {
-            "id": 5,
-            "name": "cat 5",
-            "description": "blue",
-            "color": "cyan-500"
         }
     ]
 }
