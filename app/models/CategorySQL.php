@@ -1,6 +1,6 @@
 <?php
 
-class Category extends Model
+class CategorySQL extends Model implements StorageInterface
 {
 
     //public function __construct() {}
@@ -11,11 +11,7 @@ class Category extends Model
 
     public function getAll() : array
     {
-        //ejecutamos la consulta con la qwey para todas las categorias
-        $stmt = $this->_dbh->query("SELECT * FROM " . $this->_table);
-        
-        return $stmt->fetchAll(PDO::FETCH_ASSOC); //devuelve datos en un array asociativo
-        
+        return $this->readData();
     }
 
     public function addCategory(string $name, string $description, string $color) : void
@@ -78,5 +74,20 @@ class Category extends Model
         return $stmt->fetchAll(PDO::FETCH_ASSOC); //devolvemos los resultados como un array asociativo
 
 
+    }
+    
+     public function readData() : array
+    {
+        //MySQL reading logic
+        $this->_setTable('categories');
+        $sql = "SELECT * FROM categories";
+        $statement = $this->_dbh->query($sql);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function saveData(array $dataToSave) : void
+    {
+        //MysQL saving logic
+        $this->save($dataToSave);
     }
 }
