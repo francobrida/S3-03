@@ -3,15 +3,11 @@
 class TaskController extends ApplicationController
 {
   
-    protected  $storage;
+    protected Task $tasks;
 
-    public function __construct(StorageInterface $storage = null)   
+    public function __construct()   
     {
-        //parent::__construct(); // Call the parent constructor to initialize the view and other properties
-        $this->storage = $storage ?? new Task(); // Use the provided storage or default to TaskJSON
-        //$this->storage = new TaskJSON();// Initialize the Task model (can be TaskJSON or TaskSQL based on your setup)
-        //$this->storage = new TaskSQL(); // If you want to use SQL instead of JSON, uncomment this line and comment the previous one.
-        //$this->tasks = new Task($this->storage); // Pass the storage to the Task model
+        $this->tasks = new Task(); // Initialize the Task model (TaskJSON or TaskSQL)
     }
     public function indexAction()
     {
@@ -28,7 +24,7 @@ class TaskController extends ApplicationController
             $this->view->tasks = $this->tasks->getUserTasks($_SESSION['user_id']);
         }
         else {
-            $this->view->tasks = $this->tasks->getAll(); //send all tasks   
+            $this->view->tasks = $this->tasks->getAllTasks(); //send all tasks   
         }            
     }
     public function addTaskAction()
@@ -37,7 +33,7 @@ class TaskController extends ApplicationController
             header("Location: " . $this->_baseUrl() . "/index");
             exit;
         }
-        $this->view->addTasks = $this->tasks->getAll(); //send all tasks
+        $this->view->addTasks = $this->tasks->getAllTasks(); //send all tasks
         $this->view->states = State::cases(); //send the enum of states
   
         $this->AddCategories();
@@ -48,8 +44,8 @@ class TaskController extends ApplicationController
             header("Location: " . $this->_baseUrl() . "/index");
             exit;
         }
-        $this->tasks->addNewTask($_POST['name'], $_POST['description'], $_POST['category_id'], $_POST['start_date'], $_POST['start_time'], $_POST['end_time'], (int) $_SESSION['user_id']);
-        $this->view->tasks = $this->tasks->getAll(); //shows all
+        $this->tasks->addTask($_POST['name'], $_POST['description'], $_POST['category_id'], $_POST['start_date'], $_POST['start_time'], $_POST['end_time'], (int) $_SESSION['user_id']);
+        $this->view->tasks = $this->tasks->getAllTasks(); //shows all
 
         // Redirect to avoid form resubmission
         header("Location: " . $this->_baseUrl() . "/task");
@@ -57,8 +53,8 @@ class TaskController extends ApplicationController
     }
     public function deleteTaskAction() : void
     {
-        $id_task = $this->_getParam('id_task');
-        $this->tasks->deleteData($id_task);
+        $id = $this->_getParam('id');
+        $this->tasks->deleteTask($id);
         
         // Redirect to avoid form resubmission
         header("Location: " . $this->_baseUrl() . "/task");
@@ -70,9 +66,9 @@ class TaskController extends ApplicationController
             header("Location: " . $this->_baseUrl() . "/index");
             exit;
         }
-        //$id_task = $this->_getParam('id_task');
-        $id_task = $this->_getParam('id');
-        $foundTask = $this->tasks->searchData($id_task);
+        //$id = $this->_getParam('id');
+        $id = $this->_getParam('id');
+        $foundTask = $this->tasks->searchTask($id);
         $this->view->task = $foundTask;
         $this->view->states = State::cases(); //send the enum of states        
 
@@ -80,7 +76,7 @@ class TaskController extends ApplicationController
     }
     public function updateTaskAction() : void 
     {
-        $id_task = (int) $this->_getParam('id_task');
+        $id = (int) $this->_getParam('id');
         $name = trim($this->_getParam('name'));
         $description = trim($this->_getParam('description'));
         $category = (int) $this->_getParam('category_id');
@@ -89,7 +85,7 @@ class TaskController extends ApplicationController
         $start_time = $this->_getParam('start_time');
         $end_time = $this->_getParam('end_time');
         
-        $this->tasks->editTask($id_task, $name, $description, $category, $state, $start_date, $start_time, $end_time);
+        $this->tasks->editTask($id, $name, $description, $category, $state, $start_date, $start_time, $end_time);
         
         header("Location: " . $this->_baseUrl() . "/task");
         exit;
