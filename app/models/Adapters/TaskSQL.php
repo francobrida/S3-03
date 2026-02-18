@@ -1,6 +1,6 @@
 <?php
 
-class Task extends Model implements StorageInterface{
+class TaskSQL extends Model implements StorageInterface{
     
     protected $jsonFile = ROOT_PATH . '/data/tasks.json'; // Path to the JSON file storing tasks
     
@@ -47,25 +47,25 @@ class Task extends Model implements StorageInterface{
         $this->saveData($dataToSave);
     }
 
-    public function deleteData(int $id_task): bool 
+    public function deleteData(int $id): bool 
     {
-       return $this->delete($id_task);
+       return $this->delete($id);
     }
 
-    public function searchData(int $id_task) : ?array 
+    public function searchData(int $id) : ?array 
     {
-        $task = $this->fetchOne($id_task);
+        $task = $this->fetchOne($id);
         if (!$task) {
             return null;
         }
         return (array) $task;            
     }
 
-    public function editTask(int $id_task, string $name, string $description, 
+    public function editTask(int $id, string $name, string $description, 
     int $category, string $state, string $start_date, string $start_time, string $end_time) : void 
     {        
         $dataToSave = [
-            'id' => $id_task,
+            'id' => $id,
             'name' => $name,
             'description' => $description,
             'category_id' => $category,

@@ -1,6 +1,6 @@
 <?php
 
-class Task extends Model implements StorageInterface {
+class TaskJSON extends Model implements StorageInterface {
     
     protected $jsonFile = ROOT_PATH . '/data/tasks.json'; // Path to the JSON file storing tasks
     
@@ -30,7 +30,7 @@ class Task extends Model implements StorageInterface {
         $tasks = $this->getAll();
         
         $newTask = [
-            'id_task' => count($tasks) + 1,
+            'id' => count($tasks) + 1,
             'name' => $name,
             'description' => $description,
             'category_id' => $category_id, 
@@ -48,13 +48,13 @@ class Task extends Model implements StorageInterface {
         $this->saveData($dataToSave);
     }
 
-    public function deleteData(int $id_task): bool 
+    public function deleteData(int $id): bool 
     {        
         $tasks = $this->getAll();
 
-        // Filter out the task with the given id_task
-        $tasks = array_filter($tasks, function($task) use ($id_task) {
-            return $task['id_task'] != $id_task;
+        // Filter out the task with the given id
+        $tasks = array_filter($tasks, function($task) use ($id) {
+            return $task['id'] != $id;
         });
 
         // Re-index the array to maintain sequential keys
@@ -65,25 +65,25 @@ class Task extends Model implements StorageInterface {
         return true;
     }
 
-    public function searchData(int $id_task) : ?array 
+    public function searchData(int $id) : ?array 
     {
         $tasks = $this->getAll();
         foreach ($tasks as $task) {
-            if ($task['id_task'] == $id_task) {
+            if ($task['id'] == $id) {
                 return $task;
             }
         }
         return null;           
     }
 
-    public function editTask(int $id_task, string $name, string $description, 
+    public function editTask(int $id, string $name, string $description, 
     int $category, string $state, string $start_date, string $start_time, string $end_time) : void 
     {
         $tasks = $this->getAll();
         $newTasksList = [];
 
         foreach ($tasks as $task) {
-            if ($task['id_task'] == $id_task) {
+            if ($task['id'] == $id) {
                 $task['name'] = $name;
                 $task['description'] = $description;
                 $task['category_id'] = $category;

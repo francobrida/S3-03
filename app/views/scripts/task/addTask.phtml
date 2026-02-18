@@ -5,8 +5,8 @@
     <form action="<?php echo WEB_ROOT; ?>/task/addNewTask" method="POST">        
         <div class="min-w-2xl taskItem border p-6 pb-8 mb-4 bg-white rounded-3xl shadow-lg grid gap-2">
             <div class="text-black-500 font-bold text-3xl">Crear tarea</div>
-            <!--<input type="hidden" name="id_task" value="<?php //echo $this->task['id_task']; ?>">-->
-            <input type="hidden" name="id_task" value="<?= $this->task['id']; ?>">
+
+            <input type="hidden" name="id" value="<?= $this->task['id']; ?>">
             <div class="text-black-500 text-xl">Define tu próximo objetivo</div>
             <div class="text-black-500 font-bold text-base">Nombre de la tarea</div>
             <input class="bg-gray-100 text-gray-500 pl-2 rounded-xl shadow-lg py-1" required placeholder="Nombre de la tarea" type="text" name="name" value="" maxlength="20">
