@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../../lib/base/Model.php';
 require_once 'UserType.php';
 
-class User extends Model implements StorageInterface {
+class UserJSON extends Model implements StorageInterface {
 
     // Path to the JSON files storing users and tasks
     protected $jsonUsers = ROOT_PATH . '/data/users.json';

@@ -29,7 +29,7 @@ class UserController extends ApplicationController
             header("Location: " . $this->_baseUrl() . "/task");
             exit;
         }
-        $this->view->users = $this->user->getAll(); 
+        $this->view->users = $this->user->getAllUsers(); 
     }
 
     public function addViewAction() : void {}
@@ -63,7 +63,7 @@ class UserController extends ApplicationController
     {
         $id_user = $this->_getParam('id');
 
-        $this->user->deleteData($id_user);
+        $this->user->deleteUser($id_user);
         
         header("Location: " . $this->_baseUrl() . "/userAdmin");
         exit;
@@ -73,7 +73,7 @@ class UserController extends ApplicationController
     {
         $id_user = $this->_getParam('id');
 
-        $foundUser = $this->user->searchData((int)$id_user); // casting to int
+        $foundUser = $this->user->searchUser((int)$id_user); // casting to int
         
         $this->view->user = $foundUser;
     }

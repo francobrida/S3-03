@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../../lib/base/Model.php';
 require_once 'UserType.php';
 
-class User extends Model implements StorageInterface {
+class UserSQL extends Model implements StorageInterface {
    
 
     public function __construct()
@@ -44,7 +44,7 @@ class User extends Model implements StorageInterface {
 
     public function deleteData(int $id_user) : bool
     {
-        $sqlTasks = "DELETE FROM tasks WHERE id_user = ?";
+        $sqlTasks = "DELETE FROM tasks WHERE user_id = ?";
         $queryTasks = $this->_dbh->prepare($sqlTasks);
         $queryTasks->execute([$id_user]);
 
@@ -122,7 +122,7 @@ class User extends Model implements StorageInterface {
     {
         //MySQL reading logic
         $this->_setTable('users');
-        $sql = "SELECT FROM users";
+        $sql = "SELECT * FROM users";
         $statement = $this->_dbh->query($sql);
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -132,8 +132,6 @@ class User extends Model implements StorageInterface {
         //MysQL saving logic
         $this->save($dataToSave);
     }
-
-
 
 }
 
