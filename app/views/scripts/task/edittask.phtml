@@ -8,7 +8,6 @@
             <div class="min-w-2xl taskItem border p-6 pb-8 mb-4 bg-white rounded-3xl shadow-lg grid gap-2">
                 <div class="text-black-500 font-bold text-3xl">Editar tarea</div>
 
-                <!--<input type="hidden" name="id" value="<?php //echo $this->task['id']; ?>">-->
                 <input type="hidden" name="id" value="<?= $this->task['id']; ?>">
                 <div class="text-black-500 font-bold text-base">Nombre de la tarea</div>
                 <input class="bg-gray-100 text-gray-500 pl-2 rounded-xl shadow-lg py-1" type="text" name="name" value="<?= htmlspecialchars($this->task['name']); ?>" maxlength="20">
@@ -45,7 +44,6 @@
                     </div>
                 </div>                   
 
-              <!-- linea gris -->
                  <hr class="border-t border-gray-300 my-4">
 
                 <div class="flex justify-end gap-4">
