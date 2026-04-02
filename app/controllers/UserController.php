@@ -6,22 +6,22 @@ class UserController extends ApplicationController
 
     public function __construct()
     {
-        if (session_status() === PHP_SESSION_NONE) { // If session isn't started...
-            session_start();// Start session to save user info during navigation
+        if (session_status() === PHP_SESSION_NONE) { 
+            session_start();
         }
         $this->user = new User();
     }
     
-    public function indexAction() : void // Landing page
+    public function indexAction() : void 
     {
        if (isset($_SESSION['user_id']) && $_SESSION['user_id'] != ''){ 
-            $_SESSION['info_message'] = "Ya tienes una sesión iniciada. Haz logout si eres otro usuario, sorry not sorry ;)";
+            $_SESSION['info_message'] = "Ya tienes una sesión iniciada.";
             header("Location: " . $this->_baseUrl() . "/task");
             exit;
         }
     }
 
-    public function adminAction() : void // User Admin page
+    public function adminAction() : void 
     {
         
         if (isset($_SESSION['user_id']) && $_SESSION['type'] != 'Admin'){
@@ -39,7 +39,7 @@ class UserController extends ApplicationController
     
         $nickname = $this->_getParam('nickname');
 
-        // Validation to Check if nickname is already used. In real life also should validate email.
+        
         if ($this->user->isAlreadyUsed($nickname)) {
             $_SESSION['error'] = "The nickname '$nickname' is already used. Please choose another.";
             header("Location: " . $this->_baseUrl() . "/user/index");
@@ -73,7 +73,7 @@ class UserController extends ApplicationController
     {
         $id_user = $this->_getParam('id');
 
-        $foundUser = $this->user->searchUser((int)$id_user); // casting to int
+        $foundUser = $this->user->searchUser((int)$id_user); 
         
         $this->view->user = $foundUser;
     }
@@ -103,12 +103,12 @@ class UserController extends ApplicationController
             $_SESSION['nickname'] = $foundUser['nickname'];
             $_SESSION['type'] = $foundUser['type'];
 
-            header("Location: " . $this->_baseUrl() . "/task"); // redirect to tasks if succesfull loguin.
+            header("Location: " . $this->_baseUrl() . "/task"); 
             exit; 
         } else {
             $_SESSION['error'] = "Nickname/password incorrect";
 
-            header("Location: " . $this->_baseUrl() . "/index"); // redirect to login if wrong loguin.
+            header("Location: " . $this->_baseUrl() . "/index"); 
             exit;
         }
    }
@@ -117,16 +117,14 @@ class UserController extends ApplicationController
         session_unset();
         session_destroy();
 
-        header("Location: " . $this->_baseUrl() . "/index"); // redirects to landing page
+        header("Location: " . $this->_baseUrl() . "/index"); 
         exit;
    }
 
     public function registerAction(): void 
     {
-
         $nickname = $this->_getParam('nickname');
 
-        // Validation to Check if nickname is already used
         if ($this->user->isAlreadyUsed($nickname)) {
             $_SESSION['error'] = "El nickname '$nickname' ya está ocupado. Por favor elija otro.";
             header("Location: " . $this->_baseUrl() . "/index");
@@ -149,8 +147,7 @@ class UserController extends ApplicationController
 
     public function filterAction() : void 
     {
-      $searchByNickname = $_GET['search'] ?? ''; /* This is just an example, in real life should 
-      validate/sanitize this input to avoid security issues */
+      $searchByNickname = $_GET['search'] ?? ''; 
     
       $this->view->users = $this->user->filterUser($searchByNickname);
 
