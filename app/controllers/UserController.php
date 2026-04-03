@@ -60,11 +60,17 @@ class UserController extends ApplicationController
     }
 
     public function deleteAction() : void 
-    {
-        $id_user = $this->_getParam('id');
+    {    
+        $id_to_delete = $this->_getParam('id');
+        $current_user_id = $_SESSION['user_id'];
 
-        $this->user->deleteUser($id_user);
-        
+        if ($current_user_id == $id_to_delete) {
+            $_SESSION['error'] = "You cannot delete your own account while logged in.";
+        } else {
+            $this->user->deleteUser($id_to_delete);
+            $_SESSION['success'] = "User deleted successfully.";
+        }
+
         header("Location: " . $this->_baseUrl() . "/user-admin");
         exit;
     }
