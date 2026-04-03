@@ -89,8 +89,8 @@ class TaskController extends ApplicationController
     }
     public function filterAction() : void 
     {
-        $this->AddCategories();
-        $this->AddUsers();
+        $this->addCategories();
+        $this->addUsers();
 
        $filters = [
         'user_id'     => $_GET['user_id'] ?? '',
@@ -110,7 +110,7 @@ class TaskController extends ApplicationController
         $this->view->render('task/index.phtml');
         exit;
     }
-    public function AddCategories() : void
+    public function addCategories() : void
     {
         $categoryModel = new Category(); 
         $categories = $categoryModel->getAllCategories();
@@ -128,7 +128,7 @@ class TaskController extends ApplicationController
         }
         $this->view->categoriesColorById = $categoriesColorById; 
     }
-    public function AddUsers() : void
+    public function addUsers() : void
     {
         $userModel = new User(); 
         $this->view->users = $userModel->getAllUsers(); 
