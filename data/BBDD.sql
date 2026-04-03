@@ -43,7 +43,7 @@ INSERT INTO categories (name, description, color) VALUES
 ('Personal', 'Personal tasks and errands', 'teal-500'),
 ('Hobbies', 'Tasks related to hobbies and leisure activities', 'red-500');
 
-INSERT INTO tasks (name, description, state, start_date, start_time, end_time, user_id, category_id, creation_date) VALUES
+INSERT INTO tasks (name, description, state, start_date, start_time, end_time, user_id, category_id, creation_date) VALUES 
 ('Finish project report', 'Complete the final report for the project', 'pending', '2026-02-17', '09:00:00', '11:00:00', 1, 1, '0000-00-00'),
 ('Grocery shopping', 'Buy groceries for the week', 'inProgress', '2026-02-17', '12:00:00', '13:00:00', 2, 2, '0000-00-00'),
 ('Practice guitar', 'Spend time practicing guitar chords and songs', 'completed', '2026-02-16', '18:00:00', '19:30:00', 1, 3, '0000-00-00');

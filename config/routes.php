@@ -1,19 +1,15 @@
 <?php 
 
-/**
- * Used to define the routes in the system.
- * 
- */
 $routes = array(
 	'/test' => 'test#index',
 	
 	// TASK 
     '/task' => 'task#index',
-    '/task/addTask' => 'task#addTask',
-    '/task/addNewTask' => 'task#addNewTask',
-    '/task/deleteTask' => 'task#deleteTask',
-    '/task/editTask' => 'task#editTask',
-    '/task/updateTask' => 'task#updateTask',
+    '/task/add-task' => 'task#addTask',
+    '/task/add-new-task' => 'task#addNewTask',
+    '/task/delete-task' => 'task#deleteTask',
+    '/task/edit-task' => 'task#editTask',
+    '/task/update-task' => 'task#updateTask',
     '/task/filter' => 'task#filter',
 
     // CATEGORY 
@@ -25,19 +21,18 @@ $routes = array(
     '/category/filter' => 'category#filter',
 
     // USER 
-    '/userAdmin' => 'user#admin',
-    '/user/addView' => 'user#addView',
+    '/user-admin' => 'user#admin',
+    '/user/add-view' => 'user#addView',
     '/user/add' => 'user#add',
     '/user/delete' => 'user#delete',
     '/user/edit' => 'user#edit',
     '/user/update' => 'user#update',
     '/user/filter' => 'user#filter',
 
+    // AUTH
+    '/' => 'user#index', 
     '/index' => 'user#index',
-    
     '/login' => 'user#login',
-    
     '/register' => 'user#register',
-    
     '/logout' => 'user#logout'
 );

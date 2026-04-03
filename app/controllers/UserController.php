@@ -55,7 +55,7 @@ class UserController extends ApplicationController
         
         $this->user->addUser($nickname, $name, $surname, $password, $email, UserType::from($type));
         
-        header("Location: " . $this->_baseUrl() . "/userAdmin");
+        header("Location: " . $this->_baseUrl() . "/user-admin");
         exit;
     }
 
@@ -65,7 +65,7 @@ class UserController extends ApplicationController
 
         $this->user->deleteUser($id_user);
         
-        header("Location: " . $this->_baseUrl() . "/userAdmin");
+        header("Location: " . $this->_baseUrl() . "/user-admin");
         exit;
     }
 
@@ -90,7 +90,7 @@ class UserController extends ApplicationController
 
         $this->user->editUser((int)$id, $nickname, $name, $surname, $password, $email, UserType::from($type));
         
-        header("Location: " . $this->_baseUrl() . "/userAdmin");
+        header("Location: " . $this->_baseUrl() . "/user-admin");
         exit;
     }
 
