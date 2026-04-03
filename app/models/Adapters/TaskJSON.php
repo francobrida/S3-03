@@ -2,12 +2,11 @@
 
 class TaskJSON extends Model implements StorageInterface {
     
-    protected $jsonFile = ROOT_PATH . '/data/tasks.json'; // Path to the JSON file storing tasks
+    protected $jsonFile = ROOT_PATH . '/data/tasks.json'; 
     
     public function __construct()
     {
-        // By leaving this empty, we don't call parent::__construct()
-        // so the app stops looking for a MySQL server.
+
     } 
  
     public function getAll(): array
@@ -52,12 +51,10 @@ class TaskJSON extends Model implements StorageInterface {
     {        
         $tasks = $this->getAll();
 
-        // Filter out the task with the given id
         $tasks = array_filter($tasks, function($task) use ($id) {
             return $task['id'] != $id;
         });
 
-        // Re-index the array to maintain sequential keys
         $tasks = array_values($tasks);
 
         $dataToSave = ['tasks' => $tasks];
@@ -94,7 +91,6 @@ class TaskJSON extends Model implements StorageInterface {
             }
             $newTasksList[] = $task;
         }
-
         $dataToSave = ['tasks' => $newTasksList];
         $this->saveData($dataToSave);        
     }
@@ -107,23 +103,18 @@ class TaskJSON extends Model implements StorageInterface {
         foreach ($tasks as $task) {
             $keepTask = true;
 
-            // User filter
             if ($filters['user_id'] != '' && $task['id_user'] != $filters['user_id']) {            
                 $keepTask = false;
             }
-            // Category filter
             if ($filters['category_id'] != '' && $task['category_id'] != $filters['category_id']) {
                 $keepTask = false;
             }
-            // State filter
             if ($filters['state'] != '' && $task['state'] != $filters['state']) {
                 $keepTask = false;
             }
-            // name filter (input by user)
             if ($filters['search'] != '' && stripos($task['name'], $filters['search']) === false) {
                 $keepTask = false;
             }
-            // apply the filters
             if ($keepTask) {
                 $results[] = $task;
             }
@@ -132,20 +123,16 @@ class TaskJSON extends Model implements StorageInterface {
     }
 
     public function readData() : array{
-        // JSON file reading logic
         if (!file_exists($this->jsonFile)) {
             return [];
         }
 
-        $jsonContent = file_get_contents($this->jsonFile); //exiting PHP functions -> retrieves a string
-        $data = json_decode($jsonContent, true); // existing PHP function  -> decodes THE string 
+        $jsonContent = file_get_contents($this->jsonFile);
+        $data = json_decode($jsonContent, true);
         return $data;
-         // true: turns the string into and array  -> $task['name']
-
     }
     public function saveData(array $dataToSave) : void
     {
-        //JSON file saving logic
         file_put_contents($this->jsonFile, json_encode($dataToSave, JSON_PRETTY_PRINT));
     }
 }

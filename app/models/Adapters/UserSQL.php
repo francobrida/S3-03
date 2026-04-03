@@ -5,11 +5,10 @@ class UserSQL extends Model implements StorageInterface {
 
     public function __construct()
     {
-        // 1. Calls the parent constructor to establish the database connection and store it in $this->_dbh
         parent::__construct(); 
     }
 
-    // 2. We use init to set the table name
+    
     public function init()
     {
         $this->_setTable('users'); 
@@ -33,8 +32,8 @@ class UserSQL extends Model implements StorageInterface {
         'creation_date' => date('Y-m-d H:i:s')
         ];
 
-        $id = $this->save($newUser); // save() from Model, will insert the new user into the database and return the new ID.
-        $newUser['id'] = $id; // Add the generated ID to the new user array.
+        $id = $this->save($newUser); 
+        $newUser['id'] = $id; 
         
         
         return $newUser;
@@ -46,17 +45,16 @@ class UserSQL extends Model implements StorageInterface {
         $queryTasks = $this->_dbh->prepare($sqlTasks);
         $queryTasks->execute([$id_user]);
 
-        // Aprovechamos el método delete() que ya viene en el Model.php base
-        return $this->delete($id_user); // devuelve bool
+        return $this->delete($id_user); 
     }
 
-    public function searchData(int $id_user) : ?array // return either the user found or null if not found
+    public function searchData(int $id_user) : ?array 
     {
         $user = $this->fetchOne($id_user);
         if (!$user){
             return null;
         }
-        return (array) $user; // converting object to array
+        return (array) $user; 
     }
 
     public function editUser(int $id_user, string $nickname, string $name, string $surname, 
@@ -78,14 +76,12 @@ class UserSQL extends Model implements StorageInterface {
 
    public function authenticateUser(string $nickname, string $password) : ?array 
     {
-        // 1. Search for the user by nickname in the database.
         $user = "SELECT * FROM users WHERE nickname = ?";
         $query = $this->_dbh->prepare($user);
         $query->execute([$nickname]);
         
         $userFound = $query->fetch(PDO::FETCH_ASSOC);
 
-        // 2. If user exists and the password matches, return the user data. Otherwise, return null.
         if ($userFound && $userFound['password'] === $password) {
             return $userFound;
         }
@@ -118,7 +114,6 @@ class UserSQL extends Model implements StorageInterface {
 
     public function readData() : array
     {
-        //MySQL reading logic
         $this->_setTable('users');
         $sql = "SELECT * FROM users";
         $statement = $this->_dbh->query($sql);
@@ -127,7 +122,6 @@ class UserSQL extends Model implements StorageInterface {
 
     public function saveData(array $dataToSave) : void
     {
-        //MysQL saving logic
         $this->save($dataToSave);
     }
 

@@ -33,7 +33,6 @@
     <hr>
 </div>
  
-<!-- FILTER -->
     <div class="mr-6 ">
         <form action="<?= WEB_ROOT ?>/task/filter" method="GET" class="flex gap-4 items-center justify-end">
             
@@ -76,7 +75,6 @@
             <a href="<?= WEB_ROOT ?>/task" class="bg-gray-400 text-white px-4 py-2 rounded-xl hover:bg-gray-500 transition">Limpiar</a>
         </form>
     </div>
-    <!-- END FILTER -->
 
 <div class="m-4">
     <hr>
@@ -122,9 +120,7 @@
             <div class="mt-auto">
                 <div class="mt-auto pt-4 border-t border-gray-100 flex justify-end gap-3">
                     <?php 
-                        //$taskId = isset($task['id']) ? $task['id'] : ''; 
                         $taskId = isset($task['id']) ? $task['id'] : ''; 
-                        //$urlEdit = WEB_ROOT . "/task/editTask?id=" . $taskId;
                         $urlEdit = WEB_ROOT . "/task/editTask?id=" . $taskId;
                     ?>
                     <a href="<?php echo $urlEdit; ?>">                       

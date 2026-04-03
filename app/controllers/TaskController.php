@@ -18,13 +18,13 @@ class TaskController extends ApplicationController
         $this->AddCategories();
         $this->AddUsers();        
 
-        $this->view->states = State::cases(); //send the enum of states
+        $this->view->states = State::cases();
         
         if (isset($_SESSION['user_id']) && isset($_SESSION['type']) && $_SESSION['type']!= "Admin" ){
             $this->view->tasks = $this->tasks->getUserTasks($_SESSION['user_id']);
         }
         else {
-            $this->view->tasks = $this->tasks->getAllTasks(); //send all tasks   
+            $this->view->tasks = $this->tasks->getAllTasks();
         }            
     }
     public function addTaskAction()
@@ -33,8 +33,8 @@ class TaskController extends ApplicationController
             header("Location: " . $this->_baseUrl() . "/index");
             exit;
         }
-        $this->view->addTasks = $this->tasks->getAllTasks(); //send all tasks
-        $this->view->states = State::cases(); //send the enum of states
+        $this->view->addTasks = $this->tasks->getAllTasks();
+        $this->view->states = State::cases(); 
   
         $this->AddCategories();
     }
@@ -45,9 +45,8 @@ class TaskController extends ApplicationController
             exit;
         }
         $this->tasks->addTask($_POST['name'], $_POST['description'], $_POST['category_id'], $_POST['start_date'], $_POST['start_time'], $_POST['end_time'], (int) $_SESSION['user_id']);
-        $this->view->tasks = $this->tasks->getAllTasks(); //shows all
-
-        // Redirect to avoid form resubmission
+        $this->view->tasks = $this->tasks->getAllTasks(); 
+        
         header("Location: " . $this->_baseUrl() . "/task");
         exit;
     }
@@ -56,7 +55,6 @@ class TaskController extends ApplicationController
         $id = $this->_getParam('id');
         $this->tasks->deleteTask($id);
         
-        // Redirect to avoid form resubmission
         header("Location: " . $this->_baseUrl() . "/task");
         exit;
     }
@@ -66,11 +64,10 @@ class TaskController extends ApplicationController
             header("Location: " . $this->_baseUrl() . "/index");
             exit;
         }
-        //$id = $this->_getParam('id');
         $id = $this->_getParam('id');
         $foundTask = $this->tasks->searchTask($id);
         $this->view->task = $foundTask;
-        $this->view->states = State::cases(); //send the enum of states        
+        $this->view->states = State::cases();       
 
         $this->AddCategories();
     }
@@ -95,7 +92,6 @@ class TaskController extends ApplicationController
         $this->AddCategories();
         $this->AddUsers();
 
-        // Filters
        $filters = [
         'user_id'     => $_GET['user_id'] ?? '',
         'category_id' => $_GET['category_id'] ?? '',
@@ -103,11 +99,10 @@ class TaskController extends ApplicationController
         'search'      => $_GET['search'] ?? ''
          ];
 
-        // Admin validation
         if ($_SESSION['type'] !== 'Admin') {
             $filters['user_id'] = $_SESSION['user_id']; 
         } else {
-            $filters['user_id'] = $_GET['user_id'] ?? ''; // Admin can choose user_id
+            $filters['user_id'] = $_GET['user_id'] ?? '';
         }
 
         $this->view->tasks = $this->tasks->filterTasks($filters);
@@ -117,36 +112,31 @@ class TaskController extends ApplicationController
     }
     public function AddCategories() : void
     {
-        // 1 Get and send all categories
         $categoryModel = new Category(); 
-        $categories = $categoryModel->getAllCategories(); //get all categories
-        $this->view->categories = $categories; //send to view all categories
+        $categories = $categoryModel->getAllCategories();
+        $this->view->categories = $categories;
 
-        // 2 Diccionary for category name by id
         $categoriesById = [];
         foreach ($categories as $category) {
             $categoriesById[$category['id']] = $category['name'];
         }
-        $this->view->categoriesById = $categoriesById; //send categories name diccionary
+        $this->view->categoriesById = $categoriesById; 
 
-        // 3 Diccionary for category color by id
         $categoriesColorById = [];
         foreach ($categories as $category) {
             $categoriesColorById[$category['id']] = $category['color'];
         }
-        $this->view->categoriesColorById = $categoriesColorById; //send categories color diccionary
+        $this->view->categoriesColorById = $categoriesColorById; 
     }
     public function AddUsers() : void
     {
-        // 1 Get and send all users
         $userModel = new User(); 
-        $this->view->users = $userModel->getAllUsers(); //send all users
+        $this->view->users = $userModel->getAllUsers(); 
         
-        // 2 Diccionary for nickname by id
         $userNameById = [];
         foreach ($this->view->users as $user) {
             $userNameById[$user['id']] = $user['nickname'];
         }
-        $this->view->userNameById = $userNameById; //send nickname diccionary
+        $this->view->userNameById = $userNameById; 
     }
 }

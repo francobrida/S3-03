@@ -2,14 +2,11 @@
 
 class TaskSQL extends Model implements StorageInterface{
     
-    protected $jsonFile = ROOT_PATH . '/data/tasks.json'; // Path to the JSON file storing tasks
+    protected $jsonFile = ROOT_PATH . '/data/tasks.json';
     
     public function __construct()
     {
-        // By leaving this empty, we don't call parent::__construct()
-        // so the app stops looking for a MySQL server.
-         parent::__construct(); // If you want to keep the database connection, otherwise remove this line.
-        
+         parent::__construct();        
     } 
 
     public function init()
@@ -85,23 +82,18 @@ class TaskSQL extends Model implements StorageInterface{
         foreach ($tasks as $task) {
             $keepTask = true;
 
-            // User filter
             if ($filters['user_id'] != '' && $task['user_id'] != $filters['user_id']) {
                 $keepTask = false;
             }
-            // Category filter
             if ($filters['category_id'] != '' && $task['category_id'] != $filters['category_id']) {
                 $keepTask = false;
             }
-            // State filter
             if ($filters['state'] != '' && $task['state'] != $filters['state']) {
                 $keepTask = false;
             }
-            // name filter (input by user)
             if ($filters['search'] != '' && stripos($task['name'], $filters['search']) === false) {
                 $keepTask = false;
             }
-            // apply the filters
             if ($keepTask) {
                 $results[] = $task;
             }
@@ -111,7 +103,6 @@ class TaskSQL extends Model implements StorageInterface{
 
     public function readData() : array
     {
-        //MySQL reading logic
         $this->_setTable('tasks');
         $sql = "SELECT * FROM tasks";
         $statement = $this->_dbh->query($sql);
@@ -120,9 +111,7 @@ class TaskSQL extends Model implements StorageInterface{
 
     public function saveData(array $dataToSave) : void
     {
-        //MysQL saving logic
         $this->save($dataToSave);
     }
 }
-
 ?>

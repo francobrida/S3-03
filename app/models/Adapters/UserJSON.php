@@ -2,7 +2,6 @@
 
 class UserJSON extends Model implements StorageInterface {
 
-    // Path to the JSON files storing users and tasks
     protected $jsonUsers = ROOT_PATH . '/data/users.json';
     protected $jsonTasks = ROOT_PATH . '/data/tasks.json';
 
@@ -40,9 +39,8 @@ class UserJSON extends Model implements StorageInterface {
 
         $users[] = $newUser;
 
-        // Save the updated tasks array back to the JSON file
         $data = ['users' => $users];
-        file_put_contents($this->jsonUsers, json_encode($data, JSON_PRETTY_PRINT)); // JSON_PRETTY_PRINT makes the JSON file more readable for us.
+        file_put_contents($this->jsonUsers, json_encode($data, JSON_PRETTY_PRINT)); 
         return $newUser;
     }
 
@@ -52,13 +50,11 @@ class UserJSON extends Model implements StorageInterface {
         $task = new Task ();
         $tasks = $task->getAllTasks();
 
-        // Filter out the users with the given id_user
         $users = array_filter($users, function ($user) use ($id_user) {
             return $user['id'] !== $id_user;
         });
         $users = array_values($users);
 
-        // Delete every task associated with this user also
         $tasks = array_filter($tasks, function ($task) use ($id_user) {
              return $task['id_user'] !== $id_user;
         });
@@ -68,13 +64,12 @@ class UserJSON extends Model implements StorageInterface {
         $dataToSave = ['tasks' => $tasks];
         file_put_contents($this->jsonTasks, json_encode($dataToSave, JSON_PRETTY_PRINT));  
 
-        // Save the updated user array back to the JSON file
         $data = ['users' => $users];
         $this->SaveData($data);
         return true;
     }
 
-    public function searchData(int $id_user) : ?array // return either the user found or null if not found
+    public function searchData(int $id_user) : ?array 
     {
         $users = $this->getAll();
         foreach ($users as $user) {
@@ -111,7 +106,7 @@ class UserJSON extends Model implements StorageInterface {
     {
         $users = $this->getAll();
         foreach ($users as $user) {
-            if (strtolower($user['nickname']) === strtolower(trim($nickname))){ // trim() to erase possible space errors, tolowercase for case insensitive
+            if (strtolower($user['nickname']) === strtolower(trim($nickname))){ 
                 if ($user['password'] === $password ) {
                 return $user;
                 }
@@ -125,11 +120,11 @@ class UserJSON extends Model implements StorageInterface {
         $users = $this->getAll();
         
         foreach ($users as $user) {
-            if (strtolower(trim($user['nickname'])) === strtolower(trim($nickname))) { // Compare nicknames using lowercase
-                return true; // Match found
+            if (strtolower(trim($user['nickname'])) === strtolower(trim($nickname))) { 
+                return true; 
             }
         }
-        return false; // No match found
+        return false; 
     }
 
     public function filterUser($searchByNickname) : array 
@@ -152,12 +147,10 @@ class UserJSON extends Model implements StorageInterface {
             return [];
         }
 
-        $jsonContent = file_get_contents($this->jsonUsers); //exiting PHP functions -> retrieves a string
-        $data = json_decode($jsonContent, true); // existing PHP function  -> decodes THE string 
+        $jsonContent = file_get_contents($this->jsonUsers); 
+        $data = json_decode($jsonContent, true); 
         return $data;
-        // true: turns the string into and array  -> $user['name']
 
-        // ** DEBUG: See what PHP actually thinks the data looks like
     }
 
     public function saveData(array $dataToSave) : void
