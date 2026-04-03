@@ -9,8 +9,6 @@ class User {
 
     public function __construct() 
     {
-        // PERSISTENCE switch
-        // Switch between new UserSQL() and new UserJSON() to change persistance.
         $this->adapter = new UserSQL(); 
         //$this->adapter = new UserJSON(); 
     }
