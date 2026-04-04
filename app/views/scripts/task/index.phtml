@@ -125,7 +125,7 @@
                         $taskId = isset($task['id_task']) ? $task['id_task'] : ''; 
                         $urlEdit = WEB_ROOT . "/task/editTask?id_task=" . $taskId;
                     ?>
-                    <a href="<?php echo $urlEdit; ?>">                       
+                    <a href="<?php echo $urlEdit; ?>" title="Editar">
                         <button type="button" class="py-2 px-4 rounded">
                             <img src="<?= WEB_ROOT ?>/images/lapiz.png" alt="Editar" class="w-4 h-4"></img>
                         </button>
@@ -134,7 +134,7 @@
                         $urlDelete = WEB_ROOT . "/task/deleteTask?id_task=" . $taskId;
                     ?>
                     <a href="<?php echo $urlDelete; ?>" 
-                        onclick="return confirm('¿Estas seguro que quieres eliminar esta tarea?');">
+                        onclick="return confirm('¿Estas seguro que quieres eliminar esta tarea?');" title="Eliminar">
                         <button type="button" class="py-2 px-4 rounded">
                             <img src="<?= WEB_ROOT ?>/images/papelera.png" alt="Eliminar" class="w-4 h-4"></img>
                         </button>

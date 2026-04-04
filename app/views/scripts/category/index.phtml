@@ -79,7 +79,7 @@
                 $CategoryId = isset($category['id']) ? $category['id'] : '';
                 $urlEdit = WEB_ROOT . "/category/edit?id=" . $CategoryId;
                 ?>
-                <a href="<?php echo $urlEdit; ?>">
+                <a href="<?php echo $urlEdit; ?>" title="Editar">
                     <button type="button" class="py-2 px-4 rounded"><img src="<?= WEB_ROOT ?>/images/lapiz.png" alt="Editar" class="w-4 h-4"></img></button>
                 </a>
 
@@ -87,7 +87,7 @@
                 <?php
                 $urlDelete = WEB_ROOT . "/category/delete?id=" . $CategoryId;
                 ?>
-                <a href="<?php echo $urlDelete; ?>" onclick="return confirm('¿Seguro que quieres eliminar esta categoría?');">
+                <a href="<?php echo $urlDelete; ?>" onclick="return confirm('¿Seguro que quieres eliminar esta categoría?');" title="Eliminar">
                     <button type="button" class="py-2 px-4 rounded"><img src="<?= WEB_ROOT ?>/images/papelera.png" alt="Eliminar" class="w-4 h-4"></img></button>
                 </a>
 
