@@ -5,7 +5,7 @@
             "nickname": "raven",
             "name": "prueba1",
             "surname": "Perezzzz",
-            "password": "pass1",
+            "password": "$2y$12$cAALtdV/lkWqOPBmAqFtue9C5g8cp675BqCRTpgX9/iU2BrY.mVCC",
             "email": "prueba@gmail.com",
             "type": "Admin",
             "creation_date": "2025-11-03T10:15:30Z"
