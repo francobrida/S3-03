@@ -92,15 +92,16 @@
                     $urlDelete = WEB_ROOT . "/user/delete?id=" . $userId;
                 ?>
                 
-                <a href="<?= $urlEdit ?>"> 
-                    <button type="button" class="py-2 px-4 rounded" title="Editar usuario">
+                <a href="<?= $urlEdit ?>" title="Editar"> 
+                    <button type="button" class="py-2 px-4 rounded">
                         <img src="<?= WEB_ROOT ?>/images/lapiz.png" alt="Editar" class="w-4 h-4">
                     </button>
                 </a>
 
                 <a href="<?= $urlDelete ?>" 
-                   onclick="return confirm('¿Eliminar a <?= $user['nickname'] ?> y todas sus tareas?');">
-                    <button type="button" class="py-2 px-4 rounded" title="Eliminar usuario">
+                   onclick="return confirm('¿Eliminar a <?= $user['nickname'] ?> y todas sus tareas?');"
+                   title="Eliminar">
+                    <button type="button" class="py-2 px-4 rounded">
                         <img src="<?= WEB_ROOT ?>/images/papelera.png" alt="Eliminar" class="w-4 h-4">
                     </button>
                 </a>
