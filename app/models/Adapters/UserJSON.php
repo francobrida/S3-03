@@ -31,7 +31,7 @@ class UserJSON extends Model implements StorageInterface {
             'nickname' => strtolower($nickname),
             'name' => $name,
             'surname' => $surname,
-            'password' => $password,
+            'password' => password_hash($password, PASSWORD_DEFAULT),
             'email' => $email,
             'type' => $type->value,
             'creation_date' => (new DateTime())->format('Y-m-d H:i:s')
@@ -62,7 +62,7 @@ class UserJSON extends Model implements StorageInterface {
         $tasks = array_values($tasks);
 
         $dataToSave = ['tasks' => $tasks];
-        file_put_contents($this->jsonTasks, json_encode($dataToSave, JSON_PRETTY_PRINT));  
+        file_put_contents($this->jsonTasks, json_encode(['tasks' => $tasks], JSON_PRETTY_PRINT)); 
 
         $data = ['users' => $users];
         $this->SaveData($data);
@@ -91,7 +91,7 @@ class UserJSON extends Model implements StorageInterface {
                 $user['nickname'] = strtolower($nickname);
                 $user['name'] = $name;
                 $user['surname'] = $surname;
-                $user['password'] = $password;
+                $user['password'] = password_hash($password, PASSWORD_DEFAULT);
                 $user['email'] = $email;
                 $user['type'] = $type->value;
             }
@@ -107,8 +107,8 @@ class UserJSON extends Model implements StorageInterface {
         $users = $this->getAll();
         foreach ($users as $user) {
             if (strtolower($user['nickname']) === strtolower(trim($nickname))){ 
-                if ($user['password'] === $password ) {
-                return $user;
+                if (password_verify($password, $user['password'])) {
+                    return $user;
                 }
             }
         }
@@ -144,12 +144,12 @@ class UserJSON extends Model implements StorageInterface {
     public function readData() : array
     {
         if (!file_exists($this->jsonUsers)) {
-            return [];
+            return ['users' => []];
         }
 
         $jsonContent = file_get_contents($this->jsonUsers); 
         $data = json_decode($jsonContent, true); 
-        return $data;
+        return $data ?? ['users' => []];;
 
     }
 

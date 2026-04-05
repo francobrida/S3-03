@@ -35,7 +35,7 @@ CREATE TABLE tasks (
 ); 
 
 INSERT INTO users (nickname, name, surname, password, email, type, creation_date) VALUES
-('raven', 'ravenc0loud', 'surname', 'pass1', 'raven@example.com', 'Admin', '2026-02-16'),
+('raven', 'ravencloud', 'surname', '$2y$12$cAALtdV/lkWqOPBmAqFtue9C5g8cp675BqCRTpgX9/iU2BrY.mVCC', 'raven@example.com', 'Admin', '2026-02-16'),
 ('Elena', 'Elena', 'surname', 'pass2', 'elena@example.com', 'Member', '2026-02-16');
 
 INSERT INTO categories (name, description, color) VALUES

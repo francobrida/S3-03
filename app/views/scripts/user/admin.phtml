@@ -1,5 +1,19 @@
 <?php include __DIR__ . '/../header/header.phtml'; ?>
 
+<div class="px-12 mt-4">
+    <?php if (isset($_SESSION['error'])): ?>
+        <div class="bg-red-500 text-white p-3 rounded-xl mb-4 shadow-md flex justify-between items-center">
+            <span>⚠️ <?= $_SESSION['error']; unset($_SESSION['error']); ?></span>
+        </div>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['success'])): ?>
+        <div class="bg-green-500 text-white p-3 rounded-xl mb-4 shadow-md flex justify-between items-center">
+            <span>✅ <?= $_SESSION['success']; unset($_SESSION['success']); ?></span>
+        </div>
+    <?php endif; ?>
+</div>
+
 <div class="pl-12 pb-1 pt-2 mb-4 bg-teal-800 self-center"> 
     
     <h1 class="text-4xl font-bold mb-2 text-white">Hoy</h1>

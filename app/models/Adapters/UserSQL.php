@@ -26,7 +26,7 @@ class UserSQL extends Model implements StorageInterface {
         'nickname' => strtolower($nickname),
         'name' => $name,
         'surname' => $surname,
-        'password' => $password,
+        'password' => password_hash($password, PASSWORD_DEFAULT),
         'email' => $email,
         'type' => $type->value,
         'creation_date' => date('Y-m-d H:i:s')
@@ -65,7 +65,7 @@ class UserSQL extends Model implements StorageInterface {
             'nickname' => strtolower($nickname),
             'name'     => $name,
             'surname'  => $surname,
-            'password' => $password,
+            'password' => password_hash($password, PASSWORD_DEFAULT),
             'email'    => $email,
             'type'     => $type->value
         ];
@@ -82,7 +82,7 @@ class UserSQL extends Model implements StorageInterface {
         
         $userFound = $query->fetch(PDO::FETCH_ASSOC);
 
-        if ($userFound && $userFound['password'] === $password) {
+        if ($userFound && password_verify($password, $userFound['password'])) {
             return $userFound;
         }
 
