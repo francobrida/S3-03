@@ -1,6 +1,6 @@
 <?php
 
-class UserSQL extends Model implements StorageInterface {
+class UserSQL extends Model implements UserStorageInterface {
    
 
     public function __construct()

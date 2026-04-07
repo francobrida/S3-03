@@ -7,7 +7,7 @@ class TaskController extends ApplicationController
 
     public function __construct()   
     {
-        $this->tasks = TaskFactory::create(); // Initialize the Task model (TaskJSON or TaskSQL)
+        $this->tasks = TaskFactory::create(); 
     }
     public function indexAction()
     {
@@ -130,7 +130,7 @@ class TaskController extends ApplicationController
     }
     public function addUsers() : void
     {
-        $userModel = new User(); 
+        $userModel = UserFactory::create(); 
         $this->view->users = $userModel->getAllUsers(); 
         
         $userNameById = [];

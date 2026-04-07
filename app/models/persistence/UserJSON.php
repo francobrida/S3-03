@@ -1,6 +1,6 @@
 <?php
 
-class UserJSON extends Model implements StorageInterface {
+class UserJSON extends Model implements UserStorageInterface {
 
     protected $jsonUsers = ROOT_PATH . '/data/users.json';
     protected $jsonTasks = ROOT_PATH . '/data/tasks.json';
@@ -47,7 +47,7 @@ class UserJSON extends Model implements StorageInterface {
     public function deleteData(int $id_user) : bool
     {
         $users = $this->getAll();
-        $task = new Task ();
+        $task = TaskFactory::create();
         $tasks = $task->getAllTasks();
 
         $users = array_filter($users, function ($user) use ($id_user) {
