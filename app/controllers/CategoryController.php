@@ -1,13 +1,13 @@
 <?php
 
+require_once __DIR__ . '/../models/factory/CategoryFactory.php';
+
 class CategoryController extends ApplicationController
 {
-
     protected Category $categoryModel;
 
     public function __construct()
     {
-        //$this->categoryModel = new Category();
         $this->categoryModel = CategoryFactory::create();
     }
 

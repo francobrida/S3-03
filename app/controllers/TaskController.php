@@ -1,8 +1,11 @@
 <?php
 
+require_once __DIR__ . '/../models/factory/TaskFactory.php';
+require_once __DIR__ . '/../models/factory/CategoryFactory.php';
+require_once __DIR__ . '/../models/factory/UserFactory.php';
+
 class TaskController extends ApplicationController
-{
-  
+{  
     protected Task $tasks;
 
     public function __construct()   

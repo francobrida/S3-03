@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../models/factory/UserFactory.php';
+
 class UserController extends ApplicationController
 {
     protected User $user;
