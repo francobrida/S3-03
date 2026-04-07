@@ -7,10 +7,11 @@ class User {
 
     private $adapter;
 
-    public function __construct() 
+    public function __construct(UserStorageInterface $adapter) 
     {
         //$this->adapter = new UserSQL(); 
-        $this->adapter = new UserJSON(); 
+       // $this->adapter = new UserJSON(); 
+       $this->adapter = $adapter;
     }
 
     public function getAllUsers() : array

@@ -9,7 +9,7 @@ class UserController extends ApplicationController
         if (session_status() === PHP_SESSION_NONE) { 
             session_start();
         }
-        $this->user = new User();
+        $this->user = UserFactory::create();
     }
     
     public function indexAction() : void 
