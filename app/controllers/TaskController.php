@@ -1,7 +1,5 @@
 <?php
 
-
-
 class TaskController extends ApplicationController
 {
   
@@ -114,7 +112,7 @@ class TaskController extends ApplicationController
     }
     public function addCategories() : void
     {
-        $categoryModel = new Category(); 
+        $categoryModel = CategoryFactory::create(); 
         $categories = $categoryModel->getAllCategories();
         $this->view->categories = $categories;
 

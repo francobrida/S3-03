@@ -5,48 +5,44 @@ require_once 'persistence/TaskJSON.php';
 
 class Task {
 
-    private $adapter;
+    private $persistence;
 
-    public function __construct(TaskStorageInterface $adapter) 
+    public function __construct(TaskStorageInterface $persistence) 
     {
-        // PERSISTENCE switch
-        // Switch between new TaskSQL() and new TaskJSON() to change persistance.
-        //$this->adapter = new TaskSQL(); 
-        //$this->adapter = new TaskJSON(); 
-        $this->adapter = $adapter;
+        $this->persistence = $persistence;
     }
 
      public function getAllTasks() : array
     {
-        return $this->adapter->getAll();
+        return $this->persistence->getAll();
     }
 
     public function addTask(string $name, string $description, int $category_id, string $start_date, string $start_time, string $end_time, int $id_user) : void
     {
-        $this->adapter->addNewTask($name, $description, $category_id, $start_date, $start_time, $end_time, $id_user);
+        $this->persistence->addNewTask($name, $description, $category_id, $start_date, $start_time, $end_time, $id_user);
     }
     public function getUserTasks(int $idUser): array
     {
-        return $this->adapter->getUserTasks($idUser);
+        return $this->persistence->getUserTasks($idUser);
     }
 
     public function deleteTask(int $id) : bool
     {
-        return $this->adapter->deleteData($id);
+        return $this->persistence->deleteData($id);
     }
     public function searchTask(int $id) : ?array
     {
-        return $this->adapter->searchData($id);
+        return $this->persistence->searchData($id);
     }
 
     public function filterTasks(array $filters) : array 
     {
-        return $this->adapter->filterTasks($filters);
+        return $this->persistence->filterTasks($filters);
     }
     
     public function editTask(int $id, string $name, string $description, 
     int $category, string $state, string $start_date, string $start_time, string $end_time) : void
     {
-        $this->adapter->editTask($id, $name, $description, $category, $state, $start_date, $start_time, $end_time);
+        $this->persistence->editTask($id, $name, $description, $category, $state, $start_date, $start_time, $end_time);
     }
 }

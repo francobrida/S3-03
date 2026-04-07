@@ -1,26 +1,26 @@
 <?php
 
-require_once 'persistence/TaskJson.php';
-require_once 'persistence/TaskSQL.php';
+require_once 'persistence/CategoryJSON.php';
+require_once 'persistence/CategorySQL.php';
 
-class TaskFactory {
+class CategoryFactory {
 
     public static function create() {
         $config = require '../config.php';
 
         switch ($config['persistence']) {
             case 'json':
-                $adapter = new TaskJSON();
+                $adapter = new CategoryJSON();
                 break;
 
             case 'sql':
-                $adapter = new TaskSQL();
+                $adapter = new CategorySQL();
                 break;
 
             default:
                 throw new Exception("Invalid persistence type");
         }
 
-        return new Task($adapter);
+        return new Category($adapter);
     }
 }

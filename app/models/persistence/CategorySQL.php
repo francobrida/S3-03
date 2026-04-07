@@ -1,6 +1,6 @@
 <?php
 
-class CategorySQL extends Model implements StorageInterface
+class CategorySQL extends Model implements CategoryStorageInterface
 {
 
     //public function __construct() {}
