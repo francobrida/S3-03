@@ -7,7 +7,8 @@ class CategoryController extends ApplicationController
 
     public function __construct()
     {
-        $this->categoryModel = new Category();
+        //$this->categoryModel = new Category();
+        $this->categoryModel = CategoryFactory::create();
     }
 
     public function checkLogin(): void

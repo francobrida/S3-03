@@ -1,6 +1,6 @@
 <?php
 
-class TaskJSON extends Model implements StorageInterface {
+class TaskJSON extends Model implements TaskStorageInterface {
     
     protected $jsonFile = ROOT_PATH . '/data/tasks.json'; 
     

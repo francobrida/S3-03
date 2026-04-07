@@ -7,7 +7,7 @@ class TaskController extends ApplicationController
 
     public function __construct()   
     {
-        $this->tasks = new Task(); // Initialize the Task model (TaskJSON or TaskSQL)
+        $this->tasks = TaskFactory::create(); 
     }
     public function indexAction()
     {
@@ -112,7 +112,7 @@ class TaskController extends ApplicationController
     }
     public function addCategories() : void
     {
-        $categoryModel = new Category(); 
+        $categoryModel = CategoryFactory::create(); 
         $categories = $categoryModel->getAllCategories();
         $this->view->categories = $categories;
 
@@ -130,7 +130,7 @@ class TaskController extends ApplicationController
     }
     public function addUsers() : void
     {
-        $userModel = new User(); 
+        $userModel = UserFactory::create(); 
         $this->view->users = $userModel->getAllUsers(); 
         
         $userNameById = [];

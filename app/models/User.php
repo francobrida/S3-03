@@ -1,16 +1,17 @@
 <?php
 
-require_once 'Adapters/UserSQL.php';
-require_once 'Adapters/UserJSON.php';
+require_once 'persistence/UserSQL.php';
+require_once 'persistence/UserJSON.php';
 
 class User {
 
     private $adapter;
 
-    public function __construct() 
+    public function __construct(UserStorageInterface $adapter) 
     {
-        $this->adapter = new UserSQL(); 
-        //$this->adapter = new UserJSON(); 
+        //$this->adapter = new UserSQL(); 
+       // $this->adapter = new UserJSON(); 
+       $this->adapter = $adapter;
     }
 
     public function getAllUsers() : array

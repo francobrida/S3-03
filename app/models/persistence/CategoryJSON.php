@@ -1,6 +1,6 @@
 <?php
 
-class CategoryJSON extends Model implements StorageInterface
+class CategoryJSON extends Model implements CategoryStorageInterface
 {
 
     protected $jsonFile = ROOT_PATH . '/data/categories.json';
