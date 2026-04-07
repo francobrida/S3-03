@@ -1,5 +1,7 @@
 <?php
 
+
+
 class TaskController extends ApplicationController
 {
   
@@ -7,7 +9,7 @@ class TaskController extends ApplicationController
 
     public function __construct()   
     {
-        $this->tasks = new Task(); // Initialize the Task model (TaskJSON or TaskSQL)
+        $this->tasks = TaskFactory::create(); // Initialize the Task model (TaskJSON or TaskSQL)
     }
     public function indexAction()
     {

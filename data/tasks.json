@@ -2,7 +2,7 @@
     "tasks": [
         {
             "id": 1,
-            "name": "Mostrar tareas",
+            "name": "Mostrar tareas 2",
             "description": "aprender a usar el framework y mostrar tareas creadas manualmente",
             "category_id": 1,
             "state": "completed",

@@ -1,18 +1,19 @@
 <?php
 
-require_once 'Adapters/TaskSQL.php';
-require_once 'Adapters/TaskJSON.php';
+require_once 'persistence/TaskSQL.php';
+require_once 'persistence/TaskJSON.php';
 
 class Task {
 
     private $adapter;
 
-    public function __construct() 
+    public function __construct(TaskStorageInterface $adapter) 
     {
         // PERSISTENCE switch
         // Switch between new TaskSQL() and new TaskJSON() to change persistance.
-        $this->adapter = new TaskSQL(); 
+        //$this->adapter = new TaskSQL(); 
         //$this->adapter = new TaskJSON(); 
+        $this->adapter = $adapter;
     }
 
      public function getAllTasks() : array

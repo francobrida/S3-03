@@ -1,7 +1,7 @@
 <?php
 
-require_once 'Adapters/UserSQL.php';
-require_once 'Adapters/UserJSON.php';
+require_once 'persistence/UserSQL.php';
+require_once 'persistence/UserJSON.php';
 
 class User {
 
@@ -9,8 +9,8 @@ class User {
 
     public function __construct() 
     {
-        $this->adapter = new UserSQL(); 
-        //$this->adapter = new UserJSON(); 
+        //$this->adapter = new UserSQL(); 
+        $this->adapter = new UserJSON(); 
     }
 
     public function getAllUsers() : array
