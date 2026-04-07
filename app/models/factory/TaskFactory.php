@@ -1,7 +1,7 @@
 <?php
 
-require_once 'persistence/TaskJson.php';
-require_once 'persistence/TaskSQL.php';
+require_once __DIR__ . '/../persistence/TaskJSON.php';
+require_once __DIR__ . '/../persistence/TaskSQL.php';
 
 class TaskFactory {
 
@@ -10,17 +10,17 @@ class TaskFactory {
 
         switch ($config['persistence']) {
             case 'json':
-                $adapter = new TaskJSON();
+                $persistence = new TaskJSON();
                 break;
 
             case 'sql':
-                $adapter = new TaskSQL();
+                $persistence = new TaskSQL();
                 break;
 
             default:
                 throw new Exception("Invalid persistence type");
         }
 
-        return new Task($adapter);
+        return new Task($persistence);
     }
 }

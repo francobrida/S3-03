@@ -1,7 +1,7 @@
 <?php
 
-require_once 'persistence/CategoryJSON.php';
-require_once 'persistence/CategorySQL.php';
+require_once __DIR__ . '/../persistence/CategoryJSON.php';
+require_once __DIR__ . '/../persistence/CategorySQL.php';
 
 class CategoryFactory {
 
@@ -10,17 +10,17 @@ class CategoryFactory {
 
         switch ($config['persistence']) {
             case 'json':
-                $adapter = new CategoryJSON();
+                $persistence = new CategoryJSON();
                 break;
 
             case 'sql':
-                $adapter = new CategorySQL();
+                $persistence = new CategorySQL();
                 break;
 
             default:
                 throw new Exception("Invalid persistence type");
         }
 
-        return new Category($adapter);
+        return new Category($persistence);
     }
 }
