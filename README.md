@@ -47,7 +47,7 @@ Note: The system distinguishes between 'Admin' and 'Member' roles.
 The Admin role allows management of all users, tasks, and categories.
 
 ## Persistence & Adapter Pattern
-The application is designed using the Adapter Pattern, allowing for a flexible data persistence layer. You can easily switch the entire system between MySQL (SQL) and JSON files without modifying the core business logic.
+The application is designed using the Strategy Pattern, allowing for a flexible data persistence layer. You can easily switch the entire system between MySQL (SQL) and JSON files without modifying the core business logic.
 
 This implementation is present in the following models:
 User.php
@@ -55,22 +55,16 @@ Task.php
 Category.php
 
 How to Switch Persistence:
-To change how the data is stored, navigate to the constructor (__construct) of the models mentioned above and toggle the adapter instantiation:
+To change how the data is stored, change the persistent tag of the config.php file
 
 PHP
-// Example in Task.php
-public function __construct() 
-{
-    // To use MySQL:
-    $this->adapter = new TaskSQL(); 
-
-    // To use JSON storage:
-    // $this->adapter = new TaskJSON(); 
-}
+// config.php
+return [
+    'persistence' => 'sql' // 'json' o 'sql'
+];
 [!NOTE]
 
-By default, the develop-MySQL branch is configured to use TaskSQL, UserSQL, and CategorySQL. If you switch to JSON, ensure the data/ folder has the necessary write permissions.
+By default, the develop-MySQL branch is configured to use SQL. If you switch to JSON, ensure the data/ folder has the necessary write permissions.
 
 ##📊 MER Diagram
 ![MER DIAGRAM](<docs/MER to_do v1.3.png>)
-

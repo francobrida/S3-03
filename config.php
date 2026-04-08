@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'persistence' => 'json' // 'json' o 'sql'
+    'persistence' => 'sql' // 'json' o 'sql'
 ];
